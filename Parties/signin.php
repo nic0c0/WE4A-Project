@@ -1,18 +1,17 @@
-
 <form action="./index.php" method="post">
-<div class="centerline">
+  <fieldset>
+  <legend>Connexion</legend>
 
-    <input class="centercolumn" type="text"  placeholder="Username" required>
-      <label for="floatingInputGrid"></label>
-
-  <br>
-    <input class="centercolumn" type="password"  placeholder="Password" required>
-      <label  for="floatingInputGrid"></label>
-
-</div>
+    <div class="centerline">
+      <label for="username">Nom d'utilisateur :</label>
+      <input id="username" class="centercolumn" type="text" placeholder="Username" required>
+      <br>
+      <label for="password">Mot de passe :</label>
+      <input id="password" class="centercolumn" type="password" placeholder="Password" required>
+    </div>
+  </fieldset>
   <div class="centercolumn">
-    <button type="button">Se connecter</button>
+    <button type="submit">Se connecter</button>
     <button type="button">Créer un compte</button>
   </div>
-
 </form>

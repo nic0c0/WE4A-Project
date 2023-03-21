@@ -3,7 +3,7 @@
                     <div>
                         <nav>
                             <div class="logo">
-                                <img src=".eico" alt="Logo">
+                                <img src=".ico" alt="Logo">
                             </div>
                             <ul>
                                 <li><a href="e.html">e</a></li>
@@ -18,5 +18,6 @@
                     </div>
                 </div>
 </header>
+
 
 

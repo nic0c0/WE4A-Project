@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,11 +8,18 @@
   </head>
   <body>
     <?php include("./Parties/navbar.php"); ?>
-    <!-- FAIRE SCRIPT JS POUR AVOIR LA MARGIN DE LA NAVBAR -->
     <h1>Hello, world!</h1>
 
-   <?php include("./Parties/signin.php"); ?>
-<?php include("./Parties/footer.php"); ?>
+  <?php include("./Parties/signin.php"); ?>
+  <?php include("./Parties/footer.php"); ?>
+<?php include("./Parties/signout.php"); ?>
 
+
+<script src="./scripts.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        setSiblingHeight();
+      });
+    </script>
 </body>
 </html>

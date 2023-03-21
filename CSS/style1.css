@@ -1,3 +1,18 @@
+body{
+    background-color: #1c1c1c;
+    color: #FFCC00;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+
+
+
+
+
 
 .centerline{
     display: block;
@@ -29,20 +44,22 @@
 }
 h1 {
     font-size: 4em;
-    margin-top: 150px;
-
   }
+
 header {
     display: block;
-    background-color: #1c1c1c;
+    background-color: #514646;
     position: fixed; 
     top: 0; 
     left: 0; 
-    width: 100%; 
     z-index: 999; /* Niveau de profondeur pour empêcher le chevauchement d'autres éléments */
     border-bottom: 1px solid #FFCC00;
     margin-bottom: 50px;
     width: 100%;
+    border-image: linear-gradient(to top right, #FFCC00, #1c1c1c) 1 / 0 0 30deg 0 round;
+    border-bottom-right-radius: 50% 80%;
+
+
   }
   header nav {
     display: flex;
@@ -58,3 +75,46 @@ header .centercolumn {
     align-items: center;
     padding: 0 10%;
 }
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #1c1c1c;
+    color: #FFCC00;
+    text-align: center;
+  }
+  button {
+    background-color: #FFCC00;
+    border-radius: 100px 30px 100px 30px;
+
+    color: #1c1c1c;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+  
+  button:hover {
+    background-color: #1c1c1c;
+    color: #FFCC00;
+  }  
+  
+.signout {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  fieldset {
+  border-top-left-radius: 10px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  legend {
+    border: none;
+    color: #FFCC00;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
