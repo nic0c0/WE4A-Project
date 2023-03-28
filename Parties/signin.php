@@ -12,6 +12,6 @@
   </fieldset>
   <div class="centercolumn">
     <button type="submit">Se connecter</button>
-    <button type="button">Créer un compte</button>
+    <a href="Pages/Signup.php"> <button type="button">Créer un compte</button> </a>
   </div>
 </form>
