@@ -11,8 +11,9 @@
     <h1>Hello, world!</h1>
 
   <?php include("./Parties/signin.php"); ?>
-  <?php include("./Parties/footer.php"); ?>
 <?php include("./Parties/signout.php"); ?>
+<?php include("./Parties/post.php"); ?>
+<?php include("./Parties/footer.php"); ?>
 
 
 <script src="./scripts.js"></script>

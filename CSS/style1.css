@@ -1,6 +1,6 @@
 body{
     background-color: #1c1c1c;
-    color: #FFCC00;
+    color: white;
     font-family: 'Roboto', sans-serif;
     font-size: 1.5em;
     margin: 0;
@@ -22,7 +22,6 @@ body{
     margin-right: auto;
     margin-left: auto;
     max-width: fit-content;
-    background-color: aqua;
 }
 .centercolumn >div{
     flex-basis: 50%;
@@ -39,9 +38,43 @@ body{
     margin-right: auto;
     max-width: fit-content;
     flex-basis: 50%;
-    background-color: yellowgreen;
 
 }
+
+.left,.center{
+  border-radius: 5%;
+  background: navajowhite;
+
+}
+.post {
+  height: 80vh; /* réduit la hauteur de la grille */
+  display: grid;
+  grid-template-columns: 50% 0% 50%;
+  transition: 500ms;
+  margin: 0 auto;
+
+}
+
+.left:hover + .center {
+  display: block;
+}
+
+.post:has(.left:hover) {
+  grid-template-columns: 50% 50% 0%;
+  background: rgb(220, 210, 20);
+}
+
+.center {
+  display: none;
+  background: black;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  height: 70%;
+  width: 70%;
+}
+
 h1 {
     font-size: 4em;
   }
@@ -77,8 +110,6 @@ header .centercolumn {
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
     width: 100%;
     background-color: #1c1c1c;
     color: #FFCC00;
