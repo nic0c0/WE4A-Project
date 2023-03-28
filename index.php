@@ -10,7 +10,9 @@
     <?php include("./Parties/navbar.php"); ?>
 <div class="main">
 
-    <div>    test  </div>
+    <div class="leftmain">
+      <div class="left1">test</div>
+    </div>
     <div> 
     <h1>Hello, world!</h1> <?php include("./Parties/signin.php"); ?>
           <?php include("./Parties/signout.php"); ?>
