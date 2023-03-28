@@ -5,7 +5,6 @@
     <div class="centerline">
       <label for="username">Nom d'utilisateur :</label>
       <input id="username" class="centercolumn" type="text" placeholder="Username" required>
-      <br>
       <label for="password">Mot de passe :</label>
       <input id="password" class="centercolumn" type="password" placeholder="Password" required>
     </div>
