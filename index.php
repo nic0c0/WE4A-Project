@@ -1,11 +1,5 @@
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./CSS/style1.css">
-    <title>MyNetwork</title>
-  </head>
+
+<?php include("./Parties/head.php"); ?>
   <body>
     <?php include("./Parties/navbar.php"); ?>
     <h1>Hello, world!</h1>
