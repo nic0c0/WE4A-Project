@@ -3,11 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./CSS/style1.css">
+    <link rel="shortcut icon" type="image/x-icon" href="./IMG/t3.ico">
+    <!--<link rel="stylesheet" href="./CSS/style1.css">-->
+    <script src="./scripts.js"></script>
+    <script>
+      applyStyles();
+    </script>
     <title>MyNetwork</title>
   </head>
   <body>
-    <?php include("./Parties/navbar.php"); ?>
+    <?php include("./Parties/header.php"); ?>
 <div class="main">
 
     <div class="leftmain">

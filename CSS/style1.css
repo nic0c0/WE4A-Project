@@ -2,6 +2,7 @@
   --border-radius: 5%;
   --secondary-color: #FFCC00;
   --main-color: #1a1a1b;
+  --grey-color-test: #f2f2f2;
   --transition: 500ms;
   --background-color: black;
 }
@@ -18,7 +19,7 @@ body{
 
 
 
-/* Regles générales dans la partie centrale */
+/* le main et ses fils */
 .main {
   margin: 0px auto;
   width: 100%;
@@ -54,6 +55,7 @@ body{
   grid-template-columns: 100% 0%;
 }
 
+/* A changer */
 .centerline{
     display: block;
     justify-content: space-between;
@@ -80,7 +82,7 @@ body{
     flex-basis: 50%;
 
 }
-
+/* Un post */
 .post > *{
   padding: 2rem;
 
@@ -144,25 +146,33 @@ body{
 h1 {
     font-size: 4em;
   }
-
+/* Header et fils */
 header {
-    display: block;
-    background-color: #514646;
+    display:grid;
+    grid-template-columns: 1fr 4fr 2fr;
+    grid-template-rows: 100%;
+    grid-template-areas: 
+    "left center right";
     position: fixed; 
     top: 0; 
     left: 0; 
     z-index: 999; /* Niveau de profondeur pour empêcher le chevauchement d'autres éléments */
     border-bottom: 1px solid var(--secondary-color);
-    margin-bottom: 50px;
     width: 100%;
-    background: 
-		linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
-		linear-gradient(#4e4376, #2b5876);
-
-
+    margin-bottom: 50px;
+    background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), linear-gradient(var(--main-color), var(--grey-color-test));
+    padding: 1rem 0;
   }
+  .search{
+    grid-area: center;
+  }
+header>*{/* tous les enfants de header sont des flex */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   header nav {
-    display: flex;
+    grid-area: right;
   }
   header li {
     display: inline-flex;
@@ -173,15 +183,27 @@ header .centercolumn > div {
 header .centercolumn {
     justify-content: space-between;
     align-items: center;
-    padding: 0 10%;
+    padding: inherit;
 }
-
+.logo img {
+  max-width: 20%;
+  max-height: 50%;
+  width: auto;
+}
+.logo{
+  grid-area: left;
+}
+/* Footer */
 footer {
     width: 100%;
     background-color: var(--main-color);
     color:  var(--secondary-color);
     text-align: center;
   }
+
+
+
+  /* Boutons et login*/
   button {
     background-color: var(--secondary-color);
     border-radius: var(--border-radius);
@@ -215,3 +237,6 @@ footer {
     margin-bottom: 20px;
     padding: 0 10px;
   }
+
+
+  
