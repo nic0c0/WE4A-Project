@@ -1,17 +1,4 @@
-function getHeaderHeight() {
-    const header = document.querySelector('header');
-    const headerHeight = window.getComputedStyle(header).height;
-    return headerHeight;
-  }
-  
-function setSiblingHeight() {
-    const headerHeight = getHeaderHeight();
-    const sibling = document.querySelector('header + *');
-    sibling.style.top = `${headerHeight}`;
-    sibling.style.position = 'relative';
-    sibling.style.marginBottom = `${headerHeight}`;
-    console.log(sibling);
-}
+
 
 function applyStyles() {
   // Créer une balise <link> pour la feuille de style s1
@@ -30,5 +17,17 @@ function applyStyles() {
     cssLink2.type = "text/css";
     document.head.appendChild(cssLink2);
   }
+}
+
+function header(){ // fixe le header en haut de page si on est pas au sommet
+  var myElement = document.querySelector('header');
+
+  window.addEventListener('scroll', function() {
+    if (window.pageYOffset > 0) {
+      myElement.style.position = 'fixed';
+    } else {
+      myElement.style.position = 'relative';
+    }
+  });
 }
 
