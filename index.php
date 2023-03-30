@@ -20,7 +20,7 @@
     </div>
     <div> 
     <h1>Hello, world!</h1> <?php include("./Parties/signin.php"); ?>
-          <?php include("./Parties/signout.php"); ?>
+        <?php include("./Parties/signout.php"); ?>
         <?php include("./Parties/post.php"); ?>
         <?php include("./Parties/post.php"); ?></div>
     <div><p>test</p></div>

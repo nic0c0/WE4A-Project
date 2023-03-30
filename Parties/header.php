@@ -2,12 +2,10 @@
     <div class="logo">
         <img src="./IMG/t3.ico" alt="Logo">                               
     </div>
-    <div class="search">
-    <form>
+    <form class="search">
         <input type="text" placeholder="Rechercher...">
-        <button type="submit">Rechercher</button>
+        <button type="submit">Go</button>
     </form>
-    </div>
     <nav>
         <ul>
             <li><a href="e.html">Profil</a></li>
