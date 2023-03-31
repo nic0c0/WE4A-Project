@@ -9,7 +9,7 @@
   </head>
   <body>
   
-  <?php include("./Parties/signin.php"); ?> 
+ <!-- <?php include("./Parties/signin.php"); ?> -->
 
   <?php include("./Parties/header.php"); ?>
 <div class="main">
@@ -22,7 +22,6 @@
         <?php include("./Parties/signout.php"); ?>
         <?php include("./Parties/post.php"); ?>
         <?php include("./Parties/post.php"); ?></div>
-    <div><p>test</p></div>
 
 
 
