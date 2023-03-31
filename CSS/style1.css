@@ -1,5 +1,5 @@
 :root{
-  --border-radius: 5%;
+  --border-radius: 5px;
   --secondary-color: #d9d9d9;
   --main-color: #1a1a1b;
   --grey-color: #d9d9d9;
@@ -20,6 +20,7 @@ body{
     margin: 0;
     padding: 0;
     text-align: center;
+    letter-spacing: 0.5px;
 }
 
 
@@ -60,19 +61,7 @@ body{
   grid-template-columns: 100% 0%;
 }
 
-/* A changer */
 
-.centercolumn >div{
-    flex-basis: 50%;
-}
-
-.centercolumn{
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: fit-content;
-    flex-basis: 50%;
-}
 /* Un post */
 .post > *{
   padding: 2rem;
@@ -146,7 +135,7 @@ header {
     position: relative; 
     top: 0; 
     left: 0; 
-    z-index: 999; /* Niveau de profondeur pour empêcher le chevauchement d'autres éléments */
+    z-index: 1; /* Niveau de profondeur pour empêcher le chevauchement d'autres éléments */
     border-bottom: 1px solid var(--secondary-color);
     width: 100%;
     height: 10vh;
@@ -178,19 +167,18 @@ header .centercolumn {
 .search input{
   width:80%;
   height: 40%;
-  border-radius: 30px;
+  border-radius: var(--border-radius);
   border: solid 1px var(--secondary-color);
   background-color: var(--main-color);
   color: var(--secondary-color);
   padding:0 5%;
+  
 }
 .search button{
   position:absolute;
   margin-left: 35%;
   width: 2.5%;
   height: 20%;
-  font-size: 0.8rem; /* réduire la taille du texte */
-  border-radius: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -205,29 +193,48 @@ footer {
 
 
 
-  /* Boutons et login*/
-  button {
-    background-color: var(--secondary-color);
-    border-radius: var(--border-radius);
-    color: var(--main-color);
-    cursor: pointer;
-    font-size: 1em;
-    padding: 10px 20px;
-  }
+  /* Boutons et label et inputs */
+
   
   button:hover {
     background-color: var(--main-color);
     color:  var(--secondary-color);
   }  
   
+  button {
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    color: var(--main-color);
+    cursor: pointer;
+    font-size: 0.8rem; /* réduire la taille du texte */
+    padding: 10px 20px;
+  }
+  label{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+}
+input{
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    border:none;
+    padding: 0 10px;
+    font-size: 14px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: fit-content;
+}
+
 .signout {
     display: flex;
     justify-content: flex-end;
   }
 
+  /* Login */
   fieldset {
-  border-top-left-radius: 10px;
-    margin: 0;
+    border: none;
     padding: 0;
   }
   
@@ -237,8 +244,41 @@ footer {
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 20px;
-    padding: 0 10px;
   }
 
 
-  
+  .login{
+    height: 60%;
+    width: 25%;
+    position: fixed;/* Positionnement fixe */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%); /* Décalage de 50% car top et left ne sont pas relatifs au centre */
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    background-color: rgba(255,255,255,0.13);
+    border: 2px solid rgba(255,255,255,0.1);
+    padding: 50px 35px;
+    z-index: 3;
+}
+.login ~ * { /* Tous les éléments après le formulaire de connexion */
+  pointer-events: none;
+  user-select: none;
+}
+
+.blurring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);/* assombrit l'arrière-plan */
+  backdrop-filter: blur(10px); /* Flou de l'arrière-plan */
+  z-index: 2;
+}
+.login button{
+    margin-top: 50px;
+    width: 100%;
+    font-weight: 600;
+    border:none;
+}

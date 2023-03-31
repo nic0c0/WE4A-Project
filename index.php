@@ -8,14 +8,17 @@
     <title>MyNetwork</title>
   </head>
   <body>
-    <?php include("./Parties/header.php"); ?>
+  
+  <?php include("./Parties/signin.php"); ?> 
+
+  <?php include("./Parties/header.php"); ?>
 <div class="main">
 
     <div class="leftmain">
       <div class="left1">test</div>
     </div>
     <div> 
-    <h1>Hello, world!</h1> <?php include("./Parties/signin.php"); ?>
+    <h1>Hello, world!</h1> 
         <?php include("./Parties/signout.php"); ?>
         <?php include("./Parties/post.php"); ?>
         <?php include("./Parties/post.php"); ?></div>
