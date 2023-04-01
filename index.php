@@ -3,7 +3,7 @@
 
   <body>
   
- <!-- <?php include("./Parties/signin.php"); ?> -->
+ <?php include("./Parties/signin.php"); ?>
 
   <?php include("./Parties/header.php"); ?>
 <div class="main">

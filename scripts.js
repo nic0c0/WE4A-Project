@@ -4,6 +4,7 @@ function applyStyles() {
   // Créer une balise <link> pour la feuille de style s1
   var cssLink = document.createElement("link");
   cssLink.href = "./CSS/style1.css";
+
   cssLink.rel = "stylesheet";
   cssLink.type = "text/css";
   document.head.appendChild(cssLink);
