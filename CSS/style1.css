@@ -31,7 +31,6 @@ body{
   margin: 0px auto;
   width: 100%;
   border-width: 1px 1px; 
-  border-style: dotted; /*délimité par des points */
   border-color:  rgb(var(--secondary-color));
   background-color: rgba(175, 46, 46, 0);
   display: grid;
@@ -144,28 +143,37 @@ nav ul{
   list-style: none;
 
 }
-ul > * {
+nav li {  
   flex-basis:50%;
+  text-align: center;
+  padding: 0 1em;
   }
+nav a{
+  text-decoration: none;
+  color: rgb(var(--secondary-color));
+}
+nav a:hover{
+  color: rgb(var(--main-color));
+  background-color: rgb(var(--secondary-color));
+  border-radius: var(--border-radius);
+}
 
 .logo img {
   max-width: 20%;
   max-height: 50%;
   width: auto;
 }
-.search input{
-  width:80%;
+.search >*{
   height: 40%;
-  border-radius: var(--border-radius);
+
+}
+.search input{
   color: rgb(var(--secondary-color));
   padding:0 5%;
-  
+  max-width: none;
 }
 .search button{
-  position:absolute;
-  margin-left: 35%;
-  width: 2.5%;
-  height: 20%;
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
