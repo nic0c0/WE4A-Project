@@ -9,9 +9,9 @@
     <nav>
         <ul>
             <li><a href="e.html">Profil</a></li>
-            <li><a href="./PAGES/e.html">Déconnection</a></li>
             <li><a href="./PAGES/e.html">Paramètres</a></li>
         </ul>
+        <?php include("./Parties/signout.php"); ?>
     </nav>
 
 </header>

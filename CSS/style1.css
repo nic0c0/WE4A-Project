@@ -139,9 +139,14 @@ header>*{/* tous les enfants de header sont des flex */
   align-items: center;
   max-width: 80%;
 }
-  header li {
-    display: inline-flex;
-}  
+nav ul{
+  display : flex;
+  list-style: none;
+
+}
+ul > * {
+  flex-basis:50%;
+  }
 
 .logo img {
   max-width: 20%;
