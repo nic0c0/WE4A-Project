@@ -1,5 +1,5 @@
 
-<?php include("./Parties/head.php") ?>
+<?php include("../Parties/head.php") ?>
 
   <body>
   
@@ -16,11 +16,11 @@
       <input id="username" type="text" placeholder="Username" name="username" required>
       <label for="password">Mot de passe :</label>
       <input id="password" type="password" placeholder="Password" name="password1" required>
+      <label for="password">Confirmer :</label>
+
       <input id="password" type="password" placeholder="Password" name="password2" required>
   </fieldset>
     <button type="submit">s'inscrire</button>
-
-</form>
 
 <?php 
 
@@ -37,33 +37,36 @@ if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["us
         include("../Parties/Classes.php");
 
         $U = new user($USERNAME,$PASSWORD1);
-        $U->show();
+      // $U->show();
+
+      header('Location: ../index.php');
         
         
     }else{
         
-        echo "Les mots de passe ne sont pas les mêmes!";
+        echo "mauvais mots de passe";
 
     }
 
 }
 ?>
+</form>
 
-  <?php include("./Parties/header.php"); ?>
+  <?php include("../Parties/header.php"); ?>
 <div class="main">
 
     <div class="leftmain">
     </div>
     <div> 
     <h1>Hello, world!</h1> 
-        <?php include("./Parties/signout.php"); ?>
-        <?php include("./Parties/post.php"); ?>
-        <?php include("./Parties/post.php"); ?></div>
+        <?php include("../Parties/signout.php"); ?>
+        <?php include("../Parties/post.php"); ?>
+        <?php include("../Parties/post.php"); ?></div>
 
 
 
 </div>
-<?php include("./Parties/footer.php"); ?>
+<?php include("../Parties/footer.php"); ?>
 
 </body>
 </html>
