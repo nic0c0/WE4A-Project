@@ -1,9 +1,28 @@
 
-<?php include("./Parties/head.php") ?>
+<?php 
+  session_start();
+  include("./Parties/head.php");
+  
+  ?>
 
   <body>
-  
- <?php include("./Parties/signin.php"); ?>
+
+ <?php 
+    
+    if(!isset($_SESSION["user"])){
+    
+      include("./Parties/signin.php");
+     
+    }else{
+        include("./Classes.php");
+        //$U = unserialize($_SESSION["user"]);
+        var_dump($_SESSION["user"]);
+    }
+
+    
+
+     
+     ?>
 
   <?php include("./Parties/header.php"); ?>
 <div class="main">

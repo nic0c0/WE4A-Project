@@ -1,5 +1,7 @@
 
-<?php include("../Parties/head.php") ?>
+<?php 
+session_start();
+include("../Parties/head.php") ?>
 
   <body>
   
@@ -27,17 +29,22 @@
 
 if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["username"])){
     
-    $USERNAME=$_POST["username"];
-    $PASSWORD1=$_POST["password1"];
-    $PASSWORD2=$_POST["password2"];
+  
+    $USERNAME=htmlentities($_POST["username"]);
+    $PASSWORD1=htmlentities($_POST["password1"]);
+    $PASSWORD2=htmlentities($_POST["password2"]);
 
     if($PASSWORD1==$PASSWORD2){
 
+        $PASSWORD1 = md5($PASSWORD1);
         $test=true;
         include("../Parties/Classes.php");
 
         $U = new user($USERNAME,$PASSWORD1);
       // $U->show();
+
+      $_SESSION["user"]=serialize($U);
+      //setcookie("user",serialize($U),time()*60);
 
       header('Location: ../index.php');
         
@@ -48,6 +55,12 @@ if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["us
 
     }
 
+}
+
+
+if (isset($_COOKIE["user"])){
+  $user = unserialize($_COOKIE["user"]);
+  var_dump($_COOKIE["user"]);
 }
 ?>
 </form>
