@@ -40,10 +40,10 @@ if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["us
         $test=true;
         include("../Parties/Classes.php");
 
-        $U = new user($USERNAME,$PASSWORD1);
+        //$U = new user($USERNAME,$PASSWORD1);
       // $U->show();
-
-      $_SESSION["user"]=serialize($U);
+      $info = ['user' => $USERNAME, 'password' => $PASSWORD1];
+      $_SESSION['user']=$info;
       //setcookie("user",serialize($U),time()*60);
 
       header('Location: ../index.php');
@@ -57,11 +57,12 @@ if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["us
 
 }
 
-
+/*
 if (isset($_COOKIE["user"])){
   $user = unserialize($_COOKIE["user"]);
   var_dump($_COOKIE["user"]);
-}
+}*/
+
 ?>
 </form>
 

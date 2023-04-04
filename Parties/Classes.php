@@ -28,7 +28,7 @@
         }
 
         public function show(){
-            echo "$this->name $this->password";
+            echo "SHOW: $this->name $this->password";
         }
 
 

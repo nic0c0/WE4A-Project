@@ -8,15 +8,16 @@
   <body>
 
  <?php 
+
     
-    if(!isset($_SESSION["user"])){
+    if(!isset($_SESSION['user'])){
     
       include("./Parties/signin.php");
      
     }else{
         include("./Classes.php");
-        //$U = unserialize($_SESSION["user"]);
-        var_dump($_SESSION["user"]);
+        $info = $_SESSION["user"];
+        
     }
 
     
@@ -32,6 +33,7 @@
     </div>
     <div> 
     <h1>Hello, world!</h1> 
+    <?php var_dump($_SESSION['user']); ?>
         <?php include("./Parties/signout.php"); ?>
         <?php include("./Parties/post.php"); ?>
         <?php include("./Parties/post.php"); ?></div>
