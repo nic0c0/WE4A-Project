@@ -1,6 +1,8 @@
 <header>
     <div class="logo">
-        <img src="./IMG/t3.ico" alt="Logo">                               
+        <a href="./index.php">       
+            <img src="./IMG/t3.ico" alt="Logo">
+        </a>
     </div>
     <form class="search">
         <input type="text" placeholder="Rechercher...">
@@ -8,8 +10,8 @@
     </form>
     <nav>
         <ul>
-            <li><a href="e.html">Profil</a></li>
-            <li><a href="./PAGES/e.html">Paramètres</a></li>
+            <li><a href="./Profil.php">Profil</a></li>
+            <li><a href="./Settings.php">Paramètres</a></li>
         </ul>
         <?php include("./Parties/signout.php"); ?>
     </nav>

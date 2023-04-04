@@ -1,5 +1,5 @@
-<?php include("../Parties/head.php") ?>
-<?php include("../Parties/header.php"); ?>
+<?php include("./Parties/head.php") ?>
+<?php include("./Parties/header.php"); ?>
 <body>
     
 <div class="center">
@@ -50,14 +50,14 @@
 </div>
 
 
-<?php include("../Parties/footer.php"); ?>
+<?php include("./Parties/footer.php"); ?>
 
 
-<script src="../scripts.js"></script>
+<script src="./scripts.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         header();
-        applyStyles(true);
+        applyStyles(false);
       });
     </script>
 </body>

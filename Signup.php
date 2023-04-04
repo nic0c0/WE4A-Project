@@ -1,7 +1,7 @@
 
 <?php 
 session_start();
-include("../Parties/head.php") ?>
+include("./Parties/head.php") ?>
 
   <body>
   
@@ -38,7 +38,7 @@ if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["us
 
         $PASSWORD1 = md5($PASSWORD1);
         $test=true;
-        include("../Parties/Classes.php");
+        include("./Parties/Classes.php");
 
         //$U = new user($USERNAME,$PASSWORD1);
       // $U->show();
@@ -46,7 +46,7 @@ if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["us
       $_SESSION['user']=$info;
       //setcookie("user",serialize($U),time()*60);
 
-      header('Location: ../index.php');
+      header('Location: ./index.php');
         
         
     }else{
@@ -66,21 +66,21 @@ if (isset($_COOKIE["user"])){
 ?>
 </form>
 
-  <?php include("../Parties/header.php"); ?>
+  <?php include("./Parties/header.php"); ?>
 <div class="main">
 
     <div class="leftmain">
     </div>
     <div> 
     <h1>Hello, world!</h1> 
-        <?php include("../Parties/signout.php"); ?>
-        <?php include("../Parties/post.php"); ?>
-        <?php include("../Parties/post.php"); ?></div>
+        <?php include("./Parties/signout.php"); ?>
+        <?php include("./Parties/post.php"); ?>
+        <?php include("./Parties/post.php"); ?></div>
 
 
 
 </div>
-<?php include("../Parties/footer.php"); ?>
+<?php include("./Parties/footer.php"); ?>
 
 </body>
 </html>

@@ -13,7 +13,7 @@
   </fieldset>
     <button type="submit">Se connecter</button>
 
-   <a href="./Pages/Signup.php"> <button type="button">Créer un compte</button> </a>
+   <a href="./Signup.php"> <button type="button">Créer un compte</button> </a>
    <?php var_dump($_SESSION['user']);
    ?>
 </form>
