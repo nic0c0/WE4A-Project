@@ -12,5 +12,9 @@
       <input id="password" type="password" placeholder="Password" required>
   </fieldset>
     <button type="submit">Se connecter</button>
-    <button type="button">Créer un compte</button>
+
+   <a href="./Pages/Signup.php"> <button type="button">Créer un compte</button> </a>
+   <?php var_dump($_SESSION['user']);
+   ?>
 </form>
+
