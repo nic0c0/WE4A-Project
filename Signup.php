@@ -16,11 +16,11 @@ include("./Parties/head.php") ?>
    
       <label for="username">Nom d'utilisateur :</label>
       <input id="username" type="text" placeholder="Username" name="username" required>
-      <label for="password">Mot de passe :</label>
-      <input id="password" type="password" placeholder="Password" name="password1" required>
-      <label for="password">Confirmer :</label>
+      <label for="password1">Mot de passe :</label>
+      <input id="password1" type="password" placeholder="Password" name="password1" required>
+      <label for="password2">Confirmer :</label>
 
-      <input id="password" type="password" placeholder="Password" name="password2" required>
+      <input id="password2" type="password" placeholder="Password" name="password2" required>
   </fieldset>
     <button type="submit">s'inscrire</button>
 
