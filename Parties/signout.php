@@ -6,7 +6,8 @@
 
     function logout(){
       <?php
-       
+
+        echo "TEST";
         //unset($_SESSION['user']);
         //header('Location: ../index.php');
       ?>

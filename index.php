@@ -15,8 +15,8 @@
       include("./Parties/signin.php");
      
     }else{
-        include("./Classes.php");
-        $info = $_SESSION["user"];
+        include("./Parties/Classes.php");
+        $info = $_SESSION['user'];
         
     }
 
