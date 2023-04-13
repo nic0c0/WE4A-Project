@@ -19,16 +19,22 @@ function applyStyles(x) {
     document.head.appendChild(cssLink2);
   }
 }
+//passe de relative à fixed
+// function header(){ // fixe le header en haut de page si on est pas au sommet
+//   var myElement = document.querySelector('header');
 
-function header(){ // fixe le header en haut de page si on est pas au sommet
-  var myElement = document.querySelector('header');
+//   window.addEventListener('scroll', function() {
+//     if (window.pageYOffset > 0) {
+//       myElement.style.position = 'fixed';
+//     } else {
+//       myElement.style.position = 'relative';
+//     }
+//   });
+// }
 
-  window.addEventListener('scroll', function() {
-    if (window.pageYOffset > 0) {
-      myElement.style.position = 'fixed';
-    } else {
-      myElement.style.position = 'relative';
-    }
-  });
+imgInp.onchange = evt => {
+  const [file] = imgInp.files
+  if (file) {
+    blah.src = URL.createObjectURL(file)
+  }
 }
-

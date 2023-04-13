@@ -24,25 +24,27 @@
         </form>
 
 
-        <form class="set2">
+        <form>
             <fieldset>
                 <legend>Profil</legend>
-            <div class="img-upload">
-                <label class="img-upload">
-                <input type="file" accept=".jpg, .png, .jpeg, .gif" value="">
-                </label>
-                <!-- ADD preview IMG -->
-            </div>
+                <div class="img-upload">
+                    <label class="img-upload">
+                    <input type="file" accept=".jpg, .png, .jpeg, .gif" value="">
+                    </label>
+                    <img src="" class="image-preview" alt="your image">           
+                </div>
                 <button class="btn button full" type="submit" disabled="">Sauvegarder</button>
             </fieldset>
         </form>
-        <form class="set3">
+        <form>
             <fieldset>
                 <legend>Changer de Mot de passe</legend>
-                <label for="password1">Mot de passe :</label>
-                <input id="password1" type="password" placeholder="Password" required>
-                <label for="password2">Mot de passe :</label>
-                <input id="password2" type="password" placeholder="Password" required>
+                <label for="password1">Mot de passe :
+                    <input id="password1" type="password" placeholder="Password" required>
+                </label>
+                <label for="password2">Mot de passe :
+                    <input id="password2" type="password" placeholder="Password" required>
+                </label>
             </fieldset>
             <button type="submit">Modifier</button>
         </form>

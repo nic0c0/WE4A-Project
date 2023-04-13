@@ -34,6 +34,7 @@
     <div> 
     <h1>Hello, world!</h1> 
     <?php var_dump($_SESSION['user']); ?>
+        <?php include("./Parties/poster.php")?>
         <?php include("./Parties/signout.php"); ?>
         <?php include("./Parties/post.php"); ?>
         <?php include("./Parties/post.php"); ?></div>
@@ -47,7 +48,6 @@
 <script src="./scripts.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        header();
         applyStyles();
       });
     </script>
