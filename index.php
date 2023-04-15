@@ -2,6 +2,7 @@
 <?php 
   session_start();
   include("./Parties/head.php");
+  //include("./Parties/Classes.php");
   
   ?>
 
@@ -16,8 +17,22 @@
      
     }else{
         include("./Parties/Classes.php");
+        $CONNEXION=new SQLconn();
         $info = $_SESSION['user'];
+        $user = $info['user'];
+        $password = $info['password'];
         
+        $sql = "SELECT * FROM t_utilisateur WHERE USERPSEUDO='$user'";
+        
+        $result = mysqli_query($CONNEXION->getConn(), $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            // L'utilisateur et le mot de passe sont corrects
+            echo "Bienvenue $user !";
+        } else {
+            // L'utilisateur et/ou le mot de passe sont incorrects
+            echo "Nom d'utilisateur ou mot de passe incorrect.";
+        }
     }
 
     
@@ -33,9 +48,8 @@
     </div>
     <div> 
     <h1>Hello, world!</h1> 
-    <?php var_dump($_SESSION['user']); ?>
+    
         <?php include("./Parties/poster.php")?>
-        <?php include("./Parties/signout.php"); ?>
         <?php include("./Parties/post.php"); ?>
         <?php include("./Parties/post.php"); ?></div>
 
