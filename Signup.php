@@ -82,5 +82,11 @@ if (isset($_COOKIE["user"])){
 </div>
 <?php include("./Parties/footer.php"); ?>
 
+<script src="./scripts.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        applyStyles();
+      });
+    </script>
 </body>
 </html>
