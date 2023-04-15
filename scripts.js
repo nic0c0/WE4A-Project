@@ -32,9 +32,11 @@ function applyStyles(x) {
 //   });
 // }
 
-imgInp.onchange = evt => {
-  const [file] = imgInp.files
-  if (file) {
-    blah.src = URL.createObjectURL(file)
+if (typeof imgInp !== 'undefined') {
+  imgInp.onchange = evt => {
+    const [file] = imgInp.files
+    if (file) {
+      blah.src = URL.createObjectURL(file)
+    }
   }
 }

@@ -11,8 +11,7 @@
 <script src="./scripts.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        header();
-        applyStyles();
+        applyStyles(false);
       });
     </script>
     </body>

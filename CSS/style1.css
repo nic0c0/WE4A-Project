@@ -103,7 +103,7 @@ body{
 
 .img-container img {
   max-width: 90%;
-  max-height: 80%;
+  max-height: 70%;
   object-fit: contain;
 }
 

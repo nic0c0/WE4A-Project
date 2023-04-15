@@ -28,11 +28,12 @@
             <fieldset>
                 <legend>Profil</legend>
                 <div class="img-upload">
-                    <label class="img-upload">
-                    <input type="file" accept=".jpg, .png, .jpeg, .gif" value="">
+                    <label id="imgUpload">
+                        <input accept="image/*" type='file' id="imgInp" />
                     </label>
-                    <img src="" class="image-preview" alt="your image">           
-                </div>
+                    <div class="img-container">
+                        <img id="blah" src="./IMG/img.png" alt="your image" /> 
+                    </div>
                 <button class="btn button full" type="submit" disabled="">Sauvegarder</button>
             </fieldset>
         </form>
@@ -58,7 +59,6 @@
 <script src="./scripts.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        header();
         applyStyles(false);
       });
     </script>
