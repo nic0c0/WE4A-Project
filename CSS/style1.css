@@ -100,10 +100,15 @@ body{
 .com{
   grid-area:com;
 }
+.left img{
+  border-radius:var(--border-radius);
+  max-width: 100% !important;
+
+}
 
 .img-container img {
-  max-width: 90%;
-  max-height: 70%;
+  max-width: 300px;
+  max-height: 300px;
   object-fit: contain;
 }
 
@@ -329,8 +334,8 @@ input[type="text"], textarea {
   width: 50%;
 }
 .profilePic img{
-  width: 90px;
-  height: 90px;
+  width: 256px; /* consignes */
+  height: 256px;
   border-radius: 50%;
   object-fit: cover;
 }
