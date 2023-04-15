@@ -1,7 +1,9 @@
 <div class="post">
     <div class="left">
         <h1>Le bibimbapp </h1>
-        <img src="./IMG/bibimbap.jpg" alt="bibimbap">
+        <div class="img-container">
+          <img src="./IMG/bibimbap.jpg" alt="bibimbap">
+        </div>
     </div>
     <div class="com"> 
         <p>
