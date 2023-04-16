@@ -1,0 +1,66 @@
+<?php include("./Parties/head.php") ?>
+<?php include("./Parties/header.php"); ?>
+<body>
+    
+<div class="center">
+  <div class="settings">
+        <h1>Compte</h1>
+        <form class="set1" action="">
+            <fieldset>
+                <legend>Informations</legend>
+                <label for="username">Pseudo : 
+                    <input id="username" type="text" placeholder="Username" required>
+                </label>
+                <label for="email">Email : 
+                    <input id="email" type="email" placeholder="Email" required>
+                </label>
+                <label for="name">Nom : 
+                    <input id="name" type="text" placeholder="Name" required>
+                </label>
+                <label for="firstname">Prénom : 
+                    <input id="firstname" type="text" placeholder="Firstname" required>
+                </label>
+            </fieldset>
+        </form>
+
+
+        <form>
+            <fieldset>
+                <legend>Profil</legend>
+                <div class="img-upload">
+                    <label id="imgUpload">
+                        <input accept="image/*" type='file' id="imgInp" />
+                    </label>
+                    <div class="img-container">
+                        <img id="blah" src="./IMG/img.png" alt="your image" /> 
+                    </div>
+                <button class="btn button full" type="submit" disabled="">Sauvegarder</button>
+            </fieldset>
+        </form>
+        <form>
+            <fieldset>
+                <legend>Changer de Mot de passe</legend>
+                <label for="password1">Mot de passe :
+                    <input id="password1" type="password" placeholder="Password" required>
+                </label>
+                <label for="password2">Mot de passe :
+                    <input id="password2" type="password" placeholder="Password" required>
+                </label>
+            </fieldset>
+            <button type="submit">Modifier</button>
+        </form>
+    </div>
+</div>
+
+
+<?php include("./Parties/footer.php"); ?>
+
+
+<script src="./scripts.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        applyStyles(false);
+      });
+    </script>
+</body>
+</html>

@@ -1,17 +1,31 @@
-<form action="./index.php" method="post">
-  <fieldset>
-  <legend>Connexion</legend>
 
-    <div class="centerline">
-      <label for="username">Nom d'utilisateur :</label>
-      <input id="username" class="centercolumn" type="text" placeholder="Username" required>
-      <br>
-      <label for="password">Mot de passe :</label>
-      <input id="password" class="centercolumn" type="password" placeholder="Password" required>
-    </div>
-  </fieldset>
-  <div class="centercolumn">
-    <button type="submit">Se connecter</button>
-    <a href="Pages/Signup.php"> <button type="button">Créer un compte</button> </a>
-  </div>
+<div class="blurring"></div>
+
+<form class="login" action="./index.php" method="post">
+    <fieldset>
+        <legend>Connexion</legend>
+        <label for="username">Nom d'utilisateur :</label>
+        <input id="username" type="text" placeholder="Username" required name="username">
+        <label for="password">Mot de passe :</label>
+        <input id="password" type="password" placeholder="Password" required name="password">
+    </fieldset>
+    <button type="submit" name="signin">Se connecter</button>
+    <a href="./Signup.php"><button type="button">Créer un compte</button></a>
+
+    <?php
+    if (isset($_POST["signin"])) {
+      echo "click button";
+        $conn = new SQLconn();
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        if($conn->CheckDB($username, $password)){
+          echo 'creer cookies';
+          $cook=new Cookie();
+          $cook->CreateLoginCookie($username,$password);
+          header("Location: ./index.php");
+        }
+      }else{
+        echo "not set";
+      }
+    ?>
 </form>
