@@ -1,43 +1,17 @@
 
 <?php 
-  session_start();
   include("./Parties/head.php");
-  //include("./Parties/Classes.php");
+  include("./Parties/Classes.php");
+  include("./Parties/Function.php");
   
   ?>
 
   <body>
 
  <?php 
-
     
-    if(!isset($_SESSION['user'])){
-    
-      include("./Parties/signin.php");
-     
-    }else{
-        include("./Parties/Classes.php");
-        $CONNEXION=new SQLconn();
-        $info = $_SESSION['user'];
-        $user = $info['user'];
-        $password = $info['password'];
-        
-        $sql = "SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO='$user'";
-        
-        $result = mysqli_query($CONNEXION->getConn(), $sql);
-
-        if (mysqli_num_rows($result) > 0) {
-            // L'utilisateur et le mot de passe sont corrects
-            echo "Bienvenue $user !";
-        } else {
-            // L'utilisateur et/ou le mot de passe sont incorrects
-            echo "Nom d'utilisateur ou mot de passe incorrect.";
-        }
-    }
-
-    
-
-     
+    showSignin();
+      
      ?>
 
   <?php include("./Parties/header.php"); ?>

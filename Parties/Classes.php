@@ -6,18 +6,20 @@ class Cookie {
     private $password;
 
     public function __construct() {
-        if(isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
+        if($this->IssetCookie()) {
             $this->username = $_COOKIE['username'];
             $this->password = $_COOKIE['password'];
-        } else {
-            if(isset($_POST['signin'])) {
-                $this->requestSignIn();
-            } elseif(isset($_POST['signup'])) {
-                $this->requestSignUp();
-            }
-        }
+        }     
     }
-    function CreateLoginCookie($username, $encryptedPasswd){
+
+   public function IssetCookie(){
+        return (isset($_COOKIE['username']) && isset($_COOKIE['password']));
+    }    
+
+    public function EncryptedPaswword(){
+        $this->password = password_hash($this->password,PASSWORD_BCRYPT);
+    }
+    public function CreateLoginCookie($username, $encryptedPasswd){
 
         setcookie("name", $username, time() + 24*3600 );
         setcookie("password", $encryptedPasswd, time() + 24*3600);
@@ -31,18 +33,7 @@ class Cookie {
         return $this->password;
     }
 
-    private function requestSignIn() {
-        // Afficher un formulaire de connexion demandant le nom d'utilisateur et le mot de passe
-        // Stocker les informations dans les cookies "username" et "password"
-        // Rediriger l'utilisateur vers la page souhaitée
-    }
 
-    private function requestSignUp() {
-        // Afficher un formulaire d'inscription demandant le nom d'utilisateur, le mot de passe et sa confirmation
-        // Vérifier que les deux mots de passe sont identiques
-        // Stocker les informations dans les cookies "username" et "password"
-        // Rediriger l'utilisateur vers la page souhaitée
-    }
 }
 
 
@@ -65,17 +56,33 @@ class SQLconn {
 
         if ( $this->conn->connect_error) {
             die("Connection failed: " . $this->conn->connect_error);
-        }else{
-            echo "CONNEXION REUSSI!!!!!!!!!!!!!!!!!!!!!!!!";
         }
 
         // Après connection, créer l'objet loginstatus
         //$this->loginStatus = new LoginStatus($this);
     }
 
-    function getConn(){
+    function GetConn(){
         return $this->conn;
+    } 
+    
+    public function CheckDB($user, $password) {           
+        $sql = "SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO = ? AND USER_PASSWORD = ?"; // ? = valeurs a remplacer lors de lexec
+        $stmt = mysqli_prepare($this->GetConn(), $sql); // preparation requête
+        mysqli_stmt_bind_param($stmt, "ss", $user, $password); // ss = string string, les ? sont remplacés
+        mysqli_stmt_execute($stmt);  //on execute la requette
+        $result = mysqli_stmt_get_result($stmt); // on récupère le résultat de la requête
+    
+        if (mysqli_num_rows($result) > 0) {
+           return true;
+
+        } else {
+            // L'utilisateur et/ou le mot de passe sont incorrects
+            return false;
+        }
     }
+
+    /*        */
 
     //Fonction pour sécuriser les données utilisateur de manière basique
     //--------------------------------------------------------------------------------
