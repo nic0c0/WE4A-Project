@@ -1,5 +1,4 @@
 <?php
-
 class Cookie {
 
     private $username;
@@ -21,7 +20,7 @@ class Cookie {
     }
     public function CreateLoginCookie($username, $encryptedPasswd){
 
-        setcookie("name", $username, time() + 24*3600 );
+        setcookie("username", $username, time() + 24*3600 );
         setcookie("password", $encryptedPasswd, time() + 24*3600);
 
     }// fin de Méthode

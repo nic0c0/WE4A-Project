@@ -1,8 +1,4 @@
-<?php 
-  include("./Parties/head.php");
-  include("./Parties/Classes.php");
-  include("./Parties/Function.php");
-  ?>
+
 <div class="blurring"></div>
 
 <form class="login" action="./index.php" method="post">
