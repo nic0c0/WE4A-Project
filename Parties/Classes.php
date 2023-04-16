@@ -8,12 +8,12 @@ class Cookie {
         if($this->IssetCookie()) {
             $this->username = $_COOKIE['username'];
             $this->password = $_COOKIE['password'];
-        }     
+        }
     }
 
    public function IssetCookie(){
         return (isset($_COOKIE['username']) && isset($_COOKIE['password']));
-    }    
+    }
 
     public function EncryptedPaswword($password){
         return password_hash($password,PASSWORD_BCRYPT);
@@ -44,7 +44,7 @@ class Cookie {
 }
 
 
-   
+
 class SQLconn {
     public $conn = NULL;
     public $loginStatus = NULL;
@@ -58,7 +58,7 @@ class SQLconn {
         $username = "root";
         $password = "";
         $dbname = "DB";
-        
+
         $this->conn = new mysqli($servername, $username, $password, $dbname);
 
         if ( $this->conn->connect_error) {
@@ -88,17 +88,52 @@ class SQLconn {
         mysqli_stmt_bind_param($stmt, "s", $user); // ss = string string, les ? sont remplacés
         mysqli_stmt_execute($stmt);  //on execute la requette
         $result = mysqli_stmt_get_result($stmt); // on récupère le résultat de la requête
-    
+
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_array($result);
            //echo $password,"<br>",password_hash($password,PASSWORD_BCRYPT),"<br>",$row['USER_PASSWORD'];
             return $this->CheckPassword($password,$row['USER_PASSWORD']);
 
         } else {
-            echo "données incohérentes";
             return false;
         }
     }
+    public function getUserData($username, $password) {
+        $stmt = $this->conn->prepare("SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO = ? AND USER_PASSWORD = ?");
+        $stmt->bind_param("ss", $username, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $user_data = array(
+                "user_id" => $row["USER_ID"],
+                "user_email" => $row["USER_EMAIL"],
+                "user_pp" => $row["USER_PP"],
+                "user_pseudo" => $row["USER_PSEUDO"],
+                "user_name" => $row["USER_NAME"],
+                "user_surname" => $row["USER_SURNAME"]
+            );
+            return $user_data;
+        } else {
+            return false;
+        }
+    }
+    
+    public function updateProfile($user_id, $user_email, $user_pp, $user_name, $user_surname) {
+        $sql = "UPDATE T_USER_PROFILE SET USER_EMAIL=?, USER_PP=?, USER_NAME=?, USER_SURNAME=? WHERE USER_ID=?";
+        $stmt = mysqli_prepare($this->GetConn(), $sql);
+        mysqli_stmt_bind_param($stmt, "ssssi", $user_email, $user_pp, $user_name, $user_surname, $user_id);
+        if (mysqli_stmt_execute($stmt)) {
+            echo "Vos informations ont été mises à jour avec succès.";
+        } else {
+            echo "Erreur: " . mysqli_error($this->GetConn());
+        }
+        mysqli_stmt_close($stmt); // fermeture du statement
+        mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
+    }
+
+
 
     /*        */
 
