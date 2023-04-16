@@ -91,9 +91,8 @@ class SQLconn {
     
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_array($result);
-            echo $row['USER_PASSWORD'];
+           //echo $password,"<br>",password_hash($password,PASSWORD_BCRYPT),"<br>",$row['USER_PASSWORD'];
             return $this->CheckPassword($password,$row['USER_PASSWORD']);
-            
 
         } else {
             echo "données incohérentes";
