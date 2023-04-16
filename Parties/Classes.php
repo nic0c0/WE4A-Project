@@ -15,13 +15,14 @@ class Cookie {
         return (isset($_COOKIE['username']) && isset($_COOKIE['password']));
     }    
 
-    public function EncryptedPaswword(){
-        $this->password = password_hash($this->password,PASSWORD_BCRYPT);
+    public function EncryptedPaswword($password){
+        return password_hash($password,PASSWORD_BCRYPT);
     }
+    
     public function CreateLoginCookie($username, $password){
 
         setcookie("username", $username, time() + 24*3600 );
-        setcookie("password", $password, time() + 24*3600);
+        setcookie("password", $this->EncryptedPaswword($password), time() + 24*3600);
 
     }// fin de Méthode
     public function getUsername() {
@@ -71,19 +72,31 @@ class SQLconn {
     function GetConn(){
         return $this->conn;
     } 
+
+    function CloseDB(){
+        mysqli_close($this->GetConn());
+    }
     
+    public function CheckPassword($password,$hash){
+        return password_verify($password, $hash);
+
+    }
+
     public function CheckDB($user, $password) {           
-        $sql = "SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO = ? AND USER_PASSWORD = ?"; // ? = valeurs a remplacer lors de lexec
+        $sql = "SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO = ?"; // ? = valeurs a remplacer lors de lexec
         $stmt = mysqli_prepare($this->GetConn(), $sql); // preparation requête
-        mysqli_stmt_bind_param($stmt, "ss", $user, $password); // ss = string string, les ? sont remplacés
+        mysqli_stmt_bind_param($stmt, "s", $user); // ss = string string, les ? sont remplacés
         mysqli_stmt_execute($stmt);  //on execute la requette
         $result = mysqli_stmt_get_result($stmt); // on récupère le résultat de la requête
     
         if (mysqli_num_rows($result) > 0) {
-           return true;
+            $row = mysqli_fetch_array($result);
+            echo $row['USER_PASSWORD'];
+            return $this->CheckPassword($password,$row['USER_PASSWORD']);
+            
 
         } else {
-            // L'utilisateur et/ou le mot de passe sont incorrects
+            echo "données incohérentes";
             return false;
         }
     }
@@ -261,9 +274,6 @@ class SQLconn {
 */
     //Fonction pour fermer la connection sur base de données
     //--------------------------------------------------------------------------------
-    function DisconnectDatabase(){
-        $this->conn->close();
-    }
 }
 
 class LoginStatus{
