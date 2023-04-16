@@ -22,7 +22,7 @@
         $user = $info['user'];
         $password = $info['password'];
         
-        $sql = "SELECT * FROM t_utilisateur WHERE USERPSEUDO='$user'";
+        $sql = "SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO='$user'";
         
         $result = mysqli_query($CONNEXION->getConn(), $sql);
 
