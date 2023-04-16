@@ -1,7 +1,6 @@
 <?php include("./Parties/head.php") ?>
 <?php include("./Parties/Classes.php")?>
 <?php include("./Parties/header.php"); ?>
-<?php include("./Parties/dbfunctions.php")?>
 <body>
 <?php
 

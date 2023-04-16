@@ -2,7 +2,6 @@
 <?php 
   include("./Parties/head.php");
   include("./Parties/Classes.php");
-  include("./Parties/dbfunctions.php");
   
   ?>
 
