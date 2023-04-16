@@ -45,4 +45,12 @@ function isBufferFileAdequate(){
         return false;
     }
 }
+
+function EncryptedPaswword($password){
+    return password_hash($password,PASSWORD_BCRYPT);
+}
+
+function CheckPassword($password,$hash){
+    return password_verify($password, $hash);
+}
 ?>

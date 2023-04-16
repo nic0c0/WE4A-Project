@@ -36,9 +36,10 @@ if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["us
 
     if($PASSWORD1==$PASSWORD2){
 
-        $PASSWORD1 = md5($PASSWORD1);
-
         include("./Parties/Classes.php");
+
+        $coon = new SQLconn();
+        $coon->CreateAccount($USERNAME,$PASSWORD1);
         $cook = new Cookie();
         $cook->CreateLoginCookie($USERNAME,$PASSWORD1);
 
