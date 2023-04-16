@@ -29,12 +29,3 @@
       }
     ?>
 </form>
-
-<script src="./scripts.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        applyStyles();
-      });
-    </script>
-</body>
-</html>

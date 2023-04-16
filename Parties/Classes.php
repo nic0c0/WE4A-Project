@@ -18,10 +18,10 @@ class Cookie {
     public function EncryptedPaswword(){
         $this->password = password_hash($this->password,PASSWORD_BCRYPT);
     }
-    public function CreateLoginCookie($username, $encryptedPasswd){
+    public function CreateLoginCookie($username, $password){
 
         setcookie("username", $username, time() + 24*3600 );
-        setcookie("password", $encryptedPasswd, time() + 24*3600);
+        setcookie("password", $password, time() + 24*3600);
 
     }// fin de Méthode
     public function getUsername() {
