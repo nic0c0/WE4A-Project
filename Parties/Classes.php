@@ -112,18 +112,18 @@ class SQLconn {
                 "user_pp" => $row["USER_PP"],
                 "user_pseudo" => $row["USER_PSEUDO"],
                 "user_name" => $row["USER_NAME"],
-                "user_surname" => $row["USER_SURNAME"]
+                "user_surname" => $row["USER_SURNAME"],
+                "user_desc"=> $row["USER_DESC"]
             );
             return $user_data;
         } else {
             return false;
         }
     }
-    
-    public function updateProfile($user_id, $user_email, $user_pp, $user_name, $user_surname) {
-        $sql = "UPDATE T_USER_PROFILE SET USER_EMAIL=?, USER_PP=?, USER_NAME=?, USER_SURNAME=? WHERE USER_ID=?";
+    public function updateProfile($user_id, $user_email, $user_pp, $user_name, $user_surname, $user_desc) {
+        $sql = "UPDATE T_USER_PROFILE SET USER_EMAIL=?, USER_PP=?, USER_NAME=?, USER_SURNAME=?, USER_DESC=? WHERE USER_ID=?";
         $stmt = mysqli_prepare($this->GetConn(), $sql);
-        mysqli_stmt_bind_param($stmt, "ssssi", $user_email, $user_pp, $user_name, $user_surname, $user_id);
+        mysqli_stmt_bind_param($stmt, "sssssi", $user_email, $user_pp, $user_name, $user_surname, $user_desc, $user_id);
         if (mysqli_stmt_execute($stmt)) {
             echo "Vos informations ont été mises à jour avec succès.";
         } else {
@@ -132,7 +132,7 @@ class SQLconn {
         mysqli_stmt_close($stmt); // fermeture du statement
         mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
     }
-
+    
 
 
     /*        */

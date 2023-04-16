@@ -7,6 +7,7 @@
     //Chargement de l'image de profil et du pseudo
     $user_pp = $user_data['user_pp'];
     $user_pseudo = $user_data['user_pseudo'];
+    $user_desc = $user_data['user_desc'];
     
 ?>
 
@@ -16,7 +17,7 @@
     </div>
     <div class="username">
       <h2><?php echo "$user_pseudo"?></h2>
-      <p>Description</p>
+      <p><?php echo "$user_desc"?></p>
     </div>
     
     <div class="details">

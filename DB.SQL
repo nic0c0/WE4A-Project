@@ -84,6 +84,7 @@ CREATE TABLE IF NOT EXISTS T_USER_PROFILE
  (
    USER_ID BIGINT(4) NOT NULL AUTO_INCREMENT ,
    USER_EMAIL VARCHAR(128) NOT NULL  ,
+   USER_DESC VARCHAR(128) NOT NULL  ,
    USER_PP VARCHAR(256) NOT NULL  ,
    USER_PSEUDO VARCHAR(50) NOT NULL  ,
    USER_NAME VARCHAR(50) NOT NULL  ,
@@ -146,3 +147,13 @@ ALTER TABLE T_POST_COMMENT
       REFERENCES T_USER_PROFILE (USER_ID) ;
 
 
+
+
+
+
+
+
+
+INSERT INTO `t_user_profile` (`USER_ID`, `USER_EMAIL`, `USER_PP`, `USER_PSEUDO`, `USER_NAME`, `USER_SURNAME`, `USER_PASSWORD`) VALUES
+(1, 'init@utbm.fr', './IMGDB/1profilpicture.gif', 'Init', 'IN', 'IT', 'init'),
+(2, 'Nico@utbm.fr', './IMG/bibimbap.jpg', 'Nico', 'Nicolalaa', '', 'root');

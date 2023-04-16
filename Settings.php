@@ -23,6 +23,7 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
         $user_email = $_POST['user_email'];
         $user_name = $_POST['user_name'];
         $user_surname = $_POST['user_surname'];
+        $user_desc= $_POST['user_desc'];
 
     // Chargement de l'image de profil
     $user_pp = $user_data['user_pp'];
@@ -38,7 +39,7 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
 
 
         // Mise à jour des données utilisateur dans la base de données
-        $conn->updateProfile($user_id, $user_email, $user_pp,$user_name, $user_surname);
+        $conn->updateProfile($user_id, $user_email, $user_pp,$user_name, $user_surname,$user_desc);
 
         // header("Location: ./Settings.php");
         // exit();
@@ -67,6 +68,9 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
       
       <label for="user_surname">Nom :</label>
       <input type="text" id="user_surname" name="user_surname" value="<?php echo isset($user_data['user_surname']) ? $user_data['user_surname'] : ''; ?>"  placeholder="Entrez votre nom de famille">
+            
+      <label for="user_desc">Descrition :</label>
+      <input type="text" id="user_desc" name="user_desc" value="<?php echo isset($user_data['user_desc']) ? $user_data['user_desc'] : ''; ?>"  placeholder="Entrez votre Description">
             
       <fieldset>
         <legend>Profil</legend>

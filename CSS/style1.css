@@ -255,7 +255,7 @@ input,textarea{
 input::placeholder{
     color: rgb(var(--secondary-color));
 }
-input[type="text"], textarea {
+input, textarea{
   color: rgb(var(--secondary-color));
 }
 
