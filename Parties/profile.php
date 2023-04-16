@@ -1,9 +1,21 @@
+
+<?php
+    // Récupération des données utilisateur à partir de la base de données
+    $user_data = $conn->getUserData($username, $password);
+    $user_id = $user_data['user_id'];
+
+    //Chargement de l'image de profil et du pseudo
+    $user_pp = $user_data['user_pp'];
+    $user_pseudo = $user_data['user_pseudo'];
+    
+?>
+
 <div class="card">
     <div class="profilePic">
-    <img src="./IMG/profilepic1.png" alt="profilepicture">
+    <img src="<?php echo (isset($user_pp) && !empty($user_pp)) ? $user_pp : './IMG/profilepic1.png'; ?>" alt="Image de profil">
     </div>
     <div class="username">
-      <h2>Pseudo</h2>
+      <h2><?php echo "$user_pseudo"?></h2>
       <p>Description</p>
     </div>
     

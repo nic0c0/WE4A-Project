@@ -27,7 +27,6 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
     // Chargement de l'image de profil
     $user_pp = $user_data['user_pp'];
     if (isset($_FILES['new_pp']) && $_FILES['new_pp']['size'] != 0) {
-        echo"HELLO";
         $new_pp = saveImageAsNew($user_id);
         if ($new_pp) {
             $user_pp = $new_pp;
@@ -76,7 +75,7 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
                 <input accept="image/*" type='file' id="imgInp" name="new_pp" />
             </label>
             <div class="img-container">
-            <img id="blah" src="<?php echo (isset($user_data['user_pp']) && !empty($user_data['user_pp'])) ? $user_data['user_pp'] : './IMG/img.png'; ?>" alt="your image" />
+            <img id="blah" src="<?php echo (isset($user_data['user_pp']) && !empty($user_data['user_pp'])) ? $user_data['user_pp'] : './IMG/profilepic1.png'; ?>" alt="your image" />
             </div>
             <button class="btn button full" type="submit" name="save">Sauvegarder</button>
         </fieldset>
