@@ -1,17 +1,16 @@
 <?php
-function saveImageAsNew($user_id) {
-    $hasAdequateFile = isBufferFileAdequate();
+function saveImageAsNew($user_id, $isProfilePic, $number) {
     $savePath = "./IMGDB/";
+    $var= $isProfilePic ? 'new_pp' : 'post_img';
+    $hasAdequateFile = isBufferFileAdequate($var);
 
     if ($hasAdequateFile) {
-        $file = $_FILES['new_pp']['name'];
-        echo"<br> your file is:";
-        var_dump($file);
+        $file = $_FILES[$var]['name'];
         $path = pathinfo($file); 
         $ext = $path['extension'];
 
-        $temp_name = $_FILES['new_pp']['tmp_name'];
-        $new_filename = $user_id . "profilpicture";
+        $temp_name = $_FILES[$var]['tmp_name'];
+        $new_filename = $isProfilePic ? $user_id . "profilpicture": $user_id . "picture".$number;
         $path_filename_ext = $savePath . $new_filename . "." . $ext;
 
         if (file_exists($path_filename_ext)) {
@@ -28,13 +27,13 @@ function saveImageAsNew($user_id) {
     }
 }
 
-function isBufferFileAdequate(){
+function isBufferFileAdequate($var){
     $lenght=10485760;//10Mo
-    if (isset($_FILES['new_pp']) && $_FILES['new_pp']['size'] != 0) {
-        if ($_FILES['new_pp']['size'] > $lenght) {
+    if (isset($_FILES[$var]) && $_FILES[$var]['size'] != 0) {
+        if ($_FILES[$var]['size'] > $lenght) {
             echo "Fichier trop grand! Respectez la limite de 10Mo.";
             return false;
-        } elseif (in_array($_FILES['new_pp']['type'], array("image/jpeg", "image/png", "image/gif"))) {
+        } elseif (in_array($_FILES[$var]['type'], array("image/jpeg", "image/png", "image/gif"))) {
             return true;
         } else {
             echo "Type de fichier non accepté! Images JPG et PNG seulement.";

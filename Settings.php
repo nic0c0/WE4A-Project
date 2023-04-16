@@ -28,13 +28,10 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
     // Chargement de l'image de profil
     $user_pp = $user_data['user_pp'];
     if (isset($_FILES['new_pp']) && $_FILES['new_pp']['size'] != 0) {
-        $new_pp = saveImageAsNew($user_id);
+        $new_pp = saveImageAsNew($user_id,true,0);
         if ($new_pp) {
             $user_pp = $new_pp;
         }
-        echo"test";
-        var_dump($new_pp);
-        echo"test";
     }
 
 

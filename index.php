@@ -2,6 +2,7 @@
 <?php 
   include("./Parties/head.php");
   include("./Parties/Classes.php");
+  include("./Parties/dbfunctions.php");
   
   ?>
 
@@ -11,6 +12,10 @@
             include("./Parties/signin.php");
     }else{
       include("./Parties/header.php");
+      $username = $_COOKIE['username'];
+      $password = $_COOKIE['password'];
+      // Connexion à la base de données
+      $conn = new SQLconn();
       ?>
         <div class="main">
       

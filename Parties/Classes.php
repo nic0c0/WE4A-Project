@@ -132,6 +132,33 @@ class SQLconn {
         mysqli_stmt_close($stmt); // fermeture du statement
         mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
     }
+    public function insertPost($user_id, $titre, $description, $image_path) {
+        $sql = "INSERT INTO T_USER_POST (USER_ID, POST_TITLE, POST_TEXT, POST_IMG) VALUES (?, ?, ?, ?)";
+        $stmt = mysqli_prepare($this->GetConn(), $sql);
+        mysqli_stmt_bind_param($stmt, "isss", $user_id, $titre, $description, $image_path);
+        if (mysqli_stmt_execute($stmt)) {
+            echo "Le post a été ajouté avec succès.";
+        } else {
+            echo "Erreur: " . mysqli_error($this->GetConn());
+        }
+        mysqli_stmt_close($stmt); // fermeture du statement
+        mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
+    }
+    
+    public function getUserPostCount($user_id) {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) FROM T_USER_POST WHERE USER_ID = ?");
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return $row['COUNT(*)'];
+        } else {
+            return 0;
+        }
+    }
+    
     
 
 
