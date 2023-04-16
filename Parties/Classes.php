@@ -129,9 +129,7 @@ class SQLconn {
         mysqli_stmt_close($stmt); // fermeture du statement
         mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
     }
-<<<<<<< Updated upstream
-    
-=======
+
 
     public function CreateAccount($pseudo, $password) {
         $password = EncryptedPaswword($password);
@@ -147,7 +145,7 @@ class SQLconn {
         mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
     }
 
->>>>>>> Stashed changes
+
 
 
     /*        */
