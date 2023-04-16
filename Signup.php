@@ -1,6 +1,6 @@
 
 <?php 
-session_start();
+
 include("./Parties/head.php") ?>
 
   <body>
@@ -37,14 +37,10 @@ if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["us
     if($PASSWORD1==$PASSWORD2){
 
         $PASSWORD1 = md5($PASSWORD1);
-        $test=true;
-        include("./Parties/Classes.php");
 
-        //$U = new user($USERNAME,$PASSWORD1);
-      // $U->show();
-      $info = ['user' => $USERNAME, 'password' => $PASSWORD1];
-      $_SESSION['user']=$info;
-      //setcookie("user",serialize($U),time()*60);
+        include("./Parties/Classes.php");
+        $cook = new Cookie();
+        $cook->CreateLoginCookie($USERNAME,$PASSWORD1);
 
       header('Location: ./index.php');
         
@@ -57,31 +53,8 @@ if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["us
 
 }
 
-/*
-if (isset($_COOKIE["user"])){
-  $user = unserialize($_COOKIE["user"]);
-  var_dump($_COOKIE["user"]);
-}*/
-
 ?>
 </form>
-
-  <?php include("./Parties/header.php"); ?>
-<div class="main">
-
-    <div class="leftmain">
-    </div>
-    <div> 
-    <h1>Hello, world!</h1> 
-        <?php include("./Parties/signout.php"); ?>
-        <?php include("./Parties/post.php"); ?>
-        <?php include("./Parties/post.php"); ?></div>
-
-
-
-</div>
-<?php include("./Parties/footer.php"); ?>
-
 <script src="./scripts.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
