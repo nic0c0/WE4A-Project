@@ -1,39 +1,52 @@
 <?php
 
-    class user{
+class Cookie {
 
-        private $name;
-        private $password;
+    private $username;
+    private $password;
 
-        public function __construct($name, $password){
-                $this->name=$name;
-                $this->password=$password;
+    public function __construct() {
+        if(isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
+            $this->username = $_COOKIE['username'];
+            $this->password = $_COOKIE['password'];
+        } else {
+            if(isset($_POST['signin'])) {
+                $this->requestSignIn();
+            } elseif(isset($_POST['signup'])) {
+                $this->requestSignUp();
             }
-
-        public function setPass($password){
-                $this->password=$password;
         }
-
-        public function setName($name){
-            $this->name=$name;
-        }
-
-
-        public function getPass(){
-            return $this->password;
-        }
-
-        public function getName(){
-            return $this->name;
-        }
-
-        public function show(){
-            echo "SHOW: $this->name $this->password";
-        }
-
     }
-//require_once(__ROOT__."/Classes/loginStatus.php");
+    function CreateLoginCookie($username, $encryptedPasswd){
 
+        setcookie("name", $username, time() + 24*3600 );
+        setcookie("password", $encryptedPasswd, time() + 24*3600);
+
+    }// fin de Méthode
+    public function getUsername() {
+        return $this->username;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+
+    private function requestSignIn() {
+        // Afficher un formulaire de connexion demandant le nom d'utilisateur et le mot de passe
+        // Stocker les informations dans les cookies "username" et "password"
+        // Rediriger l'utilisateur vers la page souhaitée
+    }
+
+    private function requestSignUp() {
+        // Afficher un formulaire d'inscription demandant le nom d'utilisateur, le mot de passe et sa confirmation
+        // Vérifier que les deux mots de passe sont identiques
+        // Stocker les informations dans les cookies "username" et "password"
+        // Rediriger l'utilisateur vers la page souhaitée
+    }
+}
+
+
+   
 class SQLconn {
     public $conn = NULL;
     public $loginStatus = NULL;
