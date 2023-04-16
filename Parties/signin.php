@@ -14,7 +14,7 @@
 
     <?php
     if (isset($_POST["signin"])) {
-      echo "click button";
+
         $conn = new SQLconn();
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -24,8 +24,6 @@
           $cook->CreateLoginCookie($username,$password);
           header("Location: ./index.php");
         }
-      }else{
-        echo "not set";
       }
     ?>
 </form>

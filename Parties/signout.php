@@ -1,17 +1,13 @@
 
-<div class="signout">
-  <button onclick="logout()">Se déconnecter</button>
+  <form class="signout" action="./index.php" method="post">
+  <button type="submit" name="signout">Se déconnecter</button>
+  </form>
 
-  <script>
 
-    function logout(){
-      <?php
-
-        echo "TEST";
-        //unset($_SESSION['user']);
-        //header('Location: ../index.php');
-      ?>
-    }
-  </script>
-
-</div>
+<?php
+  if(isset($_POST["signout"])){
+      $cook = new Cookie();
+      $cook->clean();
+      header("Location: ./index.php");
+  }
+?>

@@ -32,6 +32,13 @@ class Cookie {
         return $this->password;
     }
 
+    function clean() {
+
+        setcookie("username", '', time() - 3600);
+        setcookie("password", '', time() - 3600);
+                
+    }
+
 
 }
 
