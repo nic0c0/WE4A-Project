@@ -20,10 +20,11 @@
         $password = $_POST['password'];
         if($conn->CheckDB($username, $password)){
           $conn->CloseDB();
-          echo 'creer cookies';
           $cook=new Cookie();
           $cook->CreateLoginCookie($username,$password);
           header("Location: ./index.php"); 
+        }else{
+          echo "Mauvais identifiants!";
         }
       }
     ?>

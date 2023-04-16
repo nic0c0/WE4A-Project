@@ -1,4 +1,7 @@
 <?php
+
+include("./Parties/dbfunctions.php");
+
 class Cookie {
 
     private $username;
@@ -15,14 +18,12 @@ class Cookie {
         return (isset($_COOKIE['username']) && isset($_COOKIE['password']));
     }
 
-    public function EncryptedPaswword($password){
-        return password_hash($password,PASSWORD_BCRYPT);
-    }
+
     
     public function CreateLoginCookie($username, $password){
 
         setcookie("username", $username, time() + 24*3600 );
-        setcookie("password", $this->EncryptedPaswword($password), time() + 24*3600);
+        setcookie("password", EncryptedPaswword($password), time() + 24*3600);
 
     }// fin de Méthode
     public function getUsername() {
@@ -77,10 +78,6 @@ class SQLconn {
         mysqli_close($this->GetConn());
     }
     
-    public function CheckPassword($password,$hash){
-        return password_verify($password, $hash);
-
-    }
 
     public function CheckDB($user, $password) {           
         $sql = "SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO = ?"; // ? = valeurs a remplacer lors de lexec
@@ -92,15 +89,15 @@ class SQLconn {
         if (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_array($result);
            //echo $password,"<br>",password_hash($password,PASSWORD_BCRYPT),"<br>",$row['USER_PASSWORD'];
-            return $this->CheckPassword($password,$row['USER_PASSWORD']);
+            return CheckPassword($password,$row['USER_PASSWORD']);
 
         } else {
             return false;
         }
     }
-    public function getUserData($username, $password) {
-        $stmt = $this->conn->prepare("SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO = ? AND USER_PASSWORD = ?");
-        $stmt->bind_param("ss", $username, $password);
+    public function getUserData($username) {
+        $stmt = $this->conn->prepare("SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO = ?");
+        $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -144,6 +141,22 @@ class SQLconn {
         mysqli_stmt_close($stmt); // fermeture du statement
         mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
     }
+
+
+    public function CreateAccount($pseudo, $password) {
+        $password = EncryptedPaswword($password);
+        $sql = "INSERT INTO T_USER_PROFILE (USER_PSEUDO, USER_PASSWORD) VALUES (?, ?)";
+        $stmt = mysqli_prepare($this->GetConn(), $sql);
+        mysqli_stmt_bind_param($stmt, "ss", $pseudo, $password);
+        if (mysqli_stmt_execute($stmt)) {
+            echo "CREATION DU COMPTE $pseudo";
+        } else {
+            echo "Erreur: " . mysqli_error($this->GetConn());
+        }
+        mysqli_stmt_close($stmt); // fermeture du statement
+        mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
+    }
+
     
     public function getUserPostCount($user_id) {
         $stmt = $this->conn->prepare("SELECT COUNT(*) FROM T_USER_POST WHERE USER_ID = ?");
@@ -160,6 +173,7 @@ class SQLconn {
     }
     
     
+
 
 
     /*        */
