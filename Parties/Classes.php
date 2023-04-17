@@ -106,6 +106,16 @@ class SQLconn {
         }
     }
 
+public function CountFriends($user_id) {           
+        $sql = "SELECT COUNT(*) AS count FROM T_FRIENDSHIP WHERE REQUEST_USER_ID = ? OR ACCEPT_USER_ID = ?";
+        $stmt = mysqli_prepare($this->GetConn(), $sql); 
+        mysqli_stmt_bind_param($stmt, "ss", $user_id, $user_id); 
+        mysqli_stmt_execute($stmt);  
+        $result = mysqli_stmt_get_result($stmt);
+        $count = mysqli_fetch_assoc($result)['count'];
+        echo $count;
+}
+
     public function CheckDB($user, $password) {           
         $sql = "SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO = ?"; // ? = valeurs a remplacer lors de lexec
         $stmt = mysqli_prepare($this->GetConn(), $sql); // preparation requête

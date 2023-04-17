@@ -27,7 +27,13 @@
       </div>
       
       <div class="follower">
-        <h4>0</h4>
+        <h4>
+          <?php
+            $cook = new Cookie();          
+            $conn = new SQLconn();
+            $conn->CountFriends($user_id);
+          ?>
+        </h4>
         <p>Followers</p>
       </div>
       
