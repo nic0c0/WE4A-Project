@@ -154,28 +154,27 @@ class SQLconn {
             return false;
         }
     }
-    public function getComData($user_id, $post_id) {
-        $stmt = $this->conn->prepare("SELECT * FROM T_POST_COMMENT WHERE USER_ID = ? AND POST_ID = ?");
-        $stmt->bind_param("ii", $user_id, $post_id);
+    public function getComData($user_id, $post_id, $com_id) {
+        $stmt = $this->conn->prepare("SELECT * FROM T_POST_COMMENT WHERE USER_ID = ? AND POST_ID = ? AND COMMENT_ID = ?");
+        $stmt->bind_param("iii", $user_id, $post_id, $com_id);
         $stmt->execute();
         $result = $stmt->get_result();
         
-        $comment_data = array();
         if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $comment_data[] = array(
-                    "comment_id" => $row["COMMENT_ID"],
-                    "comment_text" => $row["COMMENT_TEXT"],
-                    "created_time" => $row["CREATED_TIME"],
-                    "post_id" => $row["POST_ID"],
-                    "user_id" => $row["USER_ID"]
-                );
-            }
+            $row = $result->fetch_assoc();
+            $comment_data = array(
+                "comment_id" => $row["COMMENT_ID"],
+                "comment_text" => $row["COMMENT_TEXT"],
+                "created_time" => $row["CREATED_TIME"],
+                "post_id" => $row["POST_ID"],
+                "user_id" => $row["USER_ID"]
+            );
             return $comment_data;
         } else {
             return false;
         }
     }
+    
     
     
     
@@ -218,7 +217,19 @@ class SQLconn {
         mysqli_stmt_close($stmt); // fermeture du statement
         mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
     }
-    
+    public function insertComment($user_id, $post_id, $comment_text) {
+        $created_time = date("Y-m-d H:i:s"); // date actuelle
+        $sql = "INSERT INTO T_POST_COMMENT (USER_ID, POST_ID, COMMENT_TEXT, CREATED_TIME) VALUES (?, ?, ?, ?)";
+        $stmt = mysqli_prepare($this->GetConn(), $sql);
+        mysqli_stmt_bind_param($stmt, "iiss", $user_id, $post_id, $comment_text, $created_time);
+        if (mysqli_stmt_execute($stmt)) {
+            echo "Le commentaire a été ajouté avec succès.";
+        } else {
+            echo "Erreur: " . mysqli_error($this->GetConn());
+        }
+        mysqli_stmt_close($stmt); // fermeture du statement
+        mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
+    }
     
 
 
