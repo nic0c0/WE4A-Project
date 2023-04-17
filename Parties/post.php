@@ -1,8 +1,7 @@
 <?php
-    $user_id=$conn->getUserData($username)['user_id'];
     $post_id=1;
     $com_id=1;
-    $post_data = $conn->getPostData($user_id,$post_id);
+    $post_data = $conn->getPostData($post_id);
 
     if($post_data!==false){//si le post existe
         $post_title = $post_data['post_title'];
@@ -10,7 +9,7 @@
         $post_img = $post_data['post_img'];
         $post_time = $post_data['created_time'];
 
-        $com_data=$conn->getComData($user_id,$post_id,$com_id);
+        $com_data=$conn->getComData($com_id);
         if($com_data!=false){//si le commentaire existe
             $com_text=$com_data['comment_text'];
             $com_time=$com_data['created_time'];
@@ -29,11 +28,11 @@
         <p>
         <?php echo (isset($com_text) ? $com_text . " le " . $com_time : ''); ?>
         </p>
-        <form action="comment.php" method="post">
-        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+        <form action="comment.php" method="get"> <!--get car les données ne sont pas sensibles-->
         <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
         <input type="submit" value="VOIR LE POST">
         </form>
+        
 
     </div>
     <div class="desc">
