@@ -106,10 +106,20 @@ class SQLconn {
         }
     }
 
-public function CountFriends($user_id) {           
-        $sql = "SELECT COUNT(*) AS count FROM T_FRIENDSHIP WHERE REQUEST_USER_ID = ? OR ACCEPT_USER_ID = ?";
+public function CountFollowers($user_id) {           
+    $sql = "SELECT COUNT(*) AS count FROM T_FRIENDSHIP WHERE ACCEPT_USER_ID = ?";//  OR ACCEPT_USER_ID = ?
+    $stmt = mysqli_prepare($this->GetConn(), $sql); 
+    mysqli_stmt_bind_param($stmt, "s", $user_id); 
+    mysqli_stmt_execute($stmt);  
+    $result = mysqli_stmt_get_result($stmt);
+    $count = mysqli_fetch_assoc($result)['count'];
+    echo $count;
+}
+
+public function CountFollows($user_id) {           
+        $sql = "SELECT COUNT(*) AS count FROM T_FRIENDSHIP WHERE REQUEST_USER_ID = ?";//  OR ACCEPT_USER_ID = ?
         $stmt = mysqli_prepare($this->GetConn(), $sql); 
-        mysqli_stmt_bind_param($stmt, "ss", $user_id, $user_id); 
+        mysqli_stmt_bind_param($stmt, "s", $user_id); 
         mysqli_stmt_execute($stmt);  
         $result = mysqli_stmt_get_result($stmt);
         $count = mysqli_fetch_assoc($result)['count'];
