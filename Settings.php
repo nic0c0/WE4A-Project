@@ -4,17 +4,17 @@
 <body>
 <?php
 
+$cook = new Cookie();
+
 // Vérification si l'utilisateur est authentifié
-if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
+if ($cook->IssetCookie()) {
     $authenticated = true;
-    $username = $_COOKIE['username'];
-    $password = $_COOKIE['password'];
 
     // Connexion à la base de données
     $conn = new SQLconn();
     
     // Récupération des données utilisateur à partir de la base de données
-    $user_data = $conn->getUserData($username);
+    $user_data = $conn->getUserData($cook->getUsername());
     $user_id = $user_data['user_id'];
 
     // Traitement des données soumises par le formulaire
@@ -41,11 +41,36 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
         // exit();
     }
 
+    if (isset($_POST['ChangePassword'])){
+ 
+        $PASSWORD1=htmlentities($_POST["password1"]);
+        $PASSWORD2=htmlentities($_POST["password2"]);
+    
+        if($PASSWORD1==$PASSWORD2){
+    
+            
+            $conn = new SQLconn();
+            $hash= EncryptedPaswword($PASSWORD1);
+            $conn->updatePassword($cook->getUsername(),$hash);
+            $cook->UpdatePassword($hash);
+            
+            
+        }else{
+            
+            echo "mauvais mots de passe";
+    
+        }
+    
+    }
+
 } else {
     $authenticated = false;
     header("Location: ./index.php");
     exit();
 }
+
+//var_dump(isset($_POST['ChangePassword']));
+
 
 ?>
     
@@ -83,17 +108,17 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
     </form>
 
 
-        <form>
+    <form method="post" enctype="multipart/form-data" >
             <fieldset>
                 <legend>Changer de Mot de passe</legend>
                 <label for="password1">Mot de passe :
-                    <input id="password1" type="password" placeholder="Password" required>
+                    <input id="password1" type="password" placeholder="Password" name="password2" required>
                 </label>
                 <label for="password2">Mot de passe :
-                    <input id="password2" type="password" placeholder="Password" required>
+                    <input id="password2" type="password" placeholder="Password" name="password1" required>
                 </label>
             </fieldset>
-            <button type="submit">Modifier</button>
+            <button type="submit" name="ChangePassword">Modifier</button>
         </form>
     </div>
 </div>
