@@ -39,11 +39,15 @@ if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["us
         include("./Parties/Classes.php");
 
         $coon = new SQLconn();
-        $coon->CreateAccount($USERNAME,$PASSWORD1);
-        $cook = new Cookie();
-        $cook->CreateLoginCookie($USERNAME,$PASSWORD1);
 
-      header('Location: ./index.php');
+        if(!$coon->AlreadyExist($USERNAME)){
+          $coon->CreateAccount($USERNAME,$PASSWORD1);
+          $cook = new Cookie();
+          $cook->CreateLoginCookie($USERNAME,$PASSWORD1);
+          header('Location: ./index.php');
+        }
+  
+
         
         
     }else{

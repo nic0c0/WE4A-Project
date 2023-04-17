@@ -19,11 +19,6 @@ class Cookie {
         return (isset($_COOKIE['username']) && isset($_COOKIE['password']));
     }
 
-    public function Show(){
-        echo $this->$username; 
-        echo $this->password;
-    }
-
     
     public function CreateLoginCookie($username, $password){
 
@@ -94,6 +89,22 @@ class SQLconn {
         mysqli_close($this->GetConn());
     }
     
+    public function AlreadyExist($user) {           
+        $sql = "SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO = ?"; // ? = valeurs a remplacer lors de lexec
+        $stmt = mysqli_prepare($this->GetConn(), $sql); // preparation requête
+        mysqli_stmt_bind_param($stmt, "s", $user); // ss = string string, les ? sont remplacés
+        mysqli_stmt_execute($stmt);  //on execute la requette
+        $result = mysqli_stmt_get_result($stmt); // on récupère le résultat de la requête
+
+        if (mysqli_num_rows($result) > 0) {
+            
+            echo "Le pseudo est déjà pris";
+            return true;
+
+        } else {
+            return false;
+        }
+    }
 
     public function CheckDB($user, $password) {           
         $sql = "SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO = ?"; // ? = valeurs a remplacer lors de lexec
