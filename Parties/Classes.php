@@ -117,6 +117,52 @@ class SQLconn {
             return false;
         }
     }
+    public function getPostData($user_id, $post_id) {
+        $stmt = $this->conn->prepare("SELECT * FROM T_USER_POST WHERE USER_ID = ? AND POST_ID = ?");
+        $stmt->bind_param("ii", $user_id, $post_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $post_data = array(
+                "post_id" => $row["POST_ID"],
+                "post_title" => $row["POST_TITLE"],
+                "post_text" => $row["POST_TEXT"],
+                "created_time" => $row["CREATED_TIME"],
+                "post_img" => $row["POST_IMG"],
+                "user_id" => $row["USER_ID"]
+            );
+            return $post_data;
+        } else {
+            return false;
+        }
+    }
+    public function getComData($user_id, $post_id) {
+        $stmt = $this->conn->prepare("SELECT * FROM T_POST_COMMENT WHERE USER_ID = ? AND POST_ID = ?");
+        $stmt->bind_param("ii", $user_id, $post_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        $comment_data = array();
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $comment_data[] = array(
+                    "comment_id" => $row["COMMENT_ID"],
+                    "comment_text" => $row["COMMENT_TEXT"],
+                    "created_time" => $row["CREATED_TIME"],
+                    "post_id" => $row["POST_ID"],
+                    "user_id" => $row["USER_ID"]
+                );
+            }
+            return $comment_data;
+        } else {
+            return false;
+        }
+    }
+    
+    
+    
     public function updateProfile($user_id, $user_email, $user_pp, $user_name, $user_surname, $user_desc) {
         $sql = "UPDATE T_USER_PROFILE SET USER_EMAIL=?, USER_PP=?, USER_NAME=?, USER_SURNAME=?, USER_DESC=? WHERE USER_ID=?";
         $stmt = mysqli_prepare($this->GetConn(), $sql);
@@ -130,9 +176,10 @@ class SQLconn {
         mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
     }
     public function insertPost($user_id, $titre, $description, $image_path) {
-        $sql = "INSERT INTO T_USER_POST (USER_ID, POST_TITLE, POST_TEXT, POST_IMG) VALUES (?, ?, ?, ?)";
+        $post_date = date("Y-m-d H:i:s"); // date actuelle
+        $sql = "INSERT INTO T_USER_POST (USER_ID, POST_TITLE, POST_TEXT, POST_IMG, CREATED_TIME) VALUES (?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($this->GetConn(), $sql);
-        mysqli_stmt_bind_param($stmt, "isss", $user_id, $titre, $description, $image_path);
+        mysqli_stmt_bind_param($stmt, "issss", $user_id, $titre, $description, $image_path, $post_date);
         if (mysqli_stmt_execute($stmt)) {
             echo "Le post a été ajouté avec succès.";
         } else {
@@ -141,6 +188,8 @@ class SQLconn {
         mysqli_stmt_close($stmt); // fermeture du statement
         mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
     }
+    
+    
 
 
     public function CreateAccount($pseudo, $password) {

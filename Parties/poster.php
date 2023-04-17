@@ -1,6 +1,6 @@
 <?php
     // Récupération des données utilisateur à partir de la base de données
-    $user_data = $conn->getUserData($username, $password);
+    $user_data = $conn->getUserData($username);
     $user_id = $user_data['user_id'];   
 
     //Traitement des données soumises par le formulaire
