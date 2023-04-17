@@ -14,16 +14,22 @@ class Cookie {
         }
     }
 
+
    public function IssetCookie(){
         return (isset($_COOKIE['username']) && isset($_COOKIE['password']));
     }
 
+    public function Show(){
+        echo $this->$username; 
+        echo $this->password;
+    }
 
     
     public function CreateLoginCookie($username, $password){
 
         setcookie("username", $username, time() + 24*3600 );
         setcookie("password", EncryptedPaswword($password), time() + 24*3600);
+
 
     }// fin de Méthode
     public function getUsername() {
@@ -32,6 +38,16 @@ class Cookie {
 
     public function getPassword() {
         return $this->password;
+    }
+
+    public function UpdateUsername($username) {
+        setcookie("username", $username, time() + 24*3600 );
+
+    }
+
+    public function UpdatePassword($password) {
+        setcookie("password",$password, time() + 24*3600);
+ 
     }
 
     function clean() {
@@ -129,6 +145,20 @@ class SQLconn {
         mysqli_stmt_close($stmt); // fermeture du statement
         mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
     }
+
+    public function updatePassword($user_pseudo, $user_password) {
+        $sql = "UPDATE T_USER_PROFILE SET USER_PASSWORD=? WHERE USER_PSEUDO=?";
+        $stmt = mysqli_prepare($this->GetConn(), $sql);
+        mysqli_stmt_bind_param($stmt, "ss", $user_password, $user_pseudo);
+        if (mysqli_stmt_execute($stmt)) {
+            echo "Votre mot de passe a été mises à jour avec succès.";
+        } else {
+            echo "Erreur: " . mysqli_error($this->GetConn());
+        }
+        mysqli_stmt_close($stmt); // fermeture du statement
+        mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
+    }
+
     public function insertPost($user_id, $titre, $description, $image_path) {
         $sql = "INSERT INTO T_USER_POST (USER_ID, POST_TITLE, POST_TEXT, POST_IMG) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($this->GetConn(), $sql);
