@@ -156,5 +156,10 @@ ALTER TABLE T_POST_COMMENT
 
 
 INSERT INTO `t_user_profile` (`USER_ID`, `USER_EMAIL`, `USER_PP`, `USER_PSEUDO`, `USER_NAME`, `USER_SURNAME`, `USER_PASSWORD`) VALUES
-(1, 'init@utbm.fr', './IMGDB/1profilpicture.gif', 'Init', 'IN', 'IT', 'init'),
+(1, 'init@utbm.fr', './IMGDB/1profilpicture.gif', 'Init', 'IN', 'IT', '$2y$10$qcTXA0toOSOEL.xqfOpJ0OvwF0EpGjDV5B88R5gK8PCW5VXYd9b.S'),
 (2, 'Nico@utbm.fr', './IMG/bibimbap.jpg', 'Nico', 'Nicolalaa', '', 'root');
+
+
+
+INSERT INTO `t_user_post` (`POST_ID`, `POST_TEXT`, `POST_TITLE`, `CREATED_TIME`, `POST_IMG`, `USER_ID`) VALUES
+(1, 'Nous sommes allés au restaurant coréen', 'Bulgogi', '2023-04-17 19:14:06', './IMGDB/1picture0.jpg', 1);

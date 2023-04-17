@@ -1,19 +1,23 @@
 <?php
-    // Récupération des données utilisateur à partir de la base de données
     $user_data = $conn->getUserData($username);
-    $user_id = $user_data['user_id'];   
+    if($user_data != false && is_array($user_data)){
+        $user_id = $user_data['user_id'];   
 
-    //Traitement des données soumises par le formulaire
-    if(isset($_POST['save'])){
-        $post_title = $_POST['post_title'];
-        $post_text = $_POST['post_text'];
-    
-    $postid=$conn->getUserPostCount($user_id);
-    //sauvegarde de l'image
-    $post_img=saveImageAsNew($user_id,false,$postid);
-    //Mise à jour de la base de données
-    $conn->insertPost($user_id, $post_title, $post_text, $post_img);
+        //Traitement des données soumises par le formulaire
+        if(isset($_POST['save'])){
+            $post_title = $_POST['post_title'];
+            $post_text = $_POST['post_text'];
+
+            $postid=$conn->getUserPostCount($user_id);
+            //sauvegarde de l'image
+            $post_img=saveImageAsNew($user_id,false,$postid);
+            //Mise à jour de la base de données
+            $conn->insertPost($user_id, $post_title, $post_text, $post_img);
+        }
+    } else {
+        echo "Erreur lors de la récupération des données utilisateur";
     }
+
 ?>
 
 

@@ -117,7 +117,7 @@ body{
   backdrop-filter: blur(2px); /* à voir*/
 
 }
-.left:hover ~ * >*{
+.left:hover ~ * >*,.com:hover *{
   display: block;
 }
 /* =====================Poster============== */
