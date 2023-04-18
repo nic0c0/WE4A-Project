@@ -52,4 +52,13 @@ function EncryptedPassword($password){
 function CheckPassword($password,$hash){
     return password_verify($password, $hash);
 }
+
+function CheckIntegrity(){
+    $cook = new Cookie();
+
+    if(!$cook->CheckIntegrity()){
+        $cook->clean();
+        header("Location: ./Index.php?PBINTEG"); 
+    }
+}
 ?>

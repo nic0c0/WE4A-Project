@@ -13,7 +13,6 @@ if(!$cook->CheckIntegrity()){
     
 // Vérification si l'utilisateur est authentifié
 if ($cook->IssetCookie()) {
-    echo "INTEGRITE!";
     $authenticated = true;
 
     // Connexion à la base de données
