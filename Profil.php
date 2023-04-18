@@ -22,7 +22,7 @@ if ($cook->IssetCookie()) {
 <body>
   
     <div class="center">
-        <?php include("./Parties/profile.php"); ?>
+        <?php include("./Parties/card.php"); ?>
         <?php $conn->getPosts($conn->getUserData($user_pseudo)['user_id'])?>
     </div>
 <?php include("./Parties/footer.php"); ?>
