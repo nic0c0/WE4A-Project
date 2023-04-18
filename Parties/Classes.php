@@ -200,6 +200,49 @@ public function unfollow($request_user_id, $accept_user_id) {
     }
 }
 
+public function getNumLikes($post_id) {
+    $stmt = $this->conn->prepare("SELECT COUNT(*) as LIKE_ID FROM T_LIKE WHERE POST_ID = ?");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row["LIKE_ID"];
+}
+public function getLikeUserId($user_id, $post_id) {
+    $stmt = $this->conn->prepare("SELECT LIKE_ID FROM T_LIKE WHERE POST_ID = ? AND USER_ID = ?");
+    $stmt->bind_param("ii",$post_id,$user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if($result->num_rows !== 0) {
+
+    $row = $result->fetch_assoc();
+    var_dump($row["LIKE_ID"]);
+    return $row["LIKE_ID"];
+    }else{
+        return false;
+    }
+}
+
+public function addLike($user_id, $post_id) {
+    var_dump($user_id);
+    var_dump($post_id);
+    $stmt = $this->conn->prepare("INSERT INTO T_LIKE (CREATED_TIME, USER_ID, POST_ID) VALUES (NOW(), ?, ?)");
+    $stmt->bind_param("ii", $user_id, $post_id);
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+public function deleteLike($user_id, $post_id) {
+    $stmt = $this->conn->prepare("DELETE FROM T_LIKE WHERE USER_ID = ? AND POST_ID = ?");
+    $stmt->bind_param("ii", $user_id, $post_id);
+    $stmt->execute();
+    return $stmt->affected_rows;
+}
+
 
 
 public function CountPost($user_id) {           

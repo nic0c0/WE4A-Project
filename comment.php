@@ -72,6 +72,21 @@ if ($cook->IssetCookie()) {
         <form action="./Profil.php?pseudo=<?php echo $user_pseudo?> " method="post">
         <input type="submit" value="VOIR LE PROFIL">
         </form>
+        <?php
+            $num_likes = $conn->getNumLikes($post_id);
+            $this_user_id=$conn->getUserData($cook->getUsername())['user_id'];
+            ?>
+            <form method='post' action="./redirect.php">
+            <input type='hidden' name='post_id' value='<?php echo $post_id ?>'>
+            <input type='hidden' name='user_id' value='<?php echo $this_user_id?>'>
+            <input type="hidden" name="path" value="<?php echo basename(__FILE__); ?>">
+            <button type='submit' name="like">Like</button>
+            <p><?php echo $num_likes?></p>
+            </form>
+            <?php
+        
+        ?>
+
         <p><?php echo "$post_text"?></p>
         <p><?php echo "$post_time"?></p>
 

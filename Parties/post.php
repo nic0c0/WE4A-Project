@@ -35,7 +35,6 @@
         <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
         <input type="submit" value="VOIR LE POST">
         </form>
-        
 
     </div>
     <div class="desc">

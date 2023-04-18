@@ -20,8 +20,17 @@ switch ($path) {
             $user_id = $_POST['user_id'];
             $commenter = $_POST['commenter'];//commentateur
             $com_text = $_POST['comment_text'];
-            var_dump($post_id);
             $conn->insertComment($commenter,$post_id,$com_text);
+        }
+        if(isset($_POST['like'])){
+            $post_id = $_POST['post_id'];
+            $user_id = $_POST['user_id'];
+            $info=$conn->getLikeUserId($user_id,$post_id);
+            if($info){
+                $conn->deleteLike($user_id,$post_id);
+            }else{
+                $conn->addLike($user_id,$post_id);
+            }
         }
         header("Location: $path?post_id=$post_id");
         exit();
