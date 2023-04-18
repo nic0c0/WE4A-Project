@@ -58,7 +58,7 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
         <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
         <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
         <input type="hidden" name="commenter" value="<?php echo $actual_user ?>"><!--ici on récupère l'id de l'utilisateur qui commente puis on l'envoie -->
-        <input type="hidden" name="path" value="./comment.php">
+        <input type="hidden" name="path" value="<?php echo basename(__FILE__); ?>">
 
         <label for="comment_text">Commentaire :</label><br>
         <textarea name="comment_text" id="comment_text" rows="3" cols="40"></textarea><br>
