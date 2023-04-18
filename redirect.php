@@ -60,16 +60,40 @@ switch ($path) {
                     $user_pp = $new_pp;
                 }
             }
-    
-    
             // Mise à jour des données utilisateur dans la base de données
             $conn->updateProfile($user_id, $user_email, $user_pp,$user_name, $user_surname,$user_desc);    
+            $error="";
+        }
+        //si c'est un changement de mot de passe
+        if (isset($_POST['ChangePassword'])){
+            $OLDPASSWORD=htmlentities($_POST["oldpassword"]);
+            $PASSWORD1=htmlentities($_POST["password1"]);
+            $PASSWORD2=htmlentities($_POST["password2"]);
+            $test=$OLDPASSWORD;
+            if($conn->CheckDB($cook->getUsername(), $OLDPASSWORD)){
+                
+                if($PASSWORD1==$PASSWORD2){
+            
+                    $hash= EncryptedPassword($PASSWORD1);
+                    $conn->updatePassword($cook->getUsername(),$hash);
+                    $cook->UpdatePassword(EncryptedPassword($cook->getUsername()));
+                    
+                }else{
+                    $error="Les mots de passe ne correspondent pas";
+                }
+            }else{
+                $error="Le mot de passe est incorrect";
+            }
+
 
         }
-        header("Location: $path");
+        !$save=isset($_POST['save']);
+        !$cp=isset($_POST['ChangePassword']);
+        header("Location: ./Settings.php?$error");
         exit();
+
     default:
-        header("Location: ./Settings.php?path=$path");
+        header("Location: ./index.php?path=");
         exit();
 }
 

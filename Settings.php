@@ -24,38 +24,7 @@ if ($cook->IssetCookie()) {
     $user_id = $user_data['user_id'];
 
 
-    if (isset($_POST['ChangePassword'])){
- 
-        $OLDPASSWORD=htmlentities($_POST["oldpassword"]);
-        $PASSWORD1=htmlentities($_POST["password1"]);
-        $PASSWORD2=htmlentities($_POST["password2"]);
-
-        $conn = new SQLconn();
-        if($conn->CheckDB($cook->getUsername(), $OLDPASSWORD)){
-
-            
-            if($PASSWORD1==$PASSWORD2){
-        
-                
-            
-                $hash= EncryptedPassword($PASSWORD1);
-                $conn->updatePassword($cook->getUsername(),$hash);
-                $cook->UpdatePassword(EncryptedPassword($cook->getUsername()));
-                
-                
-            }else{
-                
-                echo "mauvais mots de passe";
-        
-            }
-
-            }else{
-                echo "Ancien mot de passe incorrect!";
-            }
-
     
-    }
-
 } else {
     $authenticated = false;
     header("Location: ./index.php");
@@ -107,7 +76,7 @@ if ($cook->IssetCookie()) {
     </form>
 
 
-    <form method="post" enctype="multipart/form-data" >
+    <form method="post" enctype="multipart/form-data" action="./redirect.php" >
             <fieldset>
                 <legend>Changer de Mot de passe</legend>
                 <label for="oldpassword">Ancien mot de passe :
@@ -120,6 +89,7 @@ if ($cook->IssetCookie()) {
                     <input id="password2" type="password" placeholder="Password" name="password1" required>
                 </label>
             </fieldset>
+            <input type="hidden" name="path" value="<?php echo basename(__FILE__); ?>">
             <button type="submit" name="ChangePassword">Modifier</button>
         </form>
     </div>
