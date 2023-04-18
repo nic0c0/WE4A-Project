@@ -23,10 +23,14 @@ class Cookie {
     public function CreateLoginCookie($username, $password){
 
         setcookie("username", $username, time() + 24*3600 );
-        setcookie("password", EncryptedPaswword($password), time() + 24*3600);
+        setcookie("password", EncryptedPaswword($username), time() + 24*3600);
 
 
     }// fin de Méthode
+
+    public function CheckIntegrity(){
+        return CheckPassword($this->username,$this->password);
+    }
     public function getUsername() {
         return $this->username;
     }
@@ -164,9 +168,9 @@ public function CountFollows($user_id) {
             return false;
         }
     }
-    public function getPostData($post_id) {
-        $stmt = $this->conn->prepare("SELECT * FROM T_USER_POST WHERE POST_ID = ?");
-        $stmt->bind_param("i", $post_id);
+    public function getPostData($user_id, $post_id) {
+        $stmt = $this->conn->prepare("SELECT * FROM T_USER_POST WHERE USER_ID = ? AND POST_ID = ?");
+        $stmt->bind_param("ii", $user_id, $post_id);
         $stmt->execute();
         $result = $stmt->get_result();
     
@@ -185,13 +189,12 @@ public function CountFollows($user_id) {
             return false;
         }
     }
-    
-    public function getComData($com_id) {
-        $stmt = $this->conn->prepare("SELECT * FROM T_POST_COMMENT WHERE COMMENT_ID = ?");
-        $stmt->bind_param("i", $com_id);
+    public function getComData($user_id, $post_id, $com_id) {
+        $stmt = $this->conn->prepare("SELECT * FROM T_POST_COMMENT WHERE USER_ID = ? AND POST_ID = ? AND COMMENT_ID = ?");
+        $stmt->bind_param("iii", $user_id, $post_id, $com_id);
         $stmt->execute();
         $result = $stmt->get_result();
-            
+        
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $comment_data = array(
@@ -206,8 +209,6 @@ public function CountFollows($user_id) {
             return false;
         }
     }
-    
-    
     
     
     
