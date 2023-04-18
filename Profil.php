@@ -23,7 +23,11 @@ if ($cook->IssetCookie()) {
   
     <div class="center">
         <?php include("./Parties/card.php"); ?>
-        <?php $conn->getPosts($conn->getUserData($user_pseudo)['user_id'])?>
+        <div class="myPosts">
+<!-- Ajouter les posts persos => trier la liste dans
+    load en fct des posts possedés puis les afficher ou refaire une méthode
+ -->
+        </div>
     </div>
 <?php include("./Parties/footer.php"); ?>
 <?php
