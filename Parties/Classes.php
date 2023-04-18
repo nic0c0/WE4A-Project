@@ -23,7 +23,7 @@ class Cookie {
     public function CreateLoginCookie($username, $password){
 
         setcookie("username", $username, time() + 24*3600 );
-        setcookie("password", EncryptedPaswword($username), time() + 24*3600);
+        setcookie("password", EncryptedPassword($username), time() + 24*3600);
 
 
     }// fin de Méthode
@@ -269,7 +269,7 @@ public function CountFollows($user_id) {
 
 
     public function CreateAccount($pseudo, $password) {
-        $password = EncryptedPaswword($password);
+        $password = EncryptedPassword($password);
         $sql = "INSERT INTO T_USER_PROFILE (USER_PSEUDO, USER_PASSWORD) VALUES (?, ?)";
         $stmt = mysqli_prepare($this->GetConn(), $sql);
         mysqli_stmt_bind_param($stmt, "ss", $pseudo, $password);

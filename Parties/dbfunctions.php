@@ -45,7 +45,7 @@ function isBufferFileAdequate($var){
     }
 }
 
-function EncryptedPaswword($password){
+function EncryptedPassword($password){
     return password_hash($password,PASSWORD_BCRYPT);
 }
 

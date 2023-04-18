@@ -8,6 +8,7 @@ $cook = new Cookie();
 
 if(!$cook->CheckIntegrity()){
     header("Location: ./Index.php?PBINTEG");
+    $cook->clean();
 }else{
     
 // Vérification si l'utilisateur est authentifié
@@ -37,9 +38,9 @@ if ($cook->IssetCookie()) {
         
                 
             
-                $hash= EncryptedPaswword($PASSWORD1);
+                $hash= EncryptedPassword($PASSWORD1);
                 $conn->updatePassword($cook->getUsername(),$hash);
-                $cook->UpdatePassword($hash);
+                $cook->UpdatePassword(EncryptedPassword($cook->getUsername()));
                 
                 
             }else{

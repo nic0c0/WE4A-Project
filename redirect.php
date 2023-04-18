@@ -5,6 +5,7 @@ $cook = new Cookie();
 
 if(!$cook->CheckIntegrity()){
     header("Location: ./Index.php?PBINTEG");
+    $cook->clean();
 }else{
 $conn = new SQLconn();
 
