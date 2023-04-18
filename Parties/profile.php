@@ -22,7 +22,12 @@
     
     <div class="details">
       <div class="posted">
-        <h4>0</h4>
+        <h4>
+        <?php      
+            $conn = new SQLconn();
+            $conn->CountPost($user_id);
+          ?>
+        </h4>
         <p>Posts</p>
       </div>
       
