@@ -40,3 +40,28 @@ if (typeof imgInp !== 'undefined') {
     }
   }
 }
+
+function loadPostsOnScroll() {
+  const writearea = document.getElementById("myPosts");
+  let numberOfPostsAlready = 0;
+
+  async function loadMorePosts() {
+    const AJAXresult = await fetch(
+      `./Parties/load.php?firstPost=${numberOfPostsAlready}`
+    );
+    writearea.innerHTML += await AJAXresult.text();
+    numberOfPostsAlready += 10;
+  }
+
+  window.addEventListener("scroll", () => {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+    if (scrollTop + clientHeight >= scrollHeight - 5) {
+      loadMorePosts();
+    }
+  });
+
+  loadMorePosts();
+}
+
+

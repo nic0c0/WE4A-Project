@@ -23,9 +23,14 @@
           <div> 
             <h1>Hello, world!</h1> 
               <?php include("./Parties/poster.php")?>
-              <?php $conn->getPosts(1)?>
-            </div>
-      
+
+              <div id="myPosts">
+  <script src="./scripts.js"></script>
+  <script>
+    loadPostsOnScroll();
+  </script>
+</div>
+
       
       
         </div>

@@ -1,7 +1,10 @@
 <?php
 
-include("./Parties/dbfunctions.php");
-
+if (file_exists("../Parties/dbfunctions.php")) {
+    include("../Parties/dbfunctions.php");
+} else {
+    include("./Parties/dbfunctions.php");
+}
 class Cookie {
 
     private $username;
@@ -314,6 +317,34 @@ public function CountPost($user_id) {
             return false;
         }
     }
+    public function getPostsByDate() {
+        // Préparation de la requête SQL pour récupérer les posts
+        $sql = "SELECT POST_ID FROM T_USER_POST ORDER BY CREATED_TIME DESC";
+      
+        // Exécution de la requête SQL
+        $result = $this->conn->query($sql);
+      
+        // Vérification du nombre de résultats
+        if ($result->num_rows > 0) {
+          // Initialisation du tableau de résultats
+          $posts = array();
+      
+          // Boucle sur tous les résultats
+          $index = 0;
+          while ($row = $result->fetch_assoc()) {
+            // Ajout du post_id courant au tableau de résultats
+            $posts[$index] = $row["POST_ID"];
+            $index++;
+          }
+      
+          // Retour du tableau de résultats
+          return $posts;
+        } else {
+          // S'il n'y a aucun résultat, on retourne un tableau vide
+          return array();
+        }
+      }
+      
 public function getPosts($user_id) {
     if ($user_id === 0) { // Si le numéro utilisateur est null, on affiche tous les posts existants
         $stmt = $this->conn->prepare("SELECT * FROM T_USER_POST");

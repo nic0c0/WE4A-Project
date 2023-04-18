@@ -169,7 +169,9 @@ INSERT INTO `t_user_profile` (`USER_ID`, `USER_EMAIL`, `USER_PP`, `USER_PSEUDO`,
 
 
 INSERT INTO `t_user_post` (`POST_ID`, `POST_TEXT`, `POST_TITLE`, `CREATED_TIME`, `POST_IMG`, `USER_ID`) VALUES
-(1, 'Nous sommes allés au restaurant coréen', 'Bulgogi', '2023-04-17 19:14:06', './IMGDB/1picture0.jpg', 1);
+(NULL, 'Go Oun', 'Bulgogi', '2023-04-17 19:14:06', './IMGDB/1picture0.jpg', 1),
+(NULL, 'Quel est ce plat ?', 'Bibimbap', '2023-04-18 19:14:06', './IMGDB/2picture0.jpg', 2),
+(NULL, 'Ceci était un possible logo', 'Bibimbap', '2023-04-19 20:14:06', './IMGDB/3picture0.png', 3);
 INSERT INTO `t_friendship` (`FRIENDSHIP_ID`, `REQUEST_USER_ID`, `ACCEPT_USER_ID`) VALUES 
 (NULL, '2', '1'),
 (NULL, '3', '1'),
