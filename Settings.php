@@ -17,29 +17,6 @@ if ($cook->IssetCookie()) {
     $user_data = $conn->getUserData($cook->getUsername());
     $user_id = $user_data['user_id'];
 
-    // Traitement des données soumises par le formulaire
-    if (isset($_POST['save'])) {
-        $user_email = $_POST['user_email'];
-        $user_name = $_POST['user_name'];
-        $user_surname = $_POST['user_surname'];
-        $user_desc= $_POST['user_desc'];
-
-    // Chargement de l'image de profil
-    $user_pp = $user_data['user_pp'];
-    if (isset($_FILES['new_pp']) && $_FILES['new_pp']['size'] != 0) {
-        $new_pp = saveImageAsNew($user_id,true,0);
-        if ($new_pp) {
-            $user_pp = $new_pp;
-        }
-    }
-
-
-        // Mise à jour des données utilisateur dans la base de données
-        $conn->updateProfile($user_id, $user_email, $user_pp,$user_name, $user_surname,$user_desc);
-
-        // header("Location: ./Settings.php");
-        // exit();
-    }
 
     if (isset($_POST['ChangePassword'])){
  
@@ -77,7 +54,7 @@ if ($cook->IssetCookie()) {
 <div class="center">
   <div class="settings">
   <h1>Paramètres</h1>
-    <form method="post" class="set1" enctype="multipart/form-data" >
+    <form method="post" class="set1" enctype="multipart/form-data" action="redirect.php" >
       <label for="user_email">Adresse email :</label>
       <input type="email" id="user_email" name="user_email" value="<?php echo !empty($user_data['user_email']) ? $user_data['user_email'] : ''; ?>" placeholder="<?php echo empty($user_data['user_email']) ? 'Non renseigné' : ''; ?>" required>
       
@@ -104,6 +81,11 @@ if ($cook->IssetCookie()) {
             </div>
             <button class="btn button full" type="submit" name="save">Sauvegarder</button>
         </fieldset>
+        // On envoie le path pour pouvoir revenir à la page d'origine
+        <input type="hidden" name="path" value="<?php echo basename(__FILE__); ?>">
+        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+        <input type="hidden" name="user_pp" value="<?php echo $user_data['user_pp']; ?>">
+ 
     
     </form>
 

@@ -14,11 +14,14 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
 <?php include("./Parties/header.php"); ?>
 <body>
 <?php
-    $post_id = $_POST['post_id'];
-    $user_id = $_POST['user_id'];
+
+    if(isset($_GET['post_id'])){
+        $post_id = $_GET['post_id'];
+    }
+
 
     $com_id=1;
-    $post_data = $conn->getPostData($user_id,$post_id);
+    $post_data = $conn->getPostData($post_id);
 
     if($post_data!==false){//si le post existe
         $post_title = $post_data['post_title'];
@@ -26,16 +29,14 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
         $post_img = $post_data['post_img'];
         $post_time = $post_data['created_time'];
 
-        $com_data=$conn->getComData($user_id,$post_id,$com_id);
+        $com_data=$conn->getComData($com_id);
         if($com_data!=false){//si le commentaire existe
             $com_text=$com_data['comment_text'];
             $com_time=$com_data['created_time'];
         }
-        //sauvegarder le commentaire
-        if (isset($_POST['com'])) {
-            $com_text = $_POST['comment_text'];
-            $conn->insertComment($conn->getUserData($username)['user_id'],$post_id,$com_text);
-        }
+    //Nom de l'utilisateur actuel :
+    $actual_user=$conn->getUserData($username)['user_id'];
+
 ?>
     <div class="center">
 
@@ -48,14 +49,17 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
     </div>
     <div class="com"> 
         <p>
-        <?php echo (isset($com_text) ? $com_text . " le " . $com_time : ''); ?>
+        <?php echo (isset($com_text) ? $com_text . " le " . (isset($com_time)? $com_time : '') : ''); ?>
         </p>
         <p>
             Whouah
         </p>
-        <form method="post">
+        <form method="post" action="redirect.php">
         <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
         <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
+        <input type="hidden" name="commenter" value="<?php echo $actual_user ?>"><!--ici on récupère l'id de l'utilisateur qui commente puis on l'envoie -->
+        <input type="hidden" name="path" value="<?php echo basename(__FILE__); ?>">
+
         <label for="comment_text">Commentaire :</label><br>
         <textarea name="comment_text" id="comment_text" rows="3" cols="40"></textarea><br>
         <input type="submit" value="Sauvegarder" name="com">
