@@ -12,8 +12,9 @@ if ($cook->IssetCookie()) {
         $user_pseudo=$_POST['user_pseudo'];
     }
     else{
-        $user_pseudo=$cook->getUsername();//à corriger plus tard
+        $user_pseudo=$cook->getUsername();
     }
+    
     // Connexion à la base de données
     $conn = new SQLconn();
     ?>
@@ -22,7 +23,7 @@ if ($cook->IssetCookie()) {
   
     <div class="center">
         <?php include("./Parties/profile.php"); ?>
-        <?php include("./Parties/post.php"); ?>
+        <?php $conn->getPosts($conn->getUserData($user_pseudo)['user_id'])?>
     </div>
 <?php include("./Parties/footer.php"); ?>
 <?php
