@@ -34,3 +34,6 @@ Ce projet consiste à créer un site web permettant à des utilisateurs d'échan
 ### Conclusion
 
 Ce projet permettra de développer des compétences en développement web et de créer un site fonctionnel pour l'échange de messages entre utilisateurs.
+
+### Echantillon : 
+ MDP : init, root, test
