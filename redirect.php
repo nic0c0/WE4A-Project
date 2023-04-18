@@ -9,7 +9,7 @@ if(!$cook->CheckIntegrity()){
 }else{
 $conn = new SQLconn();
 
-$path = $_POST['path'];
+isset($_POST['path'])? $path = $_POST['path'] : $path = 'NOPATH';
 
 switch ($path) {
     case 'comment.php':
@@ -91,7 +91,23 @@ switch ($path) {
         !$cp=isset($_POST['ChangePassword']);
         header("Location: $path?$error");
         exit();
-
+    
+    case 'card.php'://path utilise basename(__FILE__) donc il va ressortir card.php
+        //on traite les infos pour le profil
+        if(isset($_POST['follow'])){
+            $user_id=$_POST['user_id'];
+            $this_user=$_POST['this_user_id'];
+            $user_pseudo=$conn->getUserPseudo($user_id);
+            if($conn->checkFollow($this_user,$user_id)){
+                $error="unfollow";
+            $conn->unfollow($this_user,$user_id);
+            }else{
+                $error="follow";
+            $conn->follow($this_user,$user_id);
+            }
+        }
+        header("Location: ./Profil.php?user_pseudo=".$user_pseudo);
+        exit();
     default:
         header("Location: ./index.php?ERROR");
         exit();

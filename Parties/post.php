@@ -41,13 +41,11 @@
     <div class="desc">
         <p><?php echo "$post_text"?></p>
         <p><?php echo "$post_time"?></p>
-        <form action="./Profil.php" method="post">
-            <?php 
-                $user_id=$conn->getUserIdFromPostId($post_id);
-                $user_pseudo=$conn->getUserPseudo($user_id);
-            ?>
-            
-        <input type="hidden" name="user_pseudo" value="<?php echo $user_pseudo; ?>">
+        <?php 
+            $user_id=$conn->getUserIdFromPostId($post_id);
+            $user_pseudo=$conn->getUserPseudo($user_id);
+        ?>
+        <form action="./Profil.php?user_pseudo=<?php echo $user_pseudo?> " method="post">
         <input type="submit" value="VOIR LE PROFIL">
         </form>
     </div>

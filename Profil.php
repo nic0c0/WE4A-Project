@@ -8,8 +8,8 @@ if ($cook->IssetCookie()) {
 
 
 
-    if(isset($_POST['user_pseudo'])){
-        $user_pseudo=$_POST['user_pseudo'];
+    if(isset($_GET['user_pseudo'])){
+        $user_pseudo=$_GET['user_pseudo'];
     }
     else{
         $user_pseudo=$cook->getUsername();

@@ -156,7 +156,7 @@ ALTER TABLE T_POST_COMMENT
 
 
 INSERT INTO `t_user_profile` (`USER_ID`, `USER_EMAIL`, `USER_PP`, `USER_PSEUDO`, `USER_NAME`, `USER_SURNAME`, `USER_PASSWORD`,`USER_DESC`) VALUES
-(1, 'init@utbm.fr', './IMGDB/1profilpicture.gif', 'Init', 'IN', 'IT', '$2y$10$qcTXA0toOSOEL.xqfOpJ0OvwF0EpGjDV5B88R5gK8PCW5VXYd9b.S',''),
+(NULL, 'init@utbm.fr', './IMGDB/1profilpicture.gif', 'Init', 'IN', 'IT', '$2y$10$qcTXA0toOSOEL.xqfOpJ0OvwF0EpGjDV5B88R5gK8PCW5VXYd9b.S',''),
 (2, 'Nico@utbm.fr', './IMGDB/2profilpicture.png', 'Nico', 'Nicolas', 'Marcelin', '$2y$10$ljA/qByHsDnwqsIroyIk/O.Kb0AsO4Dgvpu8qUq1QqxUCO2ABv3Uy',''),
 (3, 'Alb@utbm.fr', './IMGDB/3profilpicture.jpg', 'Alb', 'Albert', 'Royer', '$2y$10$ljA/qByHsDnwqsIroyIk/O.Kb0AsO4Dgvpu8qUq1QqxUCO2ABv3Uy',''),
 (4, 'bob@yahoo.com', './IMGDB/4profilpicture.jpg', 'Bob', 'Jones', 'Bob', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC','Fan de Vincent van Gogh à mes heures perdues'),
@@ -170,3 +170,11 @@ INSERT INTO `t_user_profile` (`USER_ID`, `USER_EMAIL`, `USER_PP`, `USER_PSEUDO`,
 
 INSERT INTO `t_user_post` (`POST_ID`, `POST_TEXT`, `POST_TITLE`, `CREATED_TIME`, `POST_IMG`, `USER_ID`) VALUES
 (1, 'Nous sommes allés au restaurant coréen', 'Bulgogi', '2023-04-17 19:14:06', './IMGDB/1picture0.jpg', 1);
+INSERT INTO `t_friendship` (`FRIENDSHIP_ID`, `REQUEST_USER_ID`, `ACCEPT_USER_ID`) VALUES 
+(NULL, '2', '1'),
+(NULL, '3', '1'),
+(NULL,'4','3'),
+(NULL,'4','2'),
+(NULL,'4','1'),
+(NULL,'3','2'),
+(NULL,'2','3');
