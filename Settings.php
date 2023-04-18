@@ -11,31 +11,14 @@ if(!$cook->CheckIntegrity()){
     $cook->clean();
 }else{
     
-// Vérification si l'utilisateur est authentifié
-if ($cook->IssetCookie()) {
-    echo "INTEGRITE!";
-    $authenticated = true;
-
-    // Connexion à la base de données
+   // Connexion à la base de données
     $conn = new SQLconn();
-    
     // Récupération des données utilisateur à partir de la base de données
     $user_data = $conn->getUserData($cook->getUsername());
     $user_id = $user_data['user_id'];
-
-
-    
-} else {
-    $authenticated = false;
-    header("Location: ./index.php");
-    exit();
+    // Fermeture de la connexion à la base de données
+    $conn->CloseDB();
 }
-}
-
-
-//var_dump(isset($_POST['ChangePassword']));
-
-
 ?>
     
 <div class="center">
@@ -68,7 +51,7 @@ if ($cook->IssetCookie()) {
             </div>
             <button class="btn button full" type="submit" name="save">Sauvegarder</button>
         </fieldset>
-        // On envoie le path pour pouvoir revenir à la page d'origine
+        <!-- // On envoie le path pour pouvoir revenir à la page d'origine -->
         <input type="hidden" name="path" value="<?php echo basename(__FILE__); ?>">
         <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
         <input type="hidden" name="user_pp" value="<?php echo $user_data['user_pp']; ?>">

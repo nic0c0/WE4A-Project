@@ -79,10 +79,10 @@ switch ($path) {
                     $cook->UpdatePassword(EncryptedPassword($cook->getUsername()));
                     
                 }else{
-                    $error="Les mots de passe ne correspondent pas";
+                    $error="error_password1";//les mdp ne correspondent pas
                 }
             }else{
-                $error="Le mot de passe est incorrect";
+                $error="error_password2";//mdp incorrect
             }
 
 
@@ -93,7 +93,7 @@ switch ($path) {
         exit();
 
     default:
-        header("Location: ./index.php?path=");
+        header("Location: ./index.php?ERROR");
         exit();
 }
 
