@@ -1,7 +1,11 @@
 <?php include("./Parties/Classes.php")?>
 
 <?php
+$cook = new Cookie();
 
+if(!$cook->CheckIntegrity()){
+    header("Location: ./Index.php?PBINTEG");
+}else{
 $conn = new SQLconn();
 
 $path = $_POST['path'];
@@ -68,5 +72,6 @@ switch ($path) {
         exit();
 }
 
+}
 
 ?>

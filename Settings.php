@@ -6,8 +6,13 @@
 
 $cook = new Cookie();
 
+if(!$cook->CheckIntegrity()){
+    header("Location: ./Index.php?PBINTEG");
+}else{
+    
 // Vérification si l'utilisateur est authentifié
 if ($cook->IssetCookie()) {
+    echo "INTEGRITE!";
     $authenticated = true;
 
     // Connexion à la base de données
@@ -20,23 +25,33 @@ if ($cook->IssetCookie()) {
 
     if (isset($_POST['ChangePassword'])){
  
+        $OLDPASSWORD=htmlentities($_POST["oldpassword"]);
         $PASSWORD1=htmlentities($_POST["password1"]);
         $PASSWORD2=htmlentities($_POST["password2"]);
-    
-        if($PASSWORD1==$PASSWORD2){
-    
+
+        $conn = new SQLconn();
+        if($conn->CheckDB($cook->getUsername(), $OLDPASSWORD)){
+
             
-            $conn = new SQLconn();
-            $hash= EncryptedPaswword($PASSWORD1);
-            $conn->updatePassword($cook->getUsername(),$hash);
-            $cook->UpdatePassword($hash);
+            if($PASSWORD1==$PASSWORD2){
+        
+                
             
-            
-        }else{
-            
-            echo "mauvais mots de passe";
-    
-        }
+                $hash= EncryptedPaswword($PASSWORD1);
+                $conn->updatePassword($cook->getUsername(),$hash);
+                $cook->UpdatePassword($hash);
+                
+                
+            }else{
+                
+                echo "mauvais mots de passe";
+        
+            }
+
+            }else{
+                echo "Ancien mot de passe incorrect!";
+            }
+
     
     }
 
@@ -45,6 +60,8 @@ if ($cook->IssetCookie()) {
     header("Location: ./index.php");
     exit();
 }
+}
+
 
 //var_dump(isset($_POST['ChangePassword']));
 
@@ -85,7 +102,6 @@ if ($cook->IssetCookie()) {
         <input type="hidden" name="path" value="<?php echo basename(__FILE__); ?>">
         <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
         <input type="hidden" name="user_pp" value="<?php echo $user_data['user_pp']; ?>">
- 
     
     </form>
 
@@ -93,10 +109,13 @@ if ($cook->IssetCookie()) {
     <form method="post" enctype="multipart/form-data" >
             <fieldset>
                 <legend>Changer de Mot de passe</legend>
-                <label for="password1">Mot de passe :
+                <label for="oldpassword">Ancien mot de passe :
+                    <input id="oldpassword" type="password" placeholder="Password" name="oldpassword" required>
+                </label>
+                <label for="password1">Nouveau Mot de passe :
                     <input id="password1" type="password" placeholder="Password" name="password2" required>
                 </label>
-                <label for="password2">Mot de passe :
+                <label for="password2">Nouveau Mot de passe :
                     <input id="password2" type="password" placeholder="Password" name="password1" required>
                 </label>
             </fieldset>
