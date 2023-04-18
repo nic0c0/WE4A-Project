@@ -89,7 +89,7 @@ switch ($path) {
         }
         !$save=isset($_POST['save']);
         !$cp=isset($_POST['ChangePassword']);
-        header("Location: ./Settings.php?$error");
+        header("Location: $path?$error");
         exit();
 
     default:
