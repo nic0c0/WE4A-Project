@@ -1,19 +1,22 @@
 <?php
-    $post_id=1;
+    $conn = new SQLconn();
+
     $com_id=1;
-    $post_data = $conn->getPostData($post_id);
+    if(!empty($post_id)){
+        $post_data=$conn->getPostData($post_id);
+    
+        if($post_data!==false){//si le post existe
+            
+            $post_title = $post_data['post_title'];
+            $post_text = $post_data['post_text'];
+            $post_img = $post_data['post_img'];
+            $post_time = $post_data['created_time'];
 
-    if($post_data!==false){//si le post existe
-        $post_title = $post_data['post_title'];
-        $post_text = $post_data['post_text'];
-        $post_img = $post_data['post_img'];
-        $post_time = $post_data['created_time'];
-
-        $com_data=$conn->getComData($com_id);
-        if($com_data!=false){//si le commentaire existe
-            $com_text=$com_data['comment_text'];
-            $com_time=$com_data['created_time'];
-        }
+            $com_data=$conn->getComData($com_id);
+            if($com_data!=false){//si le commentaire existe
+                $com_text=$com_data['comment_text'];
+                $com_time=$com_data['created_time'];
+            }
     
 ?>
 
@@ -38,14 +41,25 @@
     <div class="desc">
         <p><?php echo "$post_text"?></p>
         <p><?php echo "$post_time"?></p>
+        <form action="./Profil.php" method="post">
+            <?php 
+                $user_id=$conn->getUserIdFromPostId($post_id);
+                $user_pseudo=$conn->getUserPseudo($user_id);
+            ?>
+            
+        <input type="hidden" name="user_pseudo" value="<?php echo $user_pseudo; ?>">
+        <input type="submit" value="VOIR LE PROFIL">
+        </form>
+    </div>
+
 
     </div>
 </div>
 <?php   
-    }else{
-        echo "Aucun post trouvé";
+        }else{
+            echo "Aucun post trouvé";
+        }
     }
-
 
 
 

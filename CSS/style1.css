@@ -87,9 +87,9 @@ body{
   text-align: center;
   margin: 0;
 }
-.desc>*,.com>*{
+/* .desc>*,.com>*{
   display: none;
-}
+} */
 .desc{
   grid-area:desc;
 }

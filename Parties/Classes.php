@@ -199,6 +199,42 @@ public function CountPost($user_id) {
             return false;
         }
     }
+public function getPosts($user_id) {
+    if ($user_id === 0) { // Si le numéro utilisateur est null, on affiche tous les posts existants
+        $stmt = $this->conn->prepare("SELECT * FROM T_USER_POST");
+    } else { // Sinon, on affiche tous les posts publiés par le numéro utilisateur
+        $stmt = $this->conn->prepare("SELECT * FROM T_USER_POST WHERE USER_ID = ?");
+        $stmt->bind_param("i", $user_id);
+    }
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $post_id = $row['POST_ID'];
+        include "post.php";
+    }
+}
+function getUserIdFromPostId($post_id) {
+    $stmt = $this->conn->prepare("SELECT USER_ID FROM T_USER_POST WHERE POST_ID = ?");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        return $row["USER_ID"];
+    } else {
+        return null;
+    }
+}
+public function getUserPseudo($user_id) {
+    $stmt = $this->conn->prepare("SELECT USER_PSEUDO FROM T_USER_PROFILE WHERE USER_ID = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['USER_PSEUDO'];
+}
+
+
     public function getComData($com_id) {
         $stmt = $this->conn->prepare("SELECT * FROM T_POST_COMMENT WHERE COMMENT_ID = ?");
         $stmt->bind_param("i", $com_id);

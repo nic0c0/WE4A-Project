@@ -2,12 +2,18 @@
 <?php include("./Parties/Classes.php")?>
 <?php
 
+$cook =new Cookie();
 // Vérification si l'utilisateur est authentifié
-if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
-    $authenticated = true;
-    $username = $_COOKIE['username'];
-    $password = $_COOKIE['password'];
+if ($cook->IssetCookie()) {
 
+
+
+    if(isset($_POST['user_pseudo'])){
+        $user_pseudo=$_POST['user_pseudo'];
+    }
+    else{
+        $user_pseudo=$cook->getUsername();//à corriger plus tard
+    }
     // Connexion à la base de données
     $conn = new SQLconn();
     ?>
@@ -21,7 +27,6 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
 <?php include("./Parties/footer.php"); ?>
 <?php
 } else {
-    $authenticated = false;
     header("Location: ./index.php");
     exit();
 }

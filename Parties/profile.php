@@ -1,7 +1,7 @@
 
 <?php
     // Récupération des données utilisateur à partir de la base de données
-    $user_data = $conn->getUserData($username);
+    $user_data = $conn->getUserData($user_pseudo);
     $user_id = $user_data['user_id'];
 
     //Chargement de l'image de profil et du pseudo

@@ -2,11 +2,9 @@
 <?php include("./Parties/Classes.php")?>
 <?php
 
+$cook = new Cookie();
 // Vérification si l'utilisateur est authentifié
-if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
-    $authenticated = true;
-    $username = $_COOKIE['username'];
-    $password = $_COOKIE['password'];
+if ($cook->IssetCookie()) {
 
     // Connexion à la base de données
     $conn = new SQLconn();
@@ -17,6 +15,7 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
 
     if(isset($_GET['post_id'])){
         $post_id = $_GET['post_id'];
+        $user_pseudo=$conn->getUserPseudo($conn->getUserIdFromPostId($post_id));
     }
 
 
@@ -35,7 +34,7 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
             $com_time=$com_data['created_time'];
         }
     //Nom de l'utilisateur actuel :
-    $actual_user=$conn->getUserData($username)['user_id'];
+    $actual_user=$conn->getUserData($user_pseudo)['user_id'];
 
 ?>
     <div class="center">
@@ -66,6 +65,15 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
 </form>
     </div>
     <div class="desc">
+        <form action="./Profil.php" method="post">
+            <?php 
+                $user_id=$conn->getUserIdFromPostId($post_id);
+                $user_pseudo=$conn->getUserPseudo($user_id);
+            ?>
+            
+        <input type="hidden" name="user_pseudo" value="<?php echo $user_pseudo; ?>">
+        <input type="submit" value="VOIR LE PROFIL">
+        </form>
         <p><?php echo "$post_text"?></p>
         <p><?php echo "$post_time"?></p>
 
@@ -86,7 +94,6 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
 <?php include("./Parties/footer.php"); ?>
 <?php
 } else {
-    $authenticated = false;
     header("Location: ./index.php");
     exit();
 }

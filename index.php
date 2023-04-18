@@ -24,8 +24,8 @@
           <div> 
             <h1>Hello, world!</h1> 
               <?php include("./Parties/poster.php")?>
-              <?php include("./Parties/post.php"); ?>
-              <?php include("./Parties/post.php"); ?></div>
+              <?php $conn->getPosts(1)?>
+            </div>
       
       
       
