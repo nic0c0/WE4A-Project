@@ -117,6 +117,20 @@ switch ($path) {
         }
         header("Location: ./Profil.php?user_pseudo=".$user_pseudo);
         exit();
+        case 'header.php':
+            if (isset($_POST['voir_post'])){
+                $suggestField = $_POST['suggestField'];
+               if($conn->PostExist($suggestField)){
+                    $post_id=$conn->getPostId($suggestField);
+                    header("Location: ./comment.php?post_id=$post_id");
+               }else{
+                header("Location: ./index.php?ERROR");
+               }
+                
+            }
+
+            exit();
+
     default:
         header("Location: ./index.php?ERROR");
         exit();
