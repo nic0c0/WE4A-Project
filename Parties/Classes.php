@@ -381,6 +381,25 @@ public function getUserPseudo($user_id) {
 }
 
 
+public function getPostId($post_title) {
+    $stmt = $this->conn->prepare("SELECT * FROM T_USER_POST WHERE POST_TITLE = ?");
+    $stmt->bind_param("s", $post_title);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['POST_ID'];
+}
+
+public function PostExist($post_title) {
+    $stmt = $this->conn->prepare("SELECT * FROM T_USER_POST WHERE POST_TITLE = ?");
+    $stmt->bind_param("s", $post_title);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    //$row = $result->fetch_assoc();
+    return ($result->num_rows>0);
+}
+
+
     public function getComData($com_id) {
         $stmt = $this->conn->prepare("SELECT * FROM T_POST_COMMENT WHERE COMMENT_ID = ?");
         $stmt->bind_param("i", $com_id);

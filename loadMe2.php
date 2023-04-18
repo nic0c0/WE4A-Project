@@ -13,8 +13,8 @@
         if ($result->num_rows > 0) {
             $i = 1;
             while( $row = $result->fetch_assoc() ){
-            
-                echo "<span onclick='autoFillName(this.innerHTML)'>".$row["POST_TITLE"]."</span>";
+                $res="<span onclick='autoFillName(this.innerHTML)'>".$row["POST_TITLE"]."</span>";
+                echo $res;
                 if ($i < $result->num_rows) {
                     echo " - ";
                 }
