@@ -9,7 +9,7 @@ if(!$cook->CheckIntegrity()){
 }else{
 $conn = new SQLconn();
 
-$path = $_POST['path'];
+isset($_POST['path'])? $path = $_POST['path'] : $path = 'NOPATH';
 
 switch ($path) {
     case 'comment.php':
@@ -20,8 +20,17 @@ switch ($path) {
             $user_id = $_POST['user_id'];
             $commenter = $_POST['commenter'];//commentateur
             $com_text = $_POST['comment_text'];
-            var_dump($post_id);
             $conn->insertComment($commenter,$post_id,$com_text);
+        }
+        if(isset($_POST['like'])){
+            $post_id = $_POST['post_id'];
+            $user_id = $_POST['user_id'];
+            $info=$conn->getLikeUserId($user_id,$post_id);
+            if($info){
+                $conn->deleteLike($user_id,$post_id);
+            }else{
+                $conn->addLike($user_id,$post_id);
+            }
         }
         header("Location: $path?post_id=$post_id");
         exit();
@@ -91,7 +100,23 @@ switch ($path) {
         !$cp=isset($_POST['ChangePassword']);
         header("Location: $path?$error");
         exit();
-
+    
+    case 'card.php'://path utilise basename(__FILE__) donc il va ressortir card.php
+        //on traite les infos pour le profil
+        if(isset($_POST['follow'])){
+            $user_id=$_POST['user_id'];
+            $this_user=$_POST['this_user_id'];
+            $user_pseudo=$conn->getUserPseudo($user_id);
+            if($conn->checkFollow($this_user,$user_id)){
+                $error="unfollow";
+            $conn->unfollow($this_user,$user_id);
+            }else{
+                $error="follow";
+            $conn->follow($this_user,$user_id);
+            }
+        }
+        header("Location: ./Profil.php?user_pseudo=".$user_pseudo);
+        exit();
     default:
         header("Location: ./index.php?ERROR");
         exit();

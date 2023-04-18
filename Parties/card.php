@@ -9,6 +9,8 @@
     $user_pseudo = $user_data['user_pseudo'];
     $user_desc = $user_data['user_desc'];
     
+    $conn = new SQLconn();
+
 ?>
 
 <div class="card">
@@ -24,31 +26,52 @@
       <div class="posted">
         <h4>
         <?php      
-            $conn = new SQLconn();
             $conn->CountPost($user_id);
           ?>
         </h4>
         <p>Posts</p>
       </div>
       
-      <div class="follower">
+      <div class="Follow">
         <h4>
-          <?php      
-            $conn = new SQLconn();
+          <?php
             $conn->CountFollowers($user_id);
           ?>
         </h4>
-        <p>Follows</p>
+        <?php 
+        if(strtolower($user_pseudo)==$cook->getUsername()){
+          ?>
+          <p>Followers</p>
+          <form action="./Relation.php">
+          <input type="submit" name="follow" value="Voir la liste">
+          </form>
+          <?php
+        }else{
+          $this_user_id=$conn->getUserData($cook->getUsername())['user_id'];
+          if($conn->checkFollow($this_user_id,$user_id)){
+            $f="UnFollow";            
+          }else{
+            $f="Follow";
+          }
+          ?>
+          <form action="redirect.php" method="post">
+            <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+            <input type="hidden" name="this_user_id" value="<?php echo $this_user_id; ?>">
+            <input type="hidden" name="path" value="<?php echo basename(__FILE__); ?>">
+            <input type="submit" name="follow" value="<?php echo $f; ?>">
+          </form>
+          <?php
+        }
+        ?>
       </div>
       
-      <div class="following">
+      <div class="Follower">
         <h4>
         <?php      
-            $conn = new SQLconn();
             $conn->CountFollows($user_id);
           ?>
         </h4>
-        <p>Following</p>
+        <p>Follower</p>
       </div>
     </div>
 

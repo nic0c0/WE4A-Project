@@ -11,8 +11,7 @@
             include("./Parties/signin.php");
     }else{
       include("./Parties/header.php");
-      $username = $_COOKIE['username'];
-      $password = $_COOKIE['password'];
+      $username = $_COOKIE['username'];//utile pour poster
       // Connexion à la base de données
       $conn = new SQLconn();
       ?>

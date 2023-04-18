@@ -110,7 +110,7 @@ class SQLconn {
         }
     }
 
-public function CountFollowers($user_id) {           
+public function CountFollows($user_id) {           
     $sql = "SELECT COUNT(*) AS count FROM T_FRIENDSHIP WHERE ACCEPT_USER_ID = ?";//  OR ACCEPT_USER_ID = ?
     $stmt = mysqli_prepare($this->GetConn(), $sql); 
     mysqli_stmt_bind_param($stmt, "s", $user_id); 
@@ -120,7 +120,7 @@ public function CountFollowers($user_id) {
     echo $count;
 }
 
-public function CountFollows($user_id) {           
+public function CountFollowers($user_id) {           
         $sql = "SELECT COUNT(*) AS count FROM T_FRIENDSHIP WHERE REQUEST_USER_ID = ?";
         $stmt = mysqli_prepare($this->GetConn(), $sql); 
         mysqli_stmt_bind_param($stmt, "s", $user_id); 
@@ -129,6 +129,121 @@ public function CountFollows($user_id) {
         $count = mysqli_fetch_assoc($result)['count'];
         echo $count;
 }
+public function displayFollowers($user_id) {
+    $stmt = $this->conn->prepare("SELECT T_USER_PROFILE.USER_PSEUDO FROM T_FRIENDSHIP INNER JOIN T_USER_PROFILE ON T_FRIENDSHIP.REQUEST_USER_ID = T_USER_PROFILE.USER_ID WHERE T_FRIENDSHIP.ACCEPT_USER_ID = ?;");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if($result->num_rows === 0) {
+        echo "Aucun abonné trouvé.";
+    } else {
+         //Récupération du pseudo de l'utilisateur connecté
+         $cook= new Cookie();
+         $user_pseudo=$cook->getUsername();
+
+        echo "<h1>Abonnés de " . $user_pseudo . "</h1>";
+        echo "<p>";
+        while($row = $result->fetch_assoc()) {
+            echo "<a href='./Profil.php?user_pseudo=".$row["USER_PSEUDO"]."'>".$row["USER_PSEUDO"]."</a><br>";
+        }
+        echo "</p>";
+    }
+}
+public function displayFollows($user_id) {
+    $stmt = $this->conn->prepare("SELECT T_USER_PROFILE.USER_PSEUDO FROM T_FRIENDSHIP INNER JOIN T_USER_PROFILE ON T_FRIENDSHIP.ACCEPT_USER_ID = T_USER_PROFILE.USER_ID WHERE T_FRIENDSHIP.REQUEST_USER_ID = ?;");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if($result->num_rows === 0) {
+        echo "Aucun abonnement trouvé.";
+    } else {
+        //Récupération du pseudo de l'utilisateur connecté
+        $cook= new Cookie();
+        $user_pseudo=$cook->getUsername();
+
+        echo "<h1>Abonnements de " . $user_pseudo . "</h1>";
+        //Affichage des abonnements
+        echo "<p>";
+        while($row = $result->fetch_assoc()) {
+            echo "<a href='./Profil.php?user_pseudo=".$row["USER_PSEUDO"]."'>".$row["USER_PSEUDO"]."</a><br>";
+        }
+        echo "</p>";
+    }
+}
+public function checkFollow($follower_id, $followed_id) {
+    $stmt = $this->conn->prepare("SELECT COUNT(*) as nb FROM T_FRIENDSHIP WHERE REQUEST_USER_ID = ? AND ACCEPT_USER_ID = ?");
+    $stmt->bind_param("ii", $follower_id, $followed_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['nb'] > 0;
+}
+
+public function follow($user_id, $follow_user_id) {
+    $stmt = $this->conn->prepare("INSERT INTO T_FRIENDSHIP (REQUEST_USER_ID, ACCEPT_USER_ID) VALUES (?, ?)");
+    $stmt->bind_param("ii", $user_id, $follow_user_id);
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+public function unfollow($request_user_id, $accept_user_id) {
+    $stmt = $this->conn->prepare("DELETE FROM T_FRIENDSHIP WHERE REQUEST_USER_ID = ? AND ACCEPT_USER_ID = ?");
+    $stmt->bind_param("ii", $request_user_id, $accept_user_id);
+    $stmt->execute();
+    if($stmt->affected_rows === 0) {
+        echo "Impossible de supprimer le follow. Veuillez vérifier les ID des utilisateurs.";
+    } else {
+        echo "Le follow a été supprimé avec succès.";
+    }
+}
+
+public function getNumLikes($post_id) {
+    $stmt = $this->conn->prepare("SELECT COUNT(*) as LIKE_ID FROM T_LIKE WHERE POST_ID = ?");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row["LIKE_ID"];
+}
+public function getLikeUserId($user_id, $post_id) {
+    $stmt = $this->conn->prepare("SELECT LIKE_ID FROM T_LIKE WHERE POST_ID = ? AND USER_ID = ?");
+    $stmt->bind_param("ii",$post_id,$user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if($result->num_rows !== 0) {
+
+    $row = $result->fetch_assoc();
+    var_dump($row["LIKE_ID"]);
+    return $row["LIKE_ID"];
+    }else{
+        return false;
+    }
+}
+
+public function addLike($user_id, $post_id) {
+    var_dump($user_id);
+    var_dump($post_id);
+    $stmt = $this->conn->prepare("INSERT INTO T_LIKE (CREATED_TIME, USER_ID, POST_ID) VALUES (NOW(), ?, ?)");
+    $stmt->bind_param("ii", $user_id, $post_id);
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+public function deleteLike($user_id, $post_id) {
+    $stmt = $this->conn->prepare("DELETE FROM T_LIKE WHERE USER_ID = ? AND POST_ID = ?");
+    $stmt->bind_param("ii", $user_id, $post_id);
+    $stmt->execute();
+    return $stmt->affected_rows;
+}
+
+
 
 public function CountPost($user_id) {           
     $sql = "SELECT COUNT(*) AS count FROM T_USER_POST WHERE USER_ID = ?";
