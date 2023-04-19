@@ -12,6 +12,14 @@ $conn = new SQLconn();
 isset($_POST['path'])? $path = $_POST['path'] : $path = 'NOPATH';
 
 switch ($path) {
+    case 'action.php':
+        if(isset($_POST['delete'])){
+            $post_id=$_POST['post_id'];
+            $conn->deletePost($post_id);
+        }
+        header("Location: index.php");
+        exit();
+        
     case 'comment.php':
         //on traite les infos pour le commentaire
         if (isset($_POST['com'])) {

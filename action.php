@@ -15,11 +15,26 @@ if(!$cook->CheckIntegrity()){
         $state=isset($_POST['mod']) ? "mod" : "del";
         $conn = new SQLconn();
         $username=$cook->getUsername();//car on a deja check l'intégrité donc on est forcément l'uploader du post
+        
+        if($state=="mod"){
         ?>
 
-
+      
         <div class="center">
-        <?php include("./Parties/poster.php"); ?>
+        
+        <?php 
+        include("./Parties/poster.php");
+        }else{
+            include("./Parties/post.php");
+            ?>
+          <form action="./redirect.php" method="post">
+            <input type="hidden" name="post_id" value="<?php echo $post_id ?>">
+            <input type="hidden" name="path" value="<?php echo basename(__FILE__); ?>">
+            <button name="delete" type="submit" >DETRUIRE LE POST</button>
+          </form>
+
+        <?php
+        } ?>
         </div>
     
 <?php include("./Parties/footer.php"); ?>

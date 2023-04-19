@@ -317,7 +317,35 @@ public function CountPost($user_id) {
             return false;
         }
     }
-    public function getPostsByDate() {
+public function deletePost($post_id) {
+    $post_data = $this->getPostData($post_id);
+    $img = $post_data['post_img'];
+    if ($img) {
+        $path =  $post_data['post_img'];
+        if (file_exists($path)) {
+            unlink($path);
+        }
+    }
+    // supprimer les commentaires liés au post
+    $stmt = $this->conn->prepare("DELETE FROM T_POST_COMMENT WHERE POST_ID = ?");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    // supprimer les likes liés au post
+    $stmt = $this->conn->prepare("DELETE FROM t_like WHERE POST_ID = ?");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    $stmt->close();
+    // supprimer le post
+    $stmt = $this->conn->prepare("DELETE FROM t_user_post WHERE POST_ID = ?");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+    
+    
+
+    public function getPostsByDate() {//trie les posts par date
         // Préparation de la requête SQL pour récupérer les posts
         $sql = "SELECT POST_ID FROM T_USER_POST ORDER BY CREATED_TIME DESC";
       
