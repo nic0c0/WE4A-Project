@@ -289,7 +289,8 @@ public function CountPost($user_id) {
                 "user_pseudo" => $row["USER_PSEUDO"],
                 "user_name" => $row["USER_NAME"],
                 "user_surname" => $row["USER_SURNAME"],
-                "user_desc"=> $row["USER_DESC"]
+                "user_desc"=> $row["USER_DESC"],
+                "user_created" => $row["USER_CREATED"],
             );
             return $user_data;
         } else {
@@ -450,6 +451,20 @@ public function PostExist($post_title) {
         mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
     }
 
+    public function updateDate($user_pseudo, $date) {
+        $sql = "UPDATE T_USER_PROFILE SET USER_CREATED=? WHERE USER_PSEUDO=?";
+        $stmt = mysqli_prepare($this->GetConn(), $sql);
+        mysqli_stmt_bind_param($stmt, "ss", $date, $user_pseudo);
+        if (mysqli_stmt_execute($stmt)) {
+            echo "Date de l'utlisateur entrée.";
+        } else {
+            echo "Erreur: " . mysqli_error($this->GetConn());
+        }
+        mysqli_stmt_close($stmt); // fermeture du statement
+        mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
+    }
+
+
     public function insertPost($user_id, $titre, $description, $image_path) {
         $post_date = date("Y-m-d H:i:s"); // date actuelle
         $sql = "INSERT INTO T_USER_POST (USER_ID, POST_TITLE, POST_TEXT, POST_IMG, CREATED_TIME) VALUES (?, ?, ?, ?, ?)";
@@ -481,7 +496,7 @@ public function PostExist($post_title) {
 
     public function CreateAccount($pseudo, $password) {
         $password = EncryptedPassword($password);
-        $sql = "INSERT INTO T_USER_PROFILE (USER_PSEUDO, USER_PASSWORD) VALUES (?, ?)";
+        $sql = "INSERT INTO T_USER_PROFILE (USER_PSEUDO, USER_PASSWORD, USER_CREATED) VALUES (?, ?, NOW())";
         $stmt = mysqli_prepare($this->GetConn(), $sql);
         mysqli_stmt_bind_param($stmt, "ss", $pseudo, $password);
         if (mysqli_stmt_execute($stmt)) {
