@@ -419,9 +419,27 @@ public function getPostId($post_title) {
     return $row['POST_ID'];
 }
 
+public function getUserId($user_pseudo) {
+    $stmt = $this->conn->prepare("SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO = ?");
+    $stmt->bind_param("s", $user_pseudo);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['USER_ID'];
+}
+
 public function PostExist($post_title) {
     $stmt = $this->conn->prepare("SELECT * FROM T_USER_POST WHERE POST_TITLE = ?");
     $stmt->bind_param("s", $post_title);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    //$row = $result->fetch_assoc();
+    return ($result->num_rows>0);
+}
+
+public function UserExist($user_pseudo) {
+    $stmt = $this->conn->prepare("SELECT * FROM T_USER_PROFILE WHERE USER_PSEUDO = ?");
+    $stmt->bind_param("s", $user_pseudo);
     $stmt->execute();
     $result = $stmt->get_result();
     //$row = $result->fetch_assoc();

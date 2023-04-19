@@ -46,9 +46,10 @@
 
             </script>
         <input id="suggestField" type="text" onkeyup="suggestNamesFromInput(this.value)" name="suggestField">
+        <button type="submit" name="voir_post">Go</button>
         <p id="suggestions"><i></i></p>
         <input type="hidden" name="path" value="<?php echo basename(__FILE__); ?>">
-        <button type="submit" name="voir_post">Go</button>
+        
     </form>
     <nav>
         <ul>

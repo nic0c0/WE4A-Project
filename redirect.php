@@ -134,22 +134,33 @@ switch ($path) {
         }
         header("Location: ./Profil.php?user_pseudo=".$user_pseudo);
         exit();
-        case 'header.php':
-            if (isset($_POST['voir_post'])){
-                $suggestField = $_POST['suggestField'];
-               if($conn->PostExist($suggestField)){
+    case 'header.php':
+        if (isset($_POST['voir_post'])){
+            $suggestField = $_POST['suggestField'];
+
+            if($conn->UserExist($suggestField) || $conn->PostExist($suggestField)){
+                if($conn->PostExist($suggestField)){
                     $post_id=$conn->getPostId($suggestField);
-                    header("Location: ./comment.php?post_id=$post_id");
-               }else{
-                header("Location: ./index.php?ERROR");
-               }
-                
+                    $path="./comment.php?post_id=".$post_id;
+                }
+    
+                var_dump($conn->UserExist($suggestField));
+    
+                if($conn->UserExist($suggestField)){
+                $user_pseudo=$suggestField;
+                $path="./Profil.php?user_pseudo=".$user_pseudo;
+                }
+            }else{
+                $path="./index.php?ERROR";
             }
 
-            exit();
+            
+        }
+        header("Location: $path");
+        exit();
 
     default:
-        header("Location: ./index.php?ERROR");
+       header("Location: ./index.php?ERROR");
         exit();
 }
 
