@@ -2,16 +2,20 @@
 <?php 
   include("./Parties/head.php");
   include("./Parties/Classes.php");
+
+  //CheckIntegrity();
   
   ?>
 
   <body>
 <?php
-  if(!(isset($_COOKIE['username']) && isset($_COOKIE['password']))){
+  $cook = new Cookie();
+  if(!$cook->IssetCookie()){
             include("./Parties/signin.php");
     }else{
+      CheckIntegrity();
       include("./Parties/header.php");
-      $username = $_COOKIE['username'];//utile pour poster
+      $username = $cook->getUsername();//utile pour poster
       // Connexion à la base de données
       $conn = new SQLconn();
       ?>

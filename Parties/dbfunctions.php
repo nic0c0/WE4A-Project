@@ -58,7 +58,7 @@ function CheckIntegrity(){
 
     if(!$cook->CheckIntegrity()){
         $cook->clean();
-        header("Location: ./Index.php?PBINTEG"); 
+        header("Location: ./Index.php"); 
     }
 }
 ?>
