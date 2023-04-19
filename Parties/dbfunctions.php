@@ -61,4 +61,31 @@ function CheckIntegrity(){
         header("Location: ./Index.php"); 
     }
 }
+
+function soustraire_dates($date1, $date2) {
+    $date1_timestamp = strtotime($date1);
+    $date2_timestamp = strtotime($date2);
+  
+    $difference = $date2_timestamp - $date1_timestamp;
+  
+    $jours = floor($difference / (60 * 60 * 24));
+    $heures = floor(($difference - $jours * 60 * 60 * 24) / (60 * 60));
+    $minutes = floor(($difference - $jours * 60 * 60 * 24 - $heures * 60 * 60) / 60);
+    $secondes = $difference - $jours * 60 * 60 * 24 - $heures * 60 * 60 - $minutes * 60;
+  
+    $resultat = array(
+      'jours' => $jours,
+      'heures' => $heures,
+      'minutes' => $minutes,
+      'secondes' => $secondes
+    );
+    
+    if( ($resultat['jours'] == 0) && ($resultat['heures'] == 0) && ($resultat['minutes'] == 0)){
+        return $resultat['secondes'];
+    }else{
+        return 1000;
+    }
+    
+  }
+
 ?>

@@ -90,8 +90,9 @@ CREATE TABLE IF NOT EXISTS T_USER_PROFILE
    USER_PSEUDO VARCHAR(50) NOT NULL  ,
    USER_NAME VARCHAR(50) NOT NULL  ,
    USER_SURNAME VARCHAR(50) NOT NULL  ,
-   USER_PASSWORD VARCHAR(256) NOT NULL  
-   , PRIMARY KEY (USER_ID) 
+   USER_PASSWORD VARCHAR(256) NOT NULL ,  
+   USER_CREATED datetime NOT NULL  ,
+   PRIMARY KEY (USER_ID) 
  ) 
  comment = "";
 
@@ -155,17 +156,17 @@ ALTER TABLE T_POST_COMMENT
 
 
 
-INSERT INTO `t_user_profile` (`USER_ID`, `USER_EMAIL`, `USER_PP`, `USER_PSEUDO`, `USER_NAME`, `USER_SURNAME`, `USER_PASSWORD`,`USER_DESC`) VALUES
-(NULL, 'init@utbm.fr', './IMGDB/1profilpicture.gif', 'Init', 'IN', 'IT', '$2y$10$qcTXA0toOSOEL.xqfOpJ0OvwF0EpGjDV5B88R5gK8PCW5VXYd9b.S',''),
-(2, 'Nico@utbm.fr', './IMGDB/2profilpicture.png', 'Nico', 'Nicolas', 'Marcelin', '$2y$10$ljA/qByHsDnwqsIroyIk/O.Kb0AsO4Dgvpu8qUq1QqxUCO2ABv3Uy',''),
-(3, 'Alb@utbm.fr', './IMGDB/3profilpicture.jpg', 'Alb', 'Albert', 'Royer', '$2y$10$ljA/qByHsDnwqsIroyIk/O.Kb0AsO4Dgvpu8qUq1QqxUCO2ABv3Uy',''),
-(4, 'bob@yahoo.com', './IMGDB/4profilpicture.jpg', 'Bob', 'Jones', 'Bob', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC','Fan de Vincent van Gogh à mes heures perdues'),
-(5, 'jane@hotmail.com', '', 'Jane', 'Doe', 'Jane', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC',''),
-(6, 'sam@gmail.com', '', 'Sam', 'Smith', 'Sam', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC',''),
-(7, 'sarah@hotmail.com', '', 'Sarah', 'Johnson', 'Sarah', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC',''),
-(8, 'chris@yahoo.com', '', 'Chris', 'Davis', 'Chris', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC',''),
-(9, 'lisa@gmail.com', '', 'Lisa', 'Jones', 'Lisa', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC',''),
-(10, 'mike@hotmail.com', '', 'Mike', 'Miller', 'Mike', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC','');
+INSERT INTO `t_user_profile` (`USER_ID`, `USER_EMAIL`, `USER_PP`, `USER_PSEUDO`, `USER_NAME`, `USER_SURNAME`, `USER_PASSWORD`,`USER_DESC`, `USER_CREATED`) VALUES
+(NULL, 'init@utbm.fr', './IMGDB/1profilpicture.gif', 'Init', 'IN', 'IT', '$2y$10$qcTXA0toOSOEL.xqfOpJ0OvwF0EpGjDV5B88R5gK8PCW5VXYd9b.S','','2023-04-18 19:14:06'),
+(2, 'Nico@utbm.fr', './IMGDB/2profilpicture.png', 'Nico', 'Nicolas', 'Marcelin', '$2y$10$ljA/qByHsDnwqsIroyIk/O.Kb0AsO4Dgvpu8qUq1QqxUCO2ABv3Uy','', '2023-04-18 19:14:06'),
+(3, 'Alb@utbm.fr', './IMGDB/3profilpicture.jpg', 'Alb', 'Albert', 'Royer', '$2y$10$ljA/qByHsDnwqsIroyIk/O.Kb0AsO4Dgvpu8qUq1QqxUCO2ABv3Uy','', '2023-04-18 19:14:06'),
+(4, 'bob@yahoo.com', './IMGDB/4profilpicture.jpg', 'Bob', 'Jones', 'Bob', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC','Fan de Vincent van Gogh à mes heures perdues', '2023-04-18 19:14:06'),
+(5, 'jane@hotmail.com', '', 'Jane', 'Doe', 'Jane', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC','', '2023-04-18 19:14:06'),
+(6, 'sam@gmail.com', '', 'Sam', 'Smith', 'Sam', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC','', '2023-04-18 19:14:06'),
+(7, 'sarah@hotmail.com', '', 'Sarah', 'Johnson', 'Sarah', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC','', '2023-04-18 19:14:06'),
+(8, 'chris@yahoo.com', '', 'Chris', 'Davis', 'Chris', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC','', '2023-04-18 19:14:06'),
+(9, 'lisa@gmail.com', '', 'Lisa', 'Jones', 'Lisa', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC','', '2023-04-18 19:14:06'),
+(10, 'mike@hotmail.com', '', 'Mike', 'Miller', 'Mike', '$2y$10$yb4WTvcAB9BB099tNHhlg.jFLETNGcQKme9pQ4fvS43Aq/54GC1HC','','2023-04-18 19:14:06');
 
 
 INSERT INTO `t_user_post` (`POST_ID`, `POST_TEXT`, `POST_TITLE`, `CREATED_TIME`, `POST_IMG`, `USER_ID`) VALUES
