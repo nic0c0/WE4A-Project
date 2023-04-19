@@ -318,7 +318,35 @@ public function CountPost($user_id) {
             return false;
         }
     }
-    public function getPostsByDate() {
+public function deletePost($post_id) {
+    $post_data = $this->getPostData($post_id);
+    $img = $post_data['post_img'];
+    if ($img) {
+        $path =  $post_data['post_img'];
+        if (file_exists($path)) {
+            unlink($path);
+        }
+    }
+    // supprimer les commentaires liés au post
+    $stmt = $this->conn->prepare("DELETE FROM T_POST_COMMENT WHERE POST_ID = ?");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    // supprimer les likes liés au post
+    $stmt = $this->conn->prepare("DELETE FROM t_like WHERE POST_ID = ?");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    $stmt->close();
+    // supprimer le post
+    $stmt = $this->conn->prepare("DELETE FROM t_user_post WHERE POST_ID = ?");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+    
+    
+
+    public function getPostsByDate() {//trie les posts par date
         // Préparation de la requête SQL pour récupérer les posts
         $sql = "SELECT POST_ID FROM T_USER_POST ORDER BY CREATED_TIME DESC";
       
@@ -478,6 +506,29 @@ public function PostExist($post_title) {
         mysqli_stmt_close($stmt); // fermeture du statement
         mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
     }
+    public function updatePost($post_id, $user_id, $titre, $description, $image_path) {
+        $sql = "UPDATE T_USER_POST SET POST_TITLE=?, POST_TEXT=?, ";
+        if ($image_path != null) {
+            $sql .= "POST_IMG=?, ";
+        }
+        $sql .= "CREATED_TIME=now() WHERE POST_ID=? AND USER_ID=?";
+        $stmt = mysqli_prepare($this->GetConn(), $sql);
+        if ($image_path != null) {
+            mysqli_stmt_bind_param($stmt, "sssii", $titre, $description, $image_path, $post_id, $user_id);
+        } else {
+            mysqli_stmt_bind_param($stmt, "ssii", $titre, $description, $post_id, $user_id);
+        }
+        if (mysqli_stmt_execute($stmt)) {
+            echo "Le post a été modifié avec succès.";
+        } else {
+            echo "Erreur: " . mysqli_error($this->GetConn());
+        }
+        mysqli_stmt_close($stmt); // fermeture du statement
+        mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
+    }
+    
+    
+    
     public function insertComment($user_id, $post_id, $comment_text) {
         $created_time = date("Y-m-d H:i:s"); // date actuelle
         $sql = "INSERT INTO T_POST_COMMENT (USER_ID, POST_ID, COMMENT_TEXT, CREATED_TIME) VALUES (?, ?, ?, ?)";
