@@ -41,14 +41,23 @@ switch ($path) {
             $post_title = $_POST['post_title'];
             $post_text = $_POST['post_text'];
             $user_id = $_POST['user_id'];
-
-            $postid=$conn->getUserPostCount($user_id);
-            //sauvegarde de l'image
-            $post_img=saveImageAsNew($user_id,false,$postid);
+            isset($_POST['request'])? $request = $_POST['request'] : $request = false;
+            if($request){            
+                //sauvegarde de l'image
+                $name=$conn->getPostData($request)['post_img'];
+                $test=isset($_FILES['post_img']) && $_FILES['post_img']['size'] != 0 ? "newimg" : "noimg";
+                isset($_FILES['post_img']) && $_FILES['post_img']['size'] != 0 ? $post_img=saveImageAsNew($user_id,false,$request,$name) : $post_img=$name;
+            }else{                      
+                 //sauvegarde de l'image
+                $postid=$conn->getUserPostCount($user_id);
+                $name=null;
+                $post_img=saveImageAsNew($user_id,false,$postid,$name);
+            }
             //Mise à jour de la base de données
-            $conn->insertPost($user_id, $post_title, $post_text, $post_img);
+            $request ?$conn->updatePost($request,$user_id,$post_title,$post_text,$post_img):$conn->insertPost($user_id, $post_title, $post_text, $post_img);
         }
-        header("Location: ./index.php");
+        $request ? $path="comment.php?post_id=$request&$test" : $path="index.php";
+        header("Location: $path");
         exit();
     case 'Settings.php':
         //on traite les infos pour les settings
@@ -64,7 +73,7 @@ switch ($path) {
             // Chargement de l'image de profil
             $user_pp = $_POST['user_pp'];
             if (isset($_FILES['new_pp']) && $_FILES['new_pp']['size'] != 0) {
-                $new_pp = saveImageAsNew($user_id,true,0);
+                $new_pp = saveImageAsNew($user_id,true,0,null);
                 if ($new_pp) {
                     $user_pp = $new_pp;
                 }

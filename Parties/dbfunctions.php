@@ -1,5 +1,5 @@
 <?php
-function saveImageAsNew($user_id, $isProfilePic, $number) {
+function saveImageAsNew($user_id, $isProfilePic, $number,$name) {
     $savePath = "./IMGDB/";
     $var= $isProfilePic ? 'new_pp' : 'post_img';
     $hasAdequateFile = isBufferFileAdequate($var);
@@ -10,9 +10,9 @@ function saveImageAsNew($user_id, $isProfilePic, $number) {
         $ext = $path['extension'];
 
         $temp_name = $_FILES[$var]['tmp_name'];
-        $new_filename = $isProfilePic ? $user_id . "profilpicture": $user_id . "picture".$number;
-        $path_filename_ext = $savePath . $new_filename . "." . $ext;
-
+        $new_filename = $name ? $name : ($isProfilePic ? $user_id . "profilpicture" : $user_id . "picture" . $number);
+        $path_filename_ext = $name ? $new_filename : $savePath . $new_filename . "." . $ext;
+        
         if (file_exists($path_filename_ext)) {
             // If file already exists, delete it before saving the new one
             unlink($path_filename_ext);

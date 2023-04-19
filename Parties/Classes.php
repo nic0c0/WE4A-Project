@@ -463,6 +463,29 @@ public function PostExist($post_title) {
         mysqli_stmt_close($stmt); // fermeture du statement
         mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
     }
+    public function updatePost($post_id, $user_id, $titre, $description, $image_path) {
+        $sql = "UPDATE T_USER_POST SET POST_TITLE=?, POST_TEXT=?, ";
+        if ($image_path != null) {
+            $sql .= "POST_IMG=?, ";
+        }
+        $sql .= "CREATED_TIME=now() WHERE POST_ID=? AND USER_ID=?";
+        $stmt = mysqli_prepare($this->GetConn(), $sql);
+        if ($image_path != null) {
+            mysqli_stmt_bind_param($stmt, "sssii", $titre, $description, $image_path, $post_id, $user_id);
+        } else {
+            mysqli_stmt_bind_param($stmt, "ssii", $titre, $description, $post_id, $user_id);
+        }
+        if (mysqli_stmt_execute($stmt)) {
+            echo "Le post a été modifié avec succès.";
+        } else {
+            echo "Erreur: " . mysqli_error($this->GetConn());
+        }
+        mysqli_stmt_close($stmt); // fermeture du statement
+        mysqli_close($this->GetConn()); // fermeture de la connexion à la DB
+    }
+    
+    
+    
     public function insertComment($user_id, $post_id, $comment_text) {
         $created_time = date("Y-m-d H:i:s"); // date actuelle
         $sql = "INSERT INTO T_POST_COMMENT (USER_ID, POST_ID, COMMENT_TEXT, CREATED_TIME) VALUES (?, ?, ?, ?)";
