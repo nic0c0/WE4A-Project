@@ -24,10 +24,10 @@
             <h1>Hello, world!</h1> 
               <?php include("./Parties/poster.php")?>
 
-              <div id="myPosts">
+              <div id="allPosts">
   <script src="./scripts.js"></script>
   <script>
-    loadPostsOnScroll();
+    loadPostsOnScroll(0);
   </script>
 </div>
 

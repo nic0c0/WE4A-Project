@@ -17,16 +17,21 @@ if ($cook->IssetCookie()) {
     
     // Connexion à la base de données
     $conn = new SQLconn();
+    // Récupération des données utilisateur à partir de la base de données
+    $user_data = $conn->getUserData($user_pseudo);
+    $user_id = $user_data['user_id'];
     ?>
 <?php include("./Parties/header.php"); ?>
 <body>
   
     <div class="center">
         <?php include("./Parties/card.php"); ?>
-        <div class="myPosts">
-<!-- Ajouter les posts persos => trier la liste dans
-    load en fct des posts possedés puis les afficher ou refaire une méthode
- -->
+        <div id="myPosts">
+    
+  <script src="./scripts.js"></script>
+  <script>
+    loadPostsOnScroll(<?php echo $user_id; ?>);
+  </script>
         </div>
     </div>
 <?php include("./Parties/footer.php"); ?>

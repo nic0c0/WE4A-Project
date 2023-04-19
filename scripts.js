@@ -41,14 +41,17 @@ if (typeof imgInp !== 'undefined') {
   }
 }
 
-function loadPostsOnScroll() {
-  const writearea = document.getElementById("myPosts");
+function loadPostsOnScroll(user) {
+  const writearea = user ? document.getElementById("myPosts"):document.getElementById("allPosts");
   let numberOfPostsAlready = 0;
 
   async function loadMorePosts() {
-    const AJAXresult = await fetch(
-      `./Parties/load.php?firstPost=${numberOfPostsAlready}`
-    );
+    let url = `./Parties/load.php?firstPost=${numberOfPostsAlready}`;
+    if (user!=0) {
+      url += `&moreInfo=${user}`;
+    }
+    // console.log(url);
+    const AJAXresult = await fetch(url);
     writearea.innerHTML += await AJAXresult.text();
     numberOfPostsAlready += 10;
   }
@@ -63,5 +66,6 @@ function loadPostsOnScroll() {
 
   loadMorePosts();
 }
+
 
 
