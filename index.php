@@ -48,8 +48,8 @@
   }
   ?>
 
-  
-  <script>loadPostsOnScroll();</script>
+<div id="allPosts">
+  <script>loadPostsOnScroll(0);</script>
 </div>
 
       
