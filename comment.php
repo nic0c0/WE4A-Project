@@ -69,7 +69,7 @@ if ($cook->IssetCookie()) {
             $user_id=$conn->getUserIdFromPostId($post_id);
             $user_pseudo=$conn->getUserPseudo($user_id);
         ?>
-        <form action="./Profil.php?pseudo=<?php echo $user_pseudo?> " method="post">
+        <form action="./Profil.php?user_pseudo=<?php echo $user_pseudo?> " method="post">
         <input type="submit" value="VOIR LE PROFIL">
         </form>
         <?php
