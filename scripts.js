@@ -53,7 +53,7 @@ function loadPostsOnScroll(user) {
     // console.log(url);
     const AJAXresult = await fetch(url);
     writearea.innerHTML += await AJAXresult.text();
-    numberOfPostsAlready += 10;
+    numberOfPostsAlready += 2;
   }
 
   window.addEventListener("scroll", () => {
