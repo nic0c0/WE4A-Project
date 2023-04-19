@@ -1,16 +1,12 @@
 
 <?php
-    // Récupération des données utilisateur à partir de la base de données
-    $user_data = $conn->getUserData($user_pseudo);
-    $user_id = $user_data['user_id'];
+
 
     //Chargement de l'image de profil et du pseudo
     $user_pp = $user_data['user_pp'];
     $user_pseudo = $user_data['user_pseudo'];
     $user_desc = $user_data['user_desc'];
     
-    $conn = new SQLconn();
-
 ?>
 
 <div class="card">
