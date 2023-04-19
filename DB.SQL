@@ -172,6 +172,7 @@ INSERT INTO `t_user_post` (`POST_ID`, `POST_TEXT`, `POST_TITLE`, `CREATED_TIME`,
 (NULL, 'Go Oun', 'Bulgogi', '2023-04-17 19:14:06', './IMGDB/1picture0.jpg', 1),
 (NULL, 'Quel est ce plat ?', 'Bibimbap', '2023-04-18 19:14:06', './IMGDB/2picture0.jpg', 2),
 (NULL, 'Ceci était un possible logo', 'Bibimbap', '2023-04-19 20:14:06', './IMGDB/3picture0.png', 3);
+
 INSERT INTO `t_friendship` (`FRIENDSHIP_ID`, `REQUEST_USER_ID`, `ACCEPT_USER_ID`) VALUES 
 (NULL, '2', '1'),
 (NULL, '3', '1'),
@@ -180,3 +181,15 @@ INSERT INTO `t_friendship` (`FRIENDSHIP_ID`, `REQUEST_USER_ID`, `ACCEPT_USER_ID`
 (NULL,'4','1'),
 (NULL,'3','2'),
 (NULL,'2','3');
+
+INSERT INTO `t_post_comment` (`COMMENT_ID`, `COMMENT_TEXT`, `CREATED_TIME`, `POST_ID`, `USER_ID`) VALUES 
+(NULL, 'C\'est cool', '2023-04-19 14:34:17.000000', '2', '4'),
+(NULL, 'Super post !', '2023-04-18 09:12:30.000000', '2', '5'),
+(NULL, 'J\'adore ce que vous faites !', '2023-04-17 17:29:45.000000', '2', '6'),
+(NULL, 'Très intéressant, merci pour le partage !', '2023-04-16 21:06:12.000000', '2', '7'),
+(NULL, 'Je suis complètement d\'accord avec vous', '2023-04-16 10:45:21.000000', '2', '8'),
+(NULL, 'Vous êtes vraiment talentueux, continuez comme ça !', '2023-04-15 16:22:33.000000', '2', '9'),
+(NULL, 'Merci pour cette belle découverte', '2023-04-14 11:09:27.000000', '2', '10'),
+(NULL, 'Je n\'aurais pas dit mieux moi-même !', '2023-04-13 19:57:41.000000', '2', '1'),
+(NULL, 'Impressionnant !', '2023-04-12 08:33:56.000000', '2', '2'),
+(NULL, 'Bravo pour ce post très instructif', '2023-04-11 15:20:10.000000', '2', '3');
