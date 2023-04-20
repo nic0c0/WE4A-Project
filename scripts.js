@@ -72,12 +72,9 @@ function loadPostsOnScroll(user) {
 //afficher les commentaires 
 function loadCommentsOnScroll(postid) {
   const commentContainer = document.getElementById("comment-container");
-  let numberOfCommentsAlready = 0;
+  let numberOfCommentsAlready = 2;
   // Appelle la fonction pour charger des commentaires 5 fois au lancement
-  for (let i = 0; i < 5; i++) {
-    loadMoreComments();
-    numberOfCommentsAlready += 1;
-  }
+
 
   async function loadMoreComments() {
     
@@ -85,6 +82,8 @@ function loadCommentsOnScroll(postid) {
     const AJAXresult = await fetch(url);
     commentContainer.innerHTML += await AJAXresult.text();
     numberOfCommentsAlready += 1;
+        console.log(url);
+
   }
 
   commentContainer.addEventListener("scroll", () => {

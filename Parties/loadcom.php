@@ -1,10 +1,13 @@
 <?php
-include("../Parties/Classes.php");
-//connexion à la base de données
-$conn = new SQLconn();
-//récupération du numéro du dernier commentaire affiché
-$comNumber = $_GET["firstComment"];
-$post_id=$_GET["post_id"];
+if(!isset($path)){
+    include("../Parties/Classes.php");
+    //connexion à la base de données
+    $conn = new SQLconn();
+    //récupération du numéro du dernier commentaire affiché
+    $comNumber = $_GET["firstComment"];
+    $post_id=$_GET["post_id"];
+}
+
 // Récupération des id des coms
 $com_id_list = $conn->getComsByDate($post_id);
 

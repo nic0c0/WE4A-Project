@@ -50,6 +50,14 @@ if ($cook->IssetCookie()) {
                     <!-- <?php echo (isset($com_text) ? $com_text . " le " . (isset($com_time)? $com_time : '') : ''); ?> -->
                     </p>
                     <div id="comment-container" style="height: 300px; overflow-y: scroll;">
+                    <?php
+                    for($i=0;$i<2;$i++){
+                        $post_id=$_GET['post_id'];
+                        $comNumber=$i;
+                        $path=true;
+                        include("./Parties/loadcom.php");
+                    }
+                    ?>
                     <script>
                         loadCommentsOnScroll(<?php echo $post_id; ?>);
                     </script>
