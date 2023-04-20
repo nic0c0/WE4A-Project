@@ -28,11 +28,6 @@ if ($cook->IssetCookie()) {
                 
 
             
-                $com_data=$conn->getComData($com_id);
-                if($com_data!=false){//si le commentaire existe
-                    $com_text=$com_data['comment_text'];
-                    $com_time=$com_data['created_time'];
-                }
                 //Nom de l'utilisateur actuel :
                 $actual_user=$conn->getUserData($cook->getUsername())['user_id'];
                 //Nom de l'utilisateur qui a posté :
@@ -52,11 +47,13 @@ if ($cook->IssetCookie()) {
                 </div>
                 <div class="com"> 
                     <p>
-                    <?php echo (isset($com_text) ? $com_text . " le " . (isset($com_time)? $com_time : '') : ''); ?>
+                    <!-- <?php echo (isset($com_text) ? $com_text . " le " . (isset($com_time)? $com_time : '') : ''); ?> -->
                     </p>
-                    <p>
-                        Whouah
-                    </p>
+                    <div id="comment-container" style="height: 300px; overflow-y: scroll;">
+                    <script>
+                        loadCommentsOnScroll(<?php echo $post_id; ?>);
+                    </script>
+                    </div>
                     <form method="post" action="redirect.php">
                     <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                     <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">

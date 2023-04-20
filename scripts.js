@@ -53,7 +53,7 @@ function loadPostsOnScroll(user) {
     // console.log(url);
     const AJAXresult = await fetch(url);
     writearea.innerHTML += await AJAXresult.text();
-    numberOfPostsAlready += 2;
+    numberOfPostsAlready += 1;
   }
 
   window.addEventListener("scroll", () => {
@@ -66,6 +66,36 @@ function loadPostsOnScroll(user) {
 
   loadMorePosts();
 }
+
+
+
+//afficher les commentaires 
+function loadCommentsOnScroll(postid) {
+  const commentContainer = document.getElementById("comment-container");
+  let numberOfCommentsAlready = 0;
+  // Appelle la fonction pour charger des commentaires 5 fois au lancement
+  for (let i = 0; i < 5; i++) {
+    loadMoreComments();
+    numberOfCommentsAlready += 1;
+  }
+
+  async function loadMoreComments() {
+    
+    let url = `./Parties/loadcom.php?firstComment=${numberOfCommentsAlready}&post_id=${postid}`;
+    const AJAXresult = await fetch(url);
+    commentContainer.innerHTML += await AJAXresult.text();
+    numberOfCommentsAlready += 1;
+  }
+
+  commentContainer.addEventListener("scroll", () => {
+    const { scrollTop, scrollHeight, clientHeight } = commentContainer;
+
+    if (scrollTop + clientHeight >= scrollHeight - 5) {
+      loadMoreComments();
+    }
+  });
+}
+
 
 
 
