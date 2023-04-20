@@ -49,11 +49,8 @@
   ?>
 <div id="allPosts">
 
-<<<<<<< Updated upstream
-<div id="allPosts">
-=======
   
->>>>>>> Stashed changes
+
   <script>loadPostsOnScroll(0);</script>
 </div>
 

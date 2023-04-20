@@ -24,12 +24,12 @@ if(!$com_id_list){
                 $path=false;
                 break;
             }
-            echo "taille".count($com_id_list)." i=".$i." C=".$com_id_list[$i]."<br>";
+            // echo "taille".count($com_id_list)." i=".$i." C=".$com_id_list[$i]."<br>";
             $com_id = $com_id_list[$i];
             $com_data=$conn->getComData($com_id);
             $com_text=$com_data['comment_text'];
             $com_time=$com_data['created_time'];
-           // echo (isset($com_text) ? $com_text . " <br> " . (isset($com_time)? $com_time : '') : ''); 
+           echo (isset($com_text) ? $com_text . " <br> " . (isset($com_time)? $com_time : '') : ''); 
             echo "<br>";
             echo "<br>";
         }
