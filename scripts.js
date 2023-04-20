@@ -72,18 +72,23 @@ function loadPostsOnScroll(user) {
 //afficher les commentaires 
 function loadCommentsOnScroll(postid) {
   const commentContainer = document.getElementById("comment-container");
-  let numberOfCommentsAlready = 2;
-  // Appelle la fonction pour charger des commentaires 5 fois au lancement
-
+  let numberOfCommentsAlready = 4;
+  let isFetching = false; // variable de contrôle
 
   async function loadMoreComments() {
-    
+    // Vérifie si la fonction est déjà en cours d'exécution
+    if (isFetching) {
+      return;
+    }
+    isFetching = true; // Définit la variable à true pour indiquer que la fonction est en cours d'exécution
+
     let url = `./Parties/loadcom.php?firstComment=${numberOfCommentsAlready}&post_id=${postid}`;
     const AJAXresult = await fetch(url);
     commentContainer.innerHTML += await AJAXresult.text();
-    numberOfCommentsAlready += 1;
-        console.log(url);
+    numberOfCommentsAlready += 4;
+    console.log(url);
 
+    isFetching = false; // Réinitialise la variable à false une fois la fonction terminée
   }
 
   commentContainer.addEventListener("scroll", () => {
@@ -94,6 +99,7 @@ function loadCommentsOnScroll(postid) {
     }
   });
 }
+
 
 
 

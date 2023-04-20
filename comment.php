@@ -48,12 +48,9 @@ if ($cook->IssetCookie()) {
                         $post_id=$_GET['post_id'];
                     //Chargement de deux commentaires 
                     //Avant Ajax
-                    for($i=0;$i<2;$i++){
-                        if($path){
-                            $comNumber=$i;
+                            $comNumber=0;
                             include("./Parties/loadcom.php");
-                        }
-                    }
+                        
                     if($path){
                         //si on a des commentaires, on charge le script qui permet de charger les commentaires au scroll
                     ?>
