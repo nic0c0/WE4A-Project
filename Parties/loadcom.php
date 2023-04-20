@@ -1,5 +1,5 @@
 <?php
-if(!isset($path)){
+if(!isset($path)){//si on utilise par le script
     include("../Parties/Classes.php");
     //connexion à la base de données
     $conn = new SQLconn();
@@ -10,21 +10,25 @@ if(!isset($path)){
 
 // Récupération des id des coms
 $com_id_list = $conn->getComsByDate($post_id);
+if(!$com_id_list){
+    echo "Aucun commentaire";
+    $path=false;
+}else{
 
-// Suppression des posts déjà affichés
-for ($i = 0; $i < $comNumber; $i++) {
-    array_shift($com_id_list);
+    // Suppression des posts déjà affichés
+    for ($i = 0; $i < $comNumber; $i++) {
+        array_shift($com_id_list);
+    }
+
+    for ($i = 0; $i < count($com_id_list); $i++) {
+        $com_id = $com_id_list[$i];
+        $com_data=$conn->getComData($com_id);
+        $com_text=$com_data['comment_text'];
+        $com_time=$com_data['created_time'];
+        echo (isset($com_text) ? $com_text . " <br> " . (isset($com_time)? $com_time : '') : ''); 
+        echo "<br>";
+    }
 }
-
-for ($i = 0; $i < count($com_id_list); $i++) {
-    $com_id = $com_id_list[$i];
-    $com_data=$conn->getComData($com_id);
-    $com_text=$com_data['comment_text'];
-    $com_time=$com_data['created_time'];
-    echo (isset($com_text) ? $com_text . " <br> " . (isset($com_time)? $com_time : '') : ''); 
-    echo "<br>";
-}
-
 //deconnexion de la base de données
-$conn->closeDB();
+isset($path) ? '':$conn->closeDB();
 ?>

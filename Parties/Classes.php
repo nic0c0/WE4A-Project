@@ -471,8 +471,8 @@ public function PostExist($post_title) {
             // Retour du tableau de résultats
             return $comments;
         } else {
-            // S'il n'y a aucun résultat, on retourne un tableau vide
-            return array();
+            // S'il n'y a aucun résultat, on retourne false
+            return false;
         }
     }
     
