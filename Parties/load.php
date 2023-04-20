@@ -24,19 +24,15 @@ if(isset($_GET['moreInfo'])){
 for ($i = 0; $i < $postNumber; $i++) {
     array_shift($post_id_list);
 }
+// Affichage des posts 1 par 1 car on ne connait pas le nombre de posts déja affiché donc pb quand nb de posts impairs( affichage d'un doublon souvent si 2 en 2)
+if (isset($post_id_list[0])) {
+    $post_id = $post_id_list[0];
+    include "../Parties/post.php";
+}
 
 
 // Récupération des données des 5 premiers posts
-if (!empty($post_id_list)) {
-    for ($i = 0; $i < 2; $i++) {
-        if (isset($post_id_list[$i])) {
-            $post_id = $post_id_list[$i];
-            include "../Parties/post.php";
-        } else {
-            break;
-        }
-    }
-}
+
 
 
 //deconnexion de la base de données

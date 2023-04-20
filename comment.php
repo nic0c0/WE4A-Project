@@ -16,23 +16,13 @@ if ($cook->IssetCookie()) {
         if(isset($_GET['post_id'])&&!empty($_GET['post_id'])){
             $post_id = $_GET['post_id'];     
 
-
-            $com_id=1;
             $post_data = $conn->getPostData($post_id);
-
-            if($post_data!==false){//si le post existe
+            //si le post existe
+            if($post_data!==false){
                 $post_title = $post_data['post_title'];
                 $post_text = $post_data['post_text'];
                 $post_img = $post_data['post_img'];
                 $post_time = $post_data['created_time'];
-                
-
-            
-                $com_data=$conn->getComData($com_id);
-                if($com_data!=false){//si le commentaire existe
-                    $com_text=$com_data['comment_text'];
-                    $com_time=$com_data['created_time'];
-                }
                 //Nom de l'utilisateur actuel :
                 $actual_user=$conn->getUserData($cook->getUsername())['user_id'];
                 //Nom de l'utilisateur qui a posté :
@@ -51,12 +41,26 @@ if ($cook->IssetCookie()) {
                     </div>
                 </div>
                 <div class="com"> 
-                    <p>
-                    <?php echo (isset($com_text) ? $com_text . " le " . (isset($com_time)? $com_time : '') : ''); ?>
-                    </p>
-                    <p>
-                        Whouah
-                    </p>
+                    <div id="comment-container" style="height: 300px; overflow-y: scroll;">
+                    <?php
+                        //variables pour le chargement des commentaires
+                        $path=true;//si les commentaires existent
+                        $post_id=$_GET['post_id'];
+                    //Chargement de deux commentaires 
+                    //Avant Ajax
+                            $comNumber=0;
+                            include("./Parties/loadcom.php");
+                        
+                    if($path){
+                        //si on a des commentaires, on charge le script qui permet de charger les commentaires au scroll
+                    ?>
+                    <script>
+                        loadCommentsOnScroll(<?php echo $post_id; ?>);
+                    </script>
+                    <?php
+                    }
+                    ?>
+                    </div>
                     <form method="post" action="redirect.php">
                     <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                     <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
@@ -103,12 +107,6 @@ if ($cook->IssetCookie()) {
         }else{
             echo "Aucun post trouvé";
         }
-
-
-
-
-
-        
          include("./Parties/footer.php");
 } else {
     header("Location: ./index.php");

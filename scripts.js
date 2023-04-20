@@ -41,31 +41,87 @@ if (typeof imgInp !== 'undefined') {
   }
 }
 
+// Charger les posts au défilement de la page
 function loadPostsOnScroll(user) {
-  const writearea = user ? document.getElementById("myPosts"):document.getElementById("allPosts");
+  // Récupère l'élément HTML où afficher les posts
+  const writearea = user ? document.getElementById("myPosts") : document.getElementById("allPosts");
   let numberOfPostsAlready = 0;
+  let isFetching = false; // Variable de contrôle pour éviter de lancer plusieurs requêtes AJAX en même temps et donc d'éviter les doublons de posts
 
+  // Fonction pour charger plus de posts
   async function loadMorePosts() {
+    // Vérifie si une requête AJAX est déjà en cours
+    if (isFetching) {
+      return;
+    }
+    // Alors une requête AJAX est en cours
+    isFetching = true;
+
     let url = `./Parties/load.php?firstPost=${numberOfPostsAlready}`;
-    if (user!=0) {
+    // Ajoute l'argument 'moreInfo' si la fonction est appelée pour afficher les posts d'un utilisateur spécifique
+    if (user != 0) {
       url += `&moreInfo=${user}`;
     }
-    // console.log(url);
+    // Envoie une requête AJAX à l'URL spécifiée et attend la réponse
     const AJAXresult = await fetch(url);
+    // Ajoute le résultat de la requête à l'élément HTML où afficher les posts
     writearea.innerHTML += await AJAXresult.text();
-    numberOfPostsAlready += 2;
+    // Incrémente le nombre de posts déjà affichés
+    numberOfPostsAlready += 1;
+    
+    // Réinitialise la var à false une fois la requête AJAX terminée
+    isFetching = false;
   }
 
+  // Détecte si l'utilisateur a atteint le bas de la page
   window.addEventListener("scroll", () => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-
     if (scrollTop + clientHeight >= scrollHeight - 5) {
+      // Charge plus de posts
       loadMorePosts();
     }
   });
 
-  loadMorePosts();
+  // Charge les premiers posts au chargement de la page
+  // loadMorePosts();//idk si essentiel
 }
+
+
+
+
+
+//afficher les commentaires 
+function loadCommentsOnScroll(postid) {
+  const commentContainer = document.getElementById("comment-container");
+  let numberOfCommentsAlready = 4;
+  let isFetching = false; // variable de contrôle
+
+  async function loadMoreComments() {
+    // Vérifie si la fonction est déjà en cours d'exécution
+    if (isFetching) {
+      return;
+    }
+    isFetching = true; // Définit la variable à true pour indiquer que la fonction est en cours d'exécution
+
+    let url = `./Parties/loadcom.php?firstComment=${numberOfCommentsAlready}&post_id=${postid}`;
+    const AJAXresult = await fetch(url);
+    commentContainer.innerHTML += await AJAXresult.text();
+    numberOfCommentsAlready += 4;
+    console.log(url);
+
+    isFetching = false; // Réinitialise la variable à false une fois la fonction terminée
+  }
+
+  commentContainer.addEventListener("scroll", () => {
+    const { scrollTop, scrollHeight, clientHeight } = commentContainer;
+
+    if (scrollTop + clientHeight >= scrollHeight - 5) {
+      loadMoreComments();
+    }
+  });
+}
+
+
 
 
 

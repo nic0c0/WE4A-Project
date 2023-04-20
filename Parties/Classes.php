@@ -467,6 +467,33 @@ public function UserExist($user_pseudo) {
             return false;
         }
     }
+    public function getComsByDate($post_id) {
+        // Préparation de la requête SQL pour récupérer les commentaires
+        $sql = "SELECT COMMENT_ID FROM T_POST_COMMENT WHERE POST_ID = " . $post_id . " ORDER BY CREATED_TIME DESC";
+    
+        // Exécution de la requête SQL
+        $result = $this->conn->query($sql);
+    
+        // Vérification du nombre de résultats
+        if ($result->num_rows > 0) {
+            // Initialisation du tableau de résultats
+            $comments = array();
+    
+            // Boucle sur tous les résultats
+            $index = 0;
+            while ($row = $result->fetch_assoc()) {
+                // Ajout du comment_id courant au tableau de résultats
+                $comments[$index] = $row["COMMENT_ID"];
+                $index++;
+            }
+    
+            // Retour du tableau de résultats
+            return $comments;
+        } else {
+            // S'il n'y a aucun résultat, on retourne false
+            return false;
+        }
+    }
     
     
     
