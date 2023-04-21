@@ -21,12 +21,14 @@
         </div>
     </div>
     <div class="com"> 
-            <!-- <div id="comment-container" style="height: 300px; overflow-y: scroll;">
-            <script src="./scripts.js"></script>
-                    <script>
-                    loadCommentsOnScroll(<?php echo $post_id; ?>);
-                    </script>
-            </div> -->
+        <div id="comment-container">
+            <?php 
+                $comNumber=0;
+                $path=true;
+                include("../Parties/loadcom.php");
+                //on ne met pas le script pour charger les commentaires au scroll car on est dans la page principale
+            ?>
+        </div>
         <form action="comment.php" method="get"> <!--get car les données ne sont pas sensibles-->
         <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
         <input type="submit" value="VOIR LE POST">
@@ -34,15 +36,20 @@
 
     </div>
     <div class="desc">
-        <p><?php echo "$post_text"?></p>
-        <p><?php echo "$post_time"?></p>
+        <div class="usertext">
+            <div class="text"><?php echo "$post_text"?></div>
+            <p class="date"><?php echo "$post_time"?></p>
+        </div>
         <?php 
             $user_id=$conn->getUserIdFromPostId($post_id);
             $user_pseudo=$conn->getUserPseudo($user_id);
         ?>
+        <div class="like-and-user">
+
         <form action="./Profil.php?user_pseudo=<?php echo $user_pseudo?> " method="post">
         <input type="submit" value="VOIR LE PROFIL">
         </form>
+        </div>
     </div>
 
 
