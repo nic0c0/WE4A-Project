@@ -96,7 +96,7 @@ function loadCommentsOnScroll(postid) {
     const AJAXresult = await fetch(url);
     commentContainer.innerHTML += await AJAXresult.text();
     numberOfCommentsAlready += 4;
-    console.log(url);
+    // console.log(url); //debug
 
     isFetching = false; // Réinitialise la variable à false une fois la fonction terminée
   }

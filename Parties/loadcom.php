@@ -29,12 +29,12 @@ if(!$com_id_list){
             $com_data=$conn->getComData($com_id);
             $com_text=$com_data['comment_text'];
             $com_time=$com_data['created_time'];
-           echo (isset($com_text) ? $com_text . " <br> " . (isset($com_time)? $com_time : '') : ''); 
-            echo "<br>";
-            echo "<br>";
+            $user_id=$com_data['user_id'];
+            $user_pseudo=$conn->getUserPseudo($user_id);
+            echo (isset($com_text) ? "<div class=\"comments\"><div>" . "$com_text" . "</div>".(isset($com_time)? "<p class=\"date\">".(isset($user_pseudo)?"$user_pseudo le ":''). "$com_time" . "</p>" : "") . "</div>" : "");
         }
     }
-   
+       
 }
 //deconnexion de la base de données
 // isset($path) ? '':$conn->closeDB();

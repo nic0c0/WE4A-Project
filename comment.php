@@ -41,7 +41,7 @@ if ($cook->IssetCookie()) {
                     </div>
                 </div>
                 <div class="com"> 
-                    <div id="comment-container" style="height: 300px; overflow-y: scroll;">
+                    <div id="comment-container">
                     <?php
                         //variables pour le chargement des commentaires
                         $path=true;//si les commentaires existent
@@ -73,18 +73,18 @@ if ($cook->IssetCookie()) {
             </form>
                 </div>
                 <div class="desc">
-
-                    <form action="./Profil.php?pseudo=<?php echo $user_pseudo?> " method="post">
-                    <input type="submit" value="VOIR LE PROFIL">
-                    </form>
-
-                        <form method='post' action="./redirect.php">
+                    <div class="like-and-user">
+                    <form method='post' action="./redirect.php">
                         <input type='hidden' name='post_id' value='<?php echo $post_id ?>'>
                         <input type='hidden' name='user_id' value='<?php echo $actual_user?>'>
                         <input type="hidden" name="path" value="<?php echo basename(__FILE__); ?>">
-                        <button type='submit' name="like">Like</button>
-                        <p><?php echo $num_likes?></p>
-                        </form>
+                        <button type='submit' name="like">Like : <?php echo $num_likes?></button>
+                    </form>
+                    <form action="./Profil.php?pseudo=<?php echo $user_pseudo?> " method="post">
+                        <input type="submit" value="VOIR LE PROFIL">
+                    </form>
+                    </div>
+                    <div class="modif">
                         <?php if($user_id==$actual_user){ ?>
                             <form method="post" action="./action.php">
                                 <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
@@ -95,9 +95,11 @@ if ($cook->IssetCookie()) {
                                 <button type="submit" name="mod">Modifier</button>
                             </form>
                         <?php } ?>
-
-                    <p><?php echo "$post_text"?></p>
-                    <p><?php echo "$post_time"?></p>
+                    </div>
+                    <div class="usertext">
+                        <div class="text"><?php echo "$post_text"?></div>
+                        <p class="date"><?php echo "$post_time"?></p>
+                    </div>
 
                 </div>
             </div>
