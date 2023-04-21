@@ -108,6 +108,7 @@ body{
 /* .desc>*,.com>*{
   display: none;
 } */
+/* ================== Description ================== */
 .desc{
   grid-area:desc;
   display:flex;
@@ -137,6 +138,19 @@ body{
   "text text"
   ". date";
 }
+/* ================== Commentaires ================== */
+.com{
+  grid-area:com;
+  display : flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding:0.5em;
+}
+#comment-container{
+  height: 325px;
+  overflow-y: scroll;
+}
+
 .comments{
   display : flex;
   flex-direction: column;
@@ -146,6 +160,8 @@ body{
   max-height: 20%;}
 .comments :first-child{
 max-height: 80%;}
+
+/* ================== Texte et Dates ================== */
 .text{
   grid-area:text;
   overflow-y: scroll;
@@ -162,17 +178,7 @@ max-height: 80%;}
   grid-area:img;
 }
 
-.com{
-  grid-area:com;
-  display : flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  padding:0.5em;
-}
-#comment-container{
-  height: 325px;
-  overflow-y: scroll;
-}
+
 
 .left img{
   border-radius:var(--border-radius);
