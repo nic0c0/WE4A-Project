@@ -21,7 +21,7 @@
     <div class="img-container">
     <img id="blah" src="<?php echo (isset($post_data['post_img']))? $post_data['post_img'] : './IMG/img.png'; ?>" alt="Votre image" />
     </div>
-    <form  action="./redirect.php"method="post" enctype="multipart/form-data" >
+    <form  class="desc" action="./redirect.php"method="post" enctype="multipart/form-data" >
         <fieldset class="posterset">
             <legend>Mettre une Image</legend>
             <div class="img-upload">
@@ -30,7 +30,7 @@
                 </label>
             </div>
         </fieldset>
-        <div class="desc">
+        <div>
             <label for="post_title">Titre:</label>
             <input type="text" id="post_title" name="post_title" value="<?php echo (isset($post_data['post_title'])?$post_data['post_title']:'')?>" required>
             <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">

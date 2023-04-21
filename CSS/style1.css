@@ -202,13 +202,12 @@ max-height: 80%;}
 } */
 /* =====================Poster============== */
 .poster {
-  height: 100vh;
+  height: 50vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows:   1fr 1fr;
+  grid-template-rows:   1fr;
   grid-template-areas: 
   " img desc"
-  " set set";
 }
 #blah{
   grid-area:img;

@@ -25,7 +25,7 @@
             <?php 
                 $comNumber=0;
                 $path=true;
-                include("../Parties/loadcom.php");
+                file_exists("../Parties/loadcom.php")?include("../Parties/loadcom.php"):include("./Parties/loadcom.php");
                 //on ne met pas le script pour charger les commentaires au scroll car on est dans la page principale
             ?>
         </div>
