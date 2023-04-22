@@ -117,11 +117,6 @@ if ($cook->IssetCookie()) {
 }
 ?>
 
-<script src="./scripts.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        applyStyles(false);
-      });
-    </script>
+
     </body>
 </html>

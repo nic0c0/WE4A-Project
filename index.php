@@ -30,7 +30,6 @@
               <?php include("./Parties/poster.php")?>
 
               <div id="myPosts">
-  <script src="./scripts.js"></script>
   <?php
   if (true){
     $user_pseudo=$cook->getUsername();
@@ -68,11 +67,6 @@
 
 
 
-<script src="./scripts.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        applyStyles();
-      });
-    </script>
+
 </body>
 </html>
