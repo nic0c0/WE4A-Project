@@ -57,7 +57,7 @@ function loadPostsOnScroll(user) {
     writearea.innerHTML += await AJAXresult.text();
     // Incrémente le nombre de posts déjà affichés
     numberOfPostsAlready += 1;
-    
+
     // Réinitialise la var à false une fois la requête AJAX terminée
     isFetching = false;
   }

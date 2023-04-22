@@ -1,19 +1,18 @@
-
-<?php 
+<?php
 
 include("./Parties/head.php") ?>
 
-  <body>
-  
+<body>
+
   <div class="blurring">
 
-</div>
+  </div>
 
 
-<form class="login" action="./Signup.php" method="post">
-  <fieldset>
-  <legend>Inscription</legend>
-   
+  <form class="login" action="./Signup.php" method="post">
+    <fieldset>
+      <legend>Inscription</legend>
+
       <label for="username">Nom d'utilisateur :</label>
       <input id="username" type="text" placeholder="Username" name="username" required>
       <label for="password1">Mot de passe :</label>
@@ -21,44 +20,45 @@ include("./Parties/head.php") ?>
       <label for="password2">Confirmer :</label>
 
       <input id="password2" type="password" placeholder="Password" name="password2" required>
-  </fieldset>
+    </fieldset>
     <button type="submit">s'inscrire</button>
 
-<?php 
+    <?php
 
 
-if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["username"])){
-    
-  
-    $USERNAME=htmlentities($_POST["username"]);
-    $PASSWORD1=htmlentities($_POST["password1"]);
-    $PASSWORD2=htmlentities($_POST["password2"]);
+    if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["username"])) {
 
-    if($PASSWORD1==$PASSWORD2){
+
+      $USERNAME = htmlentities($_POST["username"]);
+      $PASSWORD1 = htmlentities($_POST["password1"]);
+      $PASSWORD2 = htmlentities($_POST["password2"]);
+
+      if ($PASSWORD1 == $PASSWORD2) {
 
         include("./Parties/Classes.php");
 
         $coon = new SQLconn();
 
-        if(!$coon->AlreadyExist($USERNAME)){
-          $coon->CreateAccount($USERNAME,$PASSWORD1);
+        if (!$coon->AlreadyExist($USERNAME)) {
+          $coon->CreateAccount($USERNAME, $PASSWORD1);
           $cook = new Cookie();
-          $cook->CreateLoginCookie($USERNAME,$PASSWORD1);
+          $cook->CreateLoginCookie($USERNAME, $PASSWORD1);
           header('Location: ./index.php');
         }
-  
 
-        
-        
-    }else{
-        
+
+
+
+      } else {
+
         echo "mauvais mots de passe";
+
+      }
 
     }
 
-}
-
-?>
-</form>
+    ?>
+  </form>
 </body>
+
 </html>

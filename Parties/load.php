@@ -8,12 +8,12 @@ $postNumber = $_GET["firstPost"];
 // Récupération des id des posts
 $post_id_list = $conn->getPostsByDate();
 //si on veut afficher les posts d'un utilisateur particulier
-if(isset($_GET['moreInfo'])){
+if (isset($_GET['moreInfo'])) {
     $user_id = $_GET['moreInfo'];
     $filtered_posts = array();
-    foreach($post_id_list as $post_id) {
+    foreach ($post_id_list as $post_id) {
         $poster_user = $conn->getUserIdFromPostId($post_id);
-        if($poster_user == $user_id) {
+        if ($poster_user == $user_id) {
             $filtered_posts[] = $post_id;
         }
     }
