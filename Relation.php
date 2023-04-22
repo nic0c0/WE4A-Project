@@ -31,13 +31,9 @@ if(!$cook->CheckIntegrity()){
 
 <?php
 }
+include("./Parties/footer.php");
 ?>
 
-<script src="./scripts.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        applyStyles(false);
-      });
-    </script>
+
     </body>
 </html>

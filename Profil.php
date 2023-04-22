@@ -28,7 +28,6 @@ if ($cook->IssetCookie()) {
         <?php include("./Parties/card.php"); ?>
         <div id="myPosts">
     
-  <script src="./scripts.js"></script>
   <script>
     loadPostsOnScroll(<?php echo $user_id; ?>);
   </script>
@@ -42,11 +41,6 @@ if ($cook->IssetCookie()) {
 }
 ?>
 
-<script src="./scripts.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        applyStyles(false);
-      });
-    </script>
+
     </body>
 </html>

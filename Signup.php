@@ -60,11 +60,5 @@ if (isset($_POST["password1"]) && isset($_POST["password2"]) && isset($_POST["us
 
 ?>
 </form>
-<script src="./scripts.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        applyStyles();
-      });
-    </script>
 </body>
 </html>
