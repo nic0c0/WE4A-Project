@@ -162,7 +162,7 @@ class SQLconn
             $cook = new Cookie();
             $user_pseudo = $cook->getUsername();
 
-            echo "<h1>Abonnés de " . $user_pseudo . "</h1>";
+            // echo "<h1>Abonnés de " . $user_pseudo . "</h1>";
             echo "<p>";
             while ($row = $result->fetch_assoc()) {
                 echo "<a href='./Profil.php?user_pseudo=" . $row["USER_PSEUDO"] . "'>" . $row["USER_PSEUDO"] . "</a><br>";
@@ -183,7 +183,7 @@ class SQLconn
             $cook = new Cookie();
             $user_pseudo = $cook->getUsername();
 
-            echo "<h1>Abonnements de " . $user_pseudo . "</h1>";
+            // echo "<h1>Abonnements de " . $user_pseudo . "</h1>";
             //Affichage des abonnements
             echo "<p>";
             while ($row = $result->fetch_assoc()) {

@@ -19,12 +19,19 @@ if (!$cook->CheckIntegrity()) {
 
     <body>
         <div class="center">
-            <p>
-                <?php
-                $conn->displayFollowers($user_id);
-                $conn->displayFollows($user_id);
-                ?>
-            </p>
+            <div class="relations">
+                <div>
+                    <h1>Abonnés</h1>
+                    <?php
+                    $conn->displayFollowers($user_id); ?>
+                </div>
+                <div>
+                    <h1>Abonnements</h1>
+                    <?php
+                    $conn->displayFollows($user_id);
+                    ?>
+                </div>
+            </div>
         </div>
     </body>
 
