@@ -96,12 +96,19 @@ Ce projet consiste à créer un site web permettant à des utilisateurs d'échan
 
 ### Echantillon de test : 
 - 10 comptes :
-    - Init : Admin
-        - Mdp : init
-    - Alb | Nico : Admin
-        - Mdp : root
-    - Bob | Jane | Sam | Sarah | Chris | Lisa | Mike : 
-        - Mdp : test
+    |Compte|Mot de passe|Droits            |
+    |------|------------|------------------|
+    |Init  |init        |:white_check_mark:| 
+    |Alb   |root        |:white_check_mark:|
+    |Nico  |root        |:white_check_mark:|
+    |Bob   |test        |:x:               |
+    |Jane  |test        |:x:               |
+    |Sam   |test        |:x:               |
+    |Sarah |test        |:x:               |
+    |Chris |test        |:x:               |
+    |Lisa  |test        |:x:               |
+    |Mike  |test        |:x:               |
+
 - 12 posts
 - 25 commentaires
 - 30 likes
