@@ -66,9 +66,6 @@ h1 {
   transition: var(--transition);
 }
 
-.main>div:not(.leftmain) {
-  padding-right: 2em;
-}
 
 /* ================== Post et fils ================== */
 .post {
@@ -442,10 +439,12 @@ legend {
 }
 
 /* ================== Profile ================== */
-.center {
+.center, #myPosts{
   display: grid;
   place-items: center;
   margin-top: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 

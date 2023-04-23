@@ -81,14 +81,24 @@ Ce projet consiste à créer un site web permettant à des utilisateurs d'échan
     - Table relation : T_FRIENDSHIP
 - CSS : style du site
 
-#### Style
+#### Style : 
+
+- Utilisation de Flex et Grid
+
+#### Classes importantes : 
+- card : carte de profil
+- post : un post
+- main : la page principale (sans le header et le footer) utilisée dans l'index
+- desc,com,left : parties d'un post
+- login : interface pour formulaire de connexion / inscription
+- center : centre la page semblable à main
 
 
 ### Echantillon de test : 
 - 10 comptes :
-    - Init : 
+    - Init : Admin
         - Mdp : init
-    - Alb | Nico : 
+    - Alb | Nico : Admin
         - Mdp : root
     - Bob | Jane | Sam | Sarah | Chris | Lisa | Mike : 
         - Mdp : test
@@ -96,7 +106,10 @@ Ce projet consiste à créer un site web permettant à des utilisateurs d'échan
 - 25 commentaires
 - 30 likes
 
+#### Connexion à la base de données : 
+
+    Changer les informations de connexion dans le fichier Classes.php : ligne 87
 
  ### Conclusion
 
-Ce projet permettra de développer des compétences en développement web et de créer un site fonctionnel pour l'échange de messages entre utilisateurs.
+Ce projet nous a permis de développer nos compétences en développement web et de créer un site fonctionnel pour l'échange de messages entre utilisateurs, nous avons donc beaucoup appris sur les langages HTML, CSS, PHP et JavaScript, ainsi que sur les bases de données.

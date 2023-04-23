@@ -41,7 +41,7 @@ $user_desc = $user_data['user_desc'];
       <?php
       if (strtolower($user_pseudo) == strtolower($cook->getUsername())) {
         ?>
-        <p>Followers</p>
+        <p>Follow</p>
         <form action="./Relation.php">
           <!-- value apparrait dans l'url en sortie : à regler  -->
           <input type="submit" name="follow" value="Voir la liste">

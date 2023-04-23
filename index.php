@@ -22,7 +22,6 @@ include "./Parties/Classes.php";
     <div class="main">
 
       <div class="leftmain">
-        <div class="left1">test</div>
       </div>
       <div>
         <h1>Bon retour,
