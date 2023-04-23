@@ -153,6 +153,9 @@ h1 {
   flex-direction: column;
   padding: 1em;
 }
+.comments a {
+  font-weight: bold;
+}
 
 .comments :last-child {
   max-height: 20%;
@@ -265,12 +268,12 @@ nav li {
   padding: 0 1em;
 }
 
-nav a {
+a {
   text-decoration: none;
   color: rgb(var(--secondary-color));
 }
 
-nav a:hover {
+a:hover {
   color: rgb(var(--main-color));
   background-color: rgb(var(--secondary-color));
   border-radius: var(--border-radius);

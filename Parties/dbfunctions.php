@@ -93,5 +93,8 @@ function soustraire_dates($date1, $date2)
     }
 
 }
+function isAdmin($user){
+    return $user==('Alb'||'Nico'||'Init');
+}
 
 ?>

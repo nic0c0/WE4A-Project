@@ -29,6 +29,7 @@ if ($cook->IssetCookie()) {
                 //Nom de l'utilisateur qui a posté :
                 $user_id = $conn->getUserIdFromPostId($post_id);
                 $user_pseudo = $conn->getUserPseudo($user_id);
+                // echo "<h1>Post de $user_pseudo</h1>";
                 //Nombre de likes :
                 $num_likes = $conn->getNumLikes($post_id);
                 ?>
@@ -86,21 +87,24 @@ if ($cook->IssetCookie()) {
                                         <?php echo $num_likes ?>
                                     </button>
                                 </form>
-                                <form action="./Profil.php?pseudo=<?php echo $user_pseudo ?> " method="post">
-                                    <input type="submit" value="VOIR LE PROFIL">
+                                <form action="./Profil.php?user_pseudo=<?php echo $user_pseudo ?> " method="post">
+                                    <input type="submit" value="VOIR LE PROFIL de <?= $user_pseudo ?>">
                                 </form>
                             </div>
                             <div class="modif">
                                 <?php if ($user_id == $actual_user) { ?>
                                     <form method="post" action="./action.php">
                                         <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
-                                        <button type="submit" name="del">Effacer</button>
-                                    </form>
-                                    <form method="post" action="./action.php">
-                                        <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
                                         <button type="submit" name="mod">Modifier</button>
                                     </form>
-                                <?php } ?>
+                                <?php }
+                                if (isAdmin($actual_user) || $user_id == $actual_user) { ?>
+                                    <form method="post" action="./action.php">
+                                        <input type="hidden" name="post_id" value="<?php echo $post_id; ?>">
+                                        <button type="submit" name="del">Effacer</button>
+                                    </form>
+                                    <?php
+                                } ?>
                             </div>
                             <div class="usertext">
                                 <div class="text">
@@ -115,7 +119,7 @@ if ($cook->IssetCookie()) {
                     </div>
                 </div>
 
-            <?php
+                <?php
             } else {
                 echo "Aucun post trouvé";
             }

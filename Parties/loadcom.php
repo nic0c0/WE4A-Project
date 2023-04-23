@@ -30,8 +30,8 @@ if (!$com_id_list) {
             $com_text = $com_data['comment_text'];
             $com_time = $com_data['created_time'];
             $user_id = $com_data['user_id'];
-            $user_pseudo = $conn->getUserPseudo($user_id);
-            echo (isset($com_text) ? "<div class=\"comments\"><div>" . "$com_text" . "</div>" . (isset($com_time) ? "<p class=\"date\">" . "<a href='./Profil.php?user_pseudo=" . $user_pseudo. "'>" . $user_pseudo . "</a>" . " le " . "$com_time" . "</p>" : "") . "</div>" : "");
+            $com_user_pseudo = $conn->getUserPseudo($user_id);
+            echo (isset($com_text) ? "<div class=\"comments\"><div>" . "$com_text" . "</div>" . (isset($com_time) ? "<p class=\"date\">" . "<a href='./Profil.php?user_pseudo=" . $com_user_pseudo. "'>" . $com_user_pseudo . "</a>" . " le " . "$com_time" . "</p>" : "") . "</div>" : "");
         }
     }
 

@@ -54,6 +54,7 @@ Ce projet consiste à créer un site web permettant à des utilisateurs d'échan
         - CheckPassword() : permet de vérifier si le mot de passe est correct
         - CheckIntegrity() : permet de vérifier si les données sont correctes avant de déconnecter l'utilisateur dans le cas contraire
         - soustraire_dates() : permet de calculer la différence entre deux dates
+        - isAdmin() : permet de vérifier si l'utilisateur est un admin
     - footer.php : Contient le footer du site
     - head.php : Contient le head du site
     - header.php : Contient le header du site : 
