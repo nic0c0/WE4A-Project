@@ -668,12 +668,6 @@ class SQLconn
         }
     }
 
-
-
-
-
-    /*        */
-
     //Fonction pour sécuriser les données utilisateur de manière basique
     //--------------------------------------------------------------------------------
     function SecurizeString_ForSQL($string)
