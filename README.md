@@ -29,6 +29,31 @@ Ce projet consiste à créer un site web permettant à des utilisateurs d'échan
 - Implémentation d'une fonction de recherche pour permettre aux utilisateurs de trouver du contenu spécifique.
 - Ajout d'un système de commentaires pour permettre aux utilisateurs de réagir aux messages des autres.
 
+
+### Echantillon de test : 
+- 10 comptes :
+    |Compte|Mot de passe|Droits            |
+    |------|------------|------------------|
+    |Init  |init        |:white_check_mark:| 
+    |Alb   |root        |:white_check_mark:|
+    |Nico  |root        |:white_check_mark:|
+    |Bob   |test        |:x:               |
+    |Jane  |test        |:x:               |
+    |Sam   |test        |:x:               |
+    |Sarah |test        |:x:               |
+    |Chris |test        |:x:               |
+    |Lisa  |test        |:x:               |
+    |Mike  |test        |:x:               |
+
+- 12 posts
+- 25 commentaires
+- 30 likes
+
+#### Connexion à la base de données : 
+
+    Changer les informations de connexion dans le fichier Classes.php : ligne 87
+
+
 ### Le site :
 
 #### Fichiers
@@ -73,13 +98,59 @@ Ce projet consiste à créer un site web permettant à des utilisateurs d'échan
     - loadPostsOnScroll() : permet de charger les posts en AJAX
     - loadCommentsOnScroll() : permet de charger les commentaires en AJAX
     - script pour prévisualiser l'image
-- Base de Données :
-    - Table likes : T_LIKE
-    - Table post : T_USER_POST
-    - Table commentaire : T_POST_COMMENT
-    - Table utilisateur : T_USER_PROFILE
-    - Table relation : T_FRIENDSHIP
 - CSS : style du site
+
+- Base de Données :
+    - Table likes : 
+        | Nom de la colonne | Type de données | Contraintes             |
+        | ----------------- | -------------- | ----------------------- |
+        | LIKE_ID           | BIGINT(4)      | NOT NULL, AUTO_INCREMENT |
+        | CREATED_TIME      | datetime       | NULL                    |
+        | USER_ID           | BIGINT(4)      | NOT NULL                |
+        | POST_ID           | BIGINT(4)      | NOT NULL                |
+        | PRIMARY KEY       | (LIKE_ID)      |                         |
+    - Table post : 
+        | Nom de la colonne | Type de données | Contraintes             |
+        | ----------------- | -------------- | ----------------------- |
+        | POST_ID           | BIGINT(4)      | NOT NULL, AUTO_INCREMENT |
+        | POST_TEXT         | VARCHAR(256)  | NOT NULL                |
+        | POST_TITLE        | VARCHAR(32)   | NOT NULL                |
+        | CREATED_TIME      | datetime       | NOT NULL                |
+        | POST_IMG          | VARCHAR(255)  | NOT NULL                |
+        | USER_ID           | BIGINT(4)      | NOT NULL                |
+        | PRIMARY KEY       | (POST_ID)      |                         |
+    - Table commentaire :
+        | Nom de la colonne | Type de données | Contraintes             |
+        | ----------------- | -------------- | ----------------------- |
+        | COMMENT_ID        | BIGINT(4)      | NOT NULL, AUTO_INCREMENT |
+        | COMMENT_TEXT      | VARCHAR(128)  | NOT NULL                |
+        | CREATED_TIME      | datetime       | NOT NULL                |
+        | POST_ID           | BIGINT(4)      | NOT NULL                |
+        | USER_ID           | BIGINT(4)      | NOT NULL                |
+        | PRIMARY KEY       | (COMMENT_ID)   |                         |
+    - Table utilisateur : 
+        | Nom de la colonne | Type de données | Contraintes             |
+        | ----------------- | -------------- | ----------------------- |
+        | USER_ID           | BIGINT(4)      | NOT NULL, AUTO_INCREMENT |
+        | USER_EMAIL        | VARCHAR(128)  | NOT NULL                |
+        | USER_DESC         | VARCHAR(128)  | NOT NULL                |
+        | USER_PP           | VARCHAR(256)  | NOT NULL                |
+        | USER_PSEUDO       | VARCHAR(50)   | NOT NULL                |
+        | USER_NAME         | VARCHAR(50)   | NOT NULL                |
+        | USER_SURNAME      | VARCHAR(50)   | NOT NULL                |
+        | USER_PASSWORD     | VARCHAR(256)  | NOT NULL                |
+        | USER_CREATED      | datetime       | NOT NULL                |
+        | PRIMARY KEY       | (USER_ID)      |                         |
+    - Table relation :
+        | Nom de la colonne  | Type de données | Contraintes                                                     |
+        | ------------------ | -------------- | --------------------------------------------------------------- |
+        | FRIENDSHIP_ID      | BIGINT(4)      | NOT NULL, AUTO_INCREMENT                                       |
+        | REQUEST_USER_ID    | BIGINT(4)      | NOT NULL                                                        |
+        | ACCEPT_USER_ID     | BIGINT(4)      | NOT NULL                                                        |
+        | PRIMARY KEY        | (FRIENDSHIP_ID)|                                                                 |
+        | FK_T_FRIENDSHIP_REQUEST | FOREIGN KEY (REQUEST_USER_ID) | REFERENCES T_USER_PROFILE (USER_ID) |
+        | FK_T_FRIENDSHIP_ACCEPT  | FOREIGN KEY (ACCEPT_USER_ID)  | REFERENCES T_USER_PROFILE (USER_ID) |
+
 
 #### Style : 
 
@@ -92,30 +163,6 @@ Ce projet consiste à créer un site web permettant à des utilisateurs d'échan
 - desc,com,left : parties d'un post
 - login : interface pour formulaire de connexion / inscription
 - center : centre la page semblable à main
-
-
-### Echantillon de test : 
-- 10 comptes :
-    |Compte|Mot de passe|Droits            |
-    |------|------------|------------------|
-    |Init  |init        |:white_check_mark:| 
-    |Alb   |root        |:white_check_mark:|
-    |Nico  |root        |:white_check_mark:|
-    |Bob   |test        |:x:               |
-    |Jane  |test        |:x:               |
-    |Sam   |test        |:x:               |
-    |Sarah |test        |:x:               |
-    |Chris |test        |:x:               |
-    |Lisa  |test        |:x:               |
-    |Mike  |test        |:x:               |
-
-- 12 posts
-- 25 commentaires
-- 30 likes
-
-#### Connexion à la base de données : 
-
-    Changer les informations de connexion dans le fichier Classes.php : ligne 87
 
  ### Conclusion
 
