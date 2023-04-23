@@ -34,6 +34,7 @@ Ce projet consiste à créer un site web permettant à des utilisateurs d'échan
 - Système de profil / paramètres.
 - Système de relation (abonnements / abonnés).
 - Chargement de posts et commentaires en AJAX.
+- Admins : suppression de posts.
 
 
 
