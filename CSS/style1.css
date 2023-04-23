@@ -22,6 +22,12 @@ body {
   background-attachment: fixed;
 }
 
+
+
+h1 {
+  font-size: 4em;
+}
+
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
 * {
@@ -64,8 +70,6 @@ body {
   padding-right: 2em;
 }
 
-
-
 /* ================== Post et fils ================== */
 .post {
   /*le layout shape le content donc ici */
@@ -93,9 +97,6 @@ body {
   margin: 0;
 }
 
-/* .desc>*,.com>*{
-  display: none;
-} */
 /* ================== Description ================== */
 .desc {
   grid-area: desc;
@@ -175,7 +176,7 @@ body {
 
 }
 
-
+/* =============== Post Image ================== */
 .left {
   grid-area: img;
 }
@@ -198,13 +199,9 @@ body {
 .left:hover~* {
   background: rgb(var(--secondary-color), 0.4);
   backdrop-filter: blur(2px);
-  /* à voir*/
-
+  transition: var(--transition);
 }
 
-/* .left:hover ~ * >*,.com:hover *{
-  display: block;
-} */
 /* =====================Poster============== */
 .poster {
   height: 50vh;
@@ -228,9 +225,7 @@ body {
   padding: 1em 1em;
 }
 
-h1 {
-  font-size: 4em;
-}
+
 
 /* ================== Header et fils ================== */
 
@@ -331,6 +326,7 @@ footer {
   background-color: rgb(var(--main-color));
   color: rgb(var(--secondary-color));
   text-align: center;
+  
 }
 
 
