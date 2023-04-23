@@ -27,7 +27,15 @@ Ce projet consiste à créer un site web permettant à des utilisateurs d'échan
 #### Fonctionnalités
 
 - Implémentation d'une fonction de recherche pour permettre aux utilisateurs de trouver du contenu spécifique.
-- Ajout d'un système de commentaires pour permettre aux utilisateurs de réagir aux messages des autres.
+- Système de commentaires.
+- Système de like.
+- Système publication de photos / modification / effacement.
+- Système de connexion / déconnexion / inscription.
+- Système de profil / paramètres.
+- Système de relation (abonnements / abonnés).
+- Chargement de posts et commentaires en AJAX.
+
+
 
 
 ### Echantillon de test : 
