@@ -17,10 +17,10 @@
     $conn = new SQLconn();
     $username = $_POST['username'];
     $password = $_POST['password'];
-    if ($conn->CheckDB($username, $password)) {
+    if ($conn->CheckDB(trim($username), $password)) {
       $conn->CloseDB();
       $cook = new Cookie();
-      $cook->CreateLoginCookie($username, $password);
+      $cook->CreateLoginCookie(trim($username), $password);
       header("Location: ./index.php");
     } else {
       echo "Mauvais identifiants!";
