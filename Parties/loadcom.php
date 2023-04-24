@@ -29,8 +29,8 @@ if (!$com_id_list) {
             $com_data = $conn->getComData($com_id);
             $com_text = $com_data['comment_text'];
             $com_time = $com_data['created_time'];
-            $user_id = $com_data['user_id'];
-            $com_user_pseudo = $conn->getUserPseudo($user_id);
+            $com_user_id = $com_data['user_id'];
+            $com_user_pseudo = $conn->getUserPseudo($com_user_id);
             echo (isset($com_text) ? "<div class=\"comments\"><div>" . "$com_text" . "</div>" . (isset($com_time) ? "<p class=\"date\">" . "<a href='./Profil.php?user_pseudo=" . $com_user_pseudo. "'>" . $com_user_pseudo . "</a>" . " le " . "$com_time" . "</p>" : "") . "</div>" : "");
         }
     }
