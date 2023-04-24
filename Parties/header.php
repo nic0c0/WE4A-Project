@@ -26,7 +26,7 @@
           xhttp.onload = function () {
             document.getElementById("suggestions").innerHTML = this.responseText;
           }
-          xhttp.open("GET", "./loadMe2.php?var=" + currentText, true); //Le booléen final dit si le chargement est asynchrone ou non
+          xhttp.open("GET", "./Parties/loadMe2.php?var=" + currentText, true); //Le booléen final dit si le chargement est asynchrone ou non
           xhttp.send();
 
           previousText = currentText;

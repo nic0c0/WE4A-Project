@@ -1,5 +1,5 @@
 <?php
-    include ("./Parties/Classes.php");
+    include ("../Parties/Classes.php");
     $conn = new SQLconn();
     $protectedText = $conn->SecurizeString_ForSQL($_GET["var"]);
     $protectedTextMaj = ucwords( $protectedText );
