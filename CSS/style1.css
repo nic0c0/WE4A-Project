@@ -339,7 +339,7 @@ button:hover {
   color: rgb(var(--secondary-color));
 }
 
-button {
+button, select {
   background-color: rgb(var(--secondary-color));
   border-radius: var(--border-radius);
   color: rgb(var(--main-color));
@@ -516,4 +516,26 @@ legend {
 .poster>* {
   background-color: rgba(var(--secondary-color), 0.13);
   border: 2px solid rgba(var(--secondary-color), 0.1);
+}
+
+/* Stylisation du triangle de la liste déroulante */
+select::-ms-expand {
+  display: none; 
+}
+
+select:focus {
+  outline: none;
+  border-color: #66afe9; 
+}
+
+
+/* Style pour la flèche de déroulement */
+select:after {
+  content: "\25BC"; 
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #666;
+  pointer-events: none; 
 }
