@@ -110,9 +110,12 @@ function loadCommentsOnScroll(postid) {
   });
 }
 
+// Partie du script pour la liste déroulante de la bar de recherche
+
 //Variable globale
 previousText = "";
 timer = 0;
+
 
 //Timer qui boucle toutes les secondes pour changer la variable globale
 function TimerIncrease() {
