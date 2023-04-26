@@ -33,7 +33,7 @@ Ce projet consiste à créer un site web permettant à des utilisateurs d'échan
 - Système de connexion / déconnexion / inscription.
 - Système de profil / paramètres.
 - Système de relation (abonnements / abonnés).
-- Chargement de posts et commentaires en AJAX.
+- Chargement de posts et commentaires en AJAX. (bien descendre la scrollbar)
 - Admins : suppression de posts.
 
 

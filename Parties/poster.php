@@ -27,7 +27,7 @@ isset($post_id) ? $post_data = $conn->getPostData($post_id) : '';
             <legend>Mettre une Image</legend>
             <div class="img-upload">
                 <label id="imgUpload">
-                    <input accept="image/*" type='file' id="imgInp" name="post_img" <?php echo (!isset($post_id) ? 'required' : ''); ?> />
+                    <input accept="image/gif, image/jpg, image/jpeg, image/png" type='file' id="imgInp" name="post_img" <?php echo (!isset($post_id) ? 'required' : ''); ?> />
                 </label>
             </div>
         </fieldset>

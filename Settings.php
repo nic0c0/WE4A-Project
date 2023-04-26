@@ -54,7 +54,7 @@
                     <legend>Profil</legend>
                     <div class="img-upload">
                         <label id="imgUpload">
-                            <input accept="image/*" type='file' id="imgInp" name="new_pp" />
+                            <input accept="image/gif, image/jpg, image/jpeg, image/png" type='file' id="imgInp" name="new_pp" />
                         </label>
                         <div class="img-container">
                             <img id="blah"
